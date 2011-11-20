@@ -1,0 +1,39 @@
+body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif;  margin: 0; padding: 0;}
+
+	header{background-color: #f5f5f5; background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f5f5f5)); background-image: -moz-linear-gradient(90deg, #fafafa, #f5f5f5); border: 1px solid lightGrey; border-radius: 4px; margin: 20px auto; padding: 6px; text-shadow: 0 1px 0 white; width: 800px;}
+		header img{margin: 0 332px;}
+		header h3{font: italic normal normal 40px/0px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; text-align: center;}
+		header p{margin: 0 14px; font-size: 14px;}
+		header ol{margin: 5px 14px; font-size: 14px;}
+	
+	.section{background-color: #f5f5f5; background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#f5f5f5)); background-image: -moz-linear-gradient(90deg, #fafafa, #f5f5f5); border: 1px solid lightGrey; border-radius: 4px; margin: 20px auto; padding: 6px; text-shadow: 0 1px 0 white; width: 800px;}
+		.section h3{font: italic normal normal 25px/0px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; text-align: center;}
+		.label{font-size: 15px; margin: 0 0 0 230px;}
+		.input{background: none; border: 1px solid lightGrey; border-radius: 3px; font-size: 13px; outline: none; padding: 6px 9px; width: 200px;}
+		.input:hover{background-color: white;}
+		#db_host{margin: 3px 0 3px 86px;}
+		#db_name{margin: 3px 0 3px 78px;}
+		#db_user{margin: 3px 0 3px 50px;}
+		#db_pwd{margin: 3px 0 3px 55px;}
+		#db_prefix{margin: 3px 0 3px 76px;}
+	
+		#website h3{font: italic normal normal 25px/0px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; text-align: center;}
+		#ws_name{margin: 3px 0 3px 78px;}
+		#ws_url{margin: 3px 0 3px 96px;}
+		#ws_email{margin: 3px 0 3px 75px;}
+	
+		#login h3{font: italic normal normal 25px/0px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; text-align: center;}
+		#username{margin: 3px 0 3px 50px;}
+		#password{margin: 3px 0 3px 55px;}
+		
+		#install{background-color: #636363; background-image: -webkit-gradient(linear, left top, left bottom, from(#808080), to(#636363)); background-image: -moz-linear-gradient(90deg, #808080 0%, #636363 100%); border-radius: 4px; border: 1px solid #2e5475; color: white; cursor: pointer; font: normal normal normal 13px/13px "Trebuchet MS",Arial,sans-serif; margin: 0 300px; padding: 6px 9px; outline: none; width: 200px;
+		}
+		#install:hover{background-color: #3399ff; background-image: -webkit-gradient(linear, left top, left bottom, from(#72b8ff), to(#3399ff)); background-image: -moz-linear-gradient(90deg, #72b8ff, #3399ff); border-color: #909090;}
+		
+		.message{margin: 10px 0; text-align: center;}
+			.ta{background-color: #555; background-image: -webkit-gradient(linear, left top, left bottom, from(#777), to(#555)); background-image: -moz-linear-gradient(90deg, #555, #777); border-radius: 4px; color: #fff; font-size: 13px; line-height: 2; margin: 0 2px 0 0; padding: 3px 9px; text-decoration: none; text-shadow: none;}
+			.ta:hover{background-color: #3399ff; background-image: -webkit-gradient(linear, left top, left bottom, from(#72b8ff), to(#3399ff)); background-image: -moz-linear-gradient(90deg, #3399ff, #72b8ff);}
+			#start{background-color: #555; background-image: -webkit-gradient(linear, left top, left bottom, from(#777), to(#555)); background-image: -moz-linear-gradient(90deg, #555, #777); border-radius: 4px; color: #fff; font-size: 15px; line-height: 3; padding: 4px 30px; text-decoration: none; text-shadow: none;}
+			#start:hover{background-color: #3399ff; background-image: -webkit-gradient(linear, left top, left bottom, from(#72b8ff), to(#3399ff)); background-image: -moz-linear-gradient(90deg, #3399ff, #72b8ff);}
+		
+		textarea{background: none; border: 1px solid #ccc; border-radius: 4px; height: 300px; margin: 10px 100px; padding: 7px; width: 600px;}

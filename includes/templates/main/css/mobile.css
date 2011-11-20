@@ -1,0 +1,60 @@
+body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif; margin: 0; padding: 0;}
+
+	#header{background: black url(/images/overlay.png) repeat-x; height: 40px; margin: -16px 0 0 0; min-width: 340px; width: 100%;}
+			#header li:first-child{margin-right: 24px;}
+			#header li{float: left; position: relative;}
+			.tmenu{font-size: 18px; padding: 9px 10px 10px 10px;}
+			.tmenu:hover{background: #3399ff url(/images/overlay.png) repeat-x;}
+				#header a{color: white;}
+	
+	#corps{min-width: 340px; width: 100%;}
+		#content{background: white; border: 1px solid lightGrey; height: 100%; margin: 10px 0 0 0; min-height: 175px;}
+			
+			/*listing articles*/
+			#listing_articles{margin: 0 0 0 -40px; min-height: 150px;}
+				#listing_articles li{border: 1px solid lightGrey; margin: -1px -1px 0 -1px; min-height: 43px; padding: 0 0 0 41px;}
+					#listing_articles li h4{margin: 4px 0;}
+						#listing_articles li h4 a{display: block;}
+							.la_title{line-height: 2.2;}
+							#listing_articles li h4 a img{float: right;}
+			
+			/*alone post*/
+			#news_alone{min-height: 200px;}
+				#news_alone h4{font-size: 17px;	text-align: center; text-shadow: 0 1px 0 white;}
+				#news_info{background-color: #333; color: #fff; font-size: 13px; margin: 0 auto; padding: 3px 8px; width: 300px;}
+				#news_content{font-size: 14px; margin: 15px 40px 10px; text-align: justify;}
+					#news_content a{color: #0071bb; text-decoration: underline;}
+					#news_content a:hover{color: #ed1e24; text-decoration: underline;}
+					#news_content img.center{display: block; margin-left: auto; margin-right: auto;}
+					#news_content .video{display: block; margin-left: auto; margin-right: auto;}
+					#news_content blockquote{margin: -2px 0px 0px 30px; width: 700px;}
+			
+			/*albums*/
+			#header_album{text-align: center; text-shadow: 0 1px 0 white;}
+			#listing_albums{margin: 20px 0 0 0; min-height: 250px; width: 100%;}
+				#listing_albums li{display: inline-block; height: 220px; margin: 0 29px; padding: 6px; text-align: center; width: 230px;}
+					#listing_albums li img{max-height: 200px; max-width: 230px;}
+				#album{margin: 0 30px; min-height: 141px;}
+					#album ul{margin: 30px 0 30px -30px;}
+						#album ul li{display: inline-block; padding: 10px 16px;}
+						#album ul li:hover{background-color: #777;}
+			
+			/*videos*/
+			#header_video{text-align: center; text-shadow: 0 1px 0 white;}
+			
+			/*error message*/
+			#no_content{margin: 0 0 0 -40px !important; text-align: center;}
+			.pb_img{height: 144px; left: 50%; margin: 0 0 0 -84px !important; position: relative;}
+			
+			/*404*/
+			#msg404{background-color: #333; margin: 1px;}
+				#msg404 img{left: 50%; margin-left: -125px; padding: 25px 0; position: relative;}
+				#msg404 p{color: #fff; margin: auto; padding: 0 0 12px 0; width: 153px;}
+
+/*General*/
+div{display: block;}
+
+a{color:#000; text-decoration:none;}
+	a img{border:none;}
+	
+ul{list-style-image:none; list-style-type:none;}

@@ -1,0 +1,8 @@
+#Avoid external access to your configuration file
+<Files config.php>
+
+order allow, deny
+
+deny from all
+
+</Files>
