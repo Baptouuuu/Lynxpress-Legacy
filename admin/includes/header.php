@@ -44,7 +44,7 @@
 				
 				?>
 				<span id="right">
-					Hy <?php echo Session::username() ?> | 
+					Hi <?php echo Session::username() ?> | 
 					<a href="logout.php">Logout</a>
 				</span>
 			</nav>

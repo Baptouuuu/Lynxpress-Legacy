@@ -433,6 +433,9 @@
 		
 			if(!extension_loaded('gd'))
 				throw new Exception('You can\'t handle media because GD extension is not loaded');
+			
+			if(!extension_loaded('exif'))
+				throw new Exception('You can\'t handle media because Exif extension is not loaded');
 		
 		}
 		
