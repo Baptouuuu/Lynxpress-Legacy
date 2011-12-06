@@ -8,7 +8,6 @@ This is a brand new cms written in php, trying to follow one word minimalism.
 * (http://demo.lynxpress.org "Demo website")
 * (http://doc.lynxpress.org "Sources documentation")
 
-***
 ## Requirements ##
 
 * PHP 5.3.3+

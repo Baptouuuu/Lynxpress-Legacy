@@ -53,9 +53,9 @@
 			$namespaces = explode('\\', strtolower($class));
 			
 			if($namespaces[0] == 'library')
-				$require = ADMIN.'library/class.'.$namespaces[1].'.library.php';
+				$require = ADMIN.'library/'.$namespaces[1].'/class.'.$namespaces[2].'.library.php';
 			elseif($namespaces[0] == 'admin')
-				$require = ADMIN.'includes/class.'.$namespaces[1].'.inc.php';	
+				$require = ADMIN.'includes/'.$namespaces[1].'/class.'.$namespaces[2].'.inc.php';	
 			elseif($namespaces[0] == 'site')
 				$require = 'includes/class.'.$namespaces[1].'.inc.php';
 			elseif($namespaces[0] == 'templates')

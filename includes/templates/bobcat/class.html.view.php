@@ -240,7 +240,11 @@
 			* @param	boolean [$error_name]
 			* @param	boolean [$error_email]
 			* @param	boolean [$error_content]
+			* @param	boolean [$error_captcha]
 			* @param	string [$form_side_image]
+			* @param	int [$n1]
+			* @param	int [$n2]
+			* @param	string [$result]
 		*/
 		
 		public static function comment_form($name, $email, $content, $error_name, $error_email, $error_content, $error_captcha, $form_side_image, $n1, $n2, $result){

@@ -29,7 +29,7 @@
 		
 	try{
 	
-		$session = new \Admin\Session();
+		$session = new \Admin\Session\Session();
 		
 		if(VPost::login(false))
 			$session->login();

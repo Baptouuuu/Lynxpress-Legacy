@@ -26,6 +26,7 @@
 	namespace Site;
 	use \Library\Database\Database as Database;
 	use \Library\Variable\Get as VGet;
+	use \Library\Mail\Mail as Mail;
 	
 	/**
 		* Master
@@ -62,6 +63,15 @@
 		
 		protected function __construct(){
 		
+			if(!extension_loaded('json')){
+			
+				$mail = new Mail(WS_EMAIL, 'Json not loaded', 'Lynxpress needs json extension to be loaded');
+				$mail->send();
+				
+				throw new Exception('Json not loaded');
+			
+			}
+			
 			$this->_db =& Database::load();
 			$this->pid();
 			$this->page();

@@ -27,7 +27,7 @@
 	
 		require_once 'needed.php';
 		
-		$session = new \Admin\Session();
+		$session = new \Admin\Session\Session();
 		
 		$session->logout();
 	

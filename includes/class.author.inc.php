@@ -25,7 +25,7 @@
 	
 	namespace Site;
 	use \Library\Variable\Get as VGet;
-	use \library\Variable\Session as VSession;
+	use \Library\Variable\Session as VSession;
 	use \Library\Models\User as User;
 	use \Library\Models\Media as Media;
 	use Exception;

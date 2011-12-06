@@ -32,7 +32,7 @@
 	if(!file_exists(PATH.'config.php') || (file_exists(PATH.'config.php') && !\Install\Install::check_installed(PATH)))
 		header('Location: '.PATH.'install.php');
 	
-	require_once INC.'class.loader.inc.php';
-	\Admin\Loader::load();
+	require_once INC.'loader/class.loader.inc.php';
+	\Admin\Loader\Loader::load();
 
 ?>

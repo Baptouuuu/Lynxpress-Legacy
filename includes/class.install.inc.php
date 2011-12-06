@@ -60,7 +60,7 @@
 		private $_password = null;
 		private $_conf = null;
 		private $_result = null;
-		const VERSION = '1.0-RC3';
+		const VERSION = '1.0-RC4';
 		
 		/**
 			* Class constructor

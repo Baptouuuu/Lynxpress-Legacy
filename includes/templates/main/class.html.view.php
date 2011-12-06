@@ -245,9 +245,10 @@
 			* @param	boolean [$error_name]
 			* @param	boolean [$error_email]
 			* @param	boolean [$error_content]
+			* @param	boolean [$error_captcha]
 			* @param	string [$form_side_image]
-			* @param	integer [$n1]
-			* @param	integer [$n2]
+			* @param	int [$n1]
+			* @param	int [$n2]
 			* @param	string [$result]
 		*/
 		

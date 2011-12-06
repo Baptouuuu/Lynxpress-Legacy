@@ -25,19 +25,19 @@
 	
 	require_once 'needed.php';
 	
-	use \Library\Variable;
+	use \Library\Variable\Get as VGet;
 		
 	try{
 	
-		$controller = '\\Admin\\'.ucfirst(Variable\Get::ns('dashboard')).'\\'.ucfirst(Variable\Get::ctl('manage'));
+		$controller = '\\Admin\\'.ucfirst(VGet::ns('dashboard')).'\\'.ucfirst(VGet::ctl('manage'));
 		
 		$page = new $controller();
 		
-		require_once INC.'header.php';
+		require_once INC.'html/header.php';
 		
 		$page->display_content();
 		
-		require_once INC.'footer.html';
+		require_once INC.'html/footer.html';
 	
 	}catch(Exception $e){
 	
