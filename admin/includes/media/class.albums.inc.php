@@ -714,7 +714,7 @@
 							
 							$permalink = $album->_permalink;
 							HandleMedia::delete(PATH.$permalink.'cover.png');
-							rmdir(PATH.$permalink);
+							@rmdir(PATH.$permalink);
 							
 							$album->delete();
 							
