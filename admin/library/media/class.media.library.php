@@ -381,7 +381,7 @@
 		
 		public static function delete($path){
 		
-			self::check_gd();
+			self::check_ext();
 			
 			$fname = basename($path);
 			$dirname = dirname($path).'/';
