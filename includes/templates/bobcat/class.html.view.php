@@ -132,7 +132,7 @@
 				
 				}else{
 				
-					echo '<div id="details">'.date('D M the dS', strtotime($date)).' by '.$author.'</div>';
+					echo '<div id="details">'.date('D M \t\h\e dS', strtotime($date)).' by '.$author.'</div>';
 				
 				}
 							
