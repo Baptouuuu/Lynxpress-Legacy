@@ -164,8 +164,8 @@
 		public static function plg_link_label($name, $namespace, $entry_point){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/plugins_label.png" alt="" />'.
+					'<div class="label_img label_plugins">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns='.$namespace.'&ctl='.$entry_point.'">'.$name.'</a>'.
