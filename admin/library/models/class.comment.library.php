@@ -193,8 +193,10 @@
 		
 		public function __set($attr, $value){
 		
-			if($attr == '_content' || $attr == '_name' || $attr == '_email')
+			if($attr == '_content' || $attr == '_email')
 				$this->$attr = stripslashes($value);
+			elseif($attr == '_name')
+				$this->$attr = stripslashes(htmlspecialchars($value));
 			else
 				$this->$attr = $value;
 		
