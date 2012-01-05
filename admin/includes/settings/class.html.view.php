@@ -65,8 +65,8 @@
 		public static function categories(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/cat_label.png" alt="" />'.
+					'<div id="label_categories" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=categories&ctl=manage">Categories</a>'.
@@ -85,8 +85,8 @@
 		public static function users(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/user_label.png" alt="" />'.
+					'<div id="label_users" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=users&ctl=manage" title="Manage users">Users</a>'.
@@ -105,8 +105,8 @@
 		public static function links(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/links_label.png" alt="" />'.
+					'<div id="label_links" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=links&ctl=manage" title="Manage links">Links</a>'.
@@ -125,8 +125,8 @@
 		public static function social(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/social_label.png" alt="" />'.
+					'<div id="label_social" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=social&ctl=manage" title="Manage share buttons">Social</a>'.
@@ -145,8 +145,8 @@
 		public static function roles(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/roles_label.png" alt="" />'.
+					'<div id="label_roles" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=roles&ctl=manage" title="Manage user roles">User Roles</a>'.
@@ -165,8 +165,8 @@
 		public static function activity(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/activity_label.png" alt="" />'.
+					'<div id="label_activity" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=activity&ctl=manage" title="View all activity history">Activity</a>'.
@@ -185,8 +185,8 @@
 		public static function post(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/post_label.png" alt="" />'.
+					'<div id="label_post" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=posts&ctl=settingpage">Posts</a>'.
@@ -205,8 +205,8 @@
 		public static function default_page(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/default_page_label.png" alt="" />'.
+					'<div id="label_default_page" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=defaultpage&ctl=manage">Default page</a>'.
@@ -225,8 +225,8 @@
 		public static function template(){
 		
 			echo '<div class="setting_label">'.
-				 	'<div class="label_img">'.
-				 		'<img src="'.PATH.'images/template_label.png" alt="" />'.
+				 	'<div id="label_template" class="label_img">'.
+				 		'&nbsp;'.
 				 	'</div>'.
 				 	'<div class="label_name">'.
 				 		'<a href="index.php?ns=templates&ctl=manage">Templates</a>'.
@@ -245,8 +245,8 @@
 		public static function update(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/update_label.png" alt="" />'.
+					'<div id="label_update" class="label_img">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=update&ctl=manage" title="Update your Lynxpress">Update</a>'.
@@ -265,8 +265,8 @@
 		public static function plugins(){
 		
 			echo '<div class="setting_label">'.
-					'<div class="label_img">'.
-						'<img src="'.PATH.'images/plugins_label.png" alt="" />'.
+					'<div class="label_img label_plugins">'.
+						'&nbsp;'.
 					'</div>'.
 					'<div class="label_name">'.
 						'<a href="index.php?ns=plugins&ctl=manage">Plugins</a>'.
