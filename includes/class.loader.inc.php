@@ -81,6 +81,9 @@
 		
 		public static function load(){
 		
+			if(!extension_loaded('spl'))
+				die('SPL extension not loaded!');
+		
 			spl_autoload_register(null, false);
 			spl_autoload_extensions('.inc.php, .view.php, .library.php');
 			spl_autoload_register('self::autoloader', true);
