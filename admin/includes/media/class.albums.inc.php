@@ -131,7 +131,7 @@
 					$to_read['condition_values'][':n'] = '%'.$this->_search.'%';
 					$to_read['value_types'][':n'] = 'str';
 				
-				}elseif((VGet::action() == 'edit' || VGet::action() == 'upload') && VGet::id()){
+				}elseif((VGet::action() == 'edit' || VGet::action() == 'upload' || VGet::action() == 'edit_image') && VGet::id()){
 				
 					$to_read['condition_types'][':id'] = 'AND';
 					$to_read['condition_columns'][':id'] = 'MEDIA_ID';
@@ -141,6 +141,8 @@
 					
 					if(VGet::action() == 'edit')
 						$this->get_pictures();
+					elseif(VGet::action() == 'edit_image' && VGet::pid())
+						$this->get_picture();
 				
 				}
 				
@@ -220,6 +222,26 @@
 		}
 		
 		/**
+			* Retrieve a specific image of an album
+			*
+			* @access	private
+		*/
+		
+		private function get_picture(){
+		
+			try{
+			
+				$this->_pictures[0] = new Media(VGet::pid());
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
+		
+		}
+		
+		/**
 			* Display related admin parts link
 			*
 			* @access	private
@@ -229,7 +251,7 @@
 		
 			if($this->_user['album_photo']){
 			
-				if((VGet::action() == 'edit' || VGet::action() == 'upload') && VGet::id())
+				if((VGet::action() == 'edit' || VGet::action() == 'upload' || VGet::action() == 'edit_image') && VGet::id())
 					Html::ma_menu(true, true, $this->_albums[0]->_id, $this->_albums[0]->_name);
 				else
 					Html::ma_menu(true, false);
@@ -385,7 +407,7 @@
 					 		$dirname = dirname($picture->_permalink).'/';
 					 		$filename = basename($picture->_permalink);
 					 		
-					 		Html::ma_picture_label($picture->_id, $picture->_permalink, $dirname, $filename, $picture->_name, $picture->_author_name, $picture->_date);
+					 		Html::ma_picture_label($picture->_id, $picture->_permalink, $dirname, $filename, $picture->_name, $picture->_author_name, $picture->_date, $this->_albums[0]->_id);
 					 	
 					 	}
 					 	
@@ -420,6 +442,25 @@
 		}
 		
 		/**
+			* Display a form to edit a picture
+			*
+			* @access	private
+		*/
+		
+		private function display_edit_pic(){
+		
+			Html::form('o', 'post', 'index.php?ns=media&ctl=albums&action=edit&id='.$this->_albums[0]->_id);
+			
+			$dirname = dirname($this->_pictures[0]->_permalink).'/';
+			$fname = basename($this->_pictures[0]->_permalink);
+			
+			Html::ma_edit_image($this->_pictures[0]->_name, $dirname, $fname, $this->_pictures[0]->_description, $this->_pictures[0]->_permalink, $this->_pictures[0]->_id);
+			
+			Html::form('c');
+		
+		}
+		
+		/**
 			* Display page content
 			*
 			* @access	public
@@ -442,6 +483,10 @@
 				}elseif(VGet::action() == 'upload' && VGet::id()){
 				
 					$this->display_upload();
+				
+				}elseif(VGet::action() == 'edit_image' && VGet::id() && VGet::pid()){
+				
+					$this->display_edit_pic();
 				
 				}else{
 				
@@ -500,7 +545,7 @@
 							
 							$picture = new Media();
 							$picture->_name = $name;
-							$picture->_type = 'attach';
+							$picture->_type = $mime;
 							$picture->_author = $this->_user['user_id'];
 							$picture->_album = $album->_id;
 							$picture->_allow_comment = 'closed';
@@ -653,6 +698,79 @@
 					$album->_id = VPost::album_id();
 					$album->_status = 'draft';
 					$album->update('_status', 'str');
+					
+					$result = true;
+				
+				}catch(Exception $e){
+				
+					$result = $e->getMessage();
+				
+				}
+				
+				$this->_action_msg = ActionMessages::updated($result);
+			
+			}elseif(VPost::update_image(false)){
+			
+				try{
+								
+					$media = new Media();
+					$media->_id = VPost::pid();
+					$media->_name = VPost::name();
+					$media->_description = VPost::description();
+					$media->update('_name', 'str');
+					$media->update('_description', 'str');
+					
+					if(VPost::rotate() != 'no'){
+					
+						$media->read('_permalink');
+						$media->read('_type');
+
+						$path = $media->_permalink;
+						$fname = basename($path);
+						$dirname = dirname($path).'/';
+						
+						$img = new HandleMedia();
+						$img->_mime = $media->_type;
+						
+						$img->load(PATH.$path);
+						$img->rotate(VPost::rotate());
+						
+						$img->load(PATH.$dirname.'1000-'.$fname);
+						$img->rotate(VPost::rotate());
+						
+						$img->load(PATH.$dirname.'300-'.$fname);
+						$img->rotate(VPost::rotate());
+						
+						$img->load(PATH.$dirname.'150-'.$fname);
+						$img->rotate(VPost::rotate());
+					
+					}
+					
+					if(VPost::flip() != 'no'){
+					
+						$media->read('_permalink');
+						$media->read('_type');
+
+						$path = $media->_permalink;
+						$fname = basename($path);
+						$dirname = dirname($path).'/';
+						
+						$img = new HandleMedia();
+						$img->_mime = $media->_type;
+						
+						$img->load(PATH.$path);
+						$img->flip(VPost::flip());
+						
+						$img->load(PATH.$dirname.'1000-'.$fname);
+						$img->flip(VPost::flip());
+						
+						$img->load(PATH.$dirname.'300-'.$fname);
+						$img->flip(VPost::flip());
+						
+						$img->load(PATH.$dirname.'150-'.$fname);
+						$img->flip(VPost::flip());
+					
+					}
 					
 					$result = true;
 				
