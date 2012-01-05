@@ -207,6 +207,26 @@
 		}
 		
 		/**
+			* Display database connection error message
+			*
+			* @static
+			* @access	public
+		*/
+		
+		public static function connect_error(){
+		
+			echo '<header>'.
+					'<img src="images/lynxpress_install.png" alt="" />'.
+					'<h3>Lynxpress > Installation error</h3>'.
+					'<p class="message">'.
+						'Lynxpress can\'t connect to your database. Make sure the given informations are correct and <a class="ta" href="install.php">try again</a>.<br/>'.
+						'If the problem persists, re-check your database user name, password or host from informations given by your web hoster.'.
+					'</p>'.
+				 '</header>';
+		
+		}
+		
+		/**
 			* Display unknown error message
 			*
 			* @static
