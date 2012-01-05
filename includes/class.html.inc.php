@@ -72,14 +72,10 @@
 					$template = $setting[0]['setting_data'];
 				else
 					$template = 'main';
-				
-				return $template;
-			
-			}else{
-			
-				return $template;
 			
 			}
+			
+			return $template;
 		
 		}
 		
@@ -330,14 +326,16 @@
 			* @access	public
 			* @param	string [$mini] Picture thumb path
 			* @param	string [$full] Picture path
+			* @param	string [$name] Picture name
+			* @param	string [$desc] Picture description
 		*/
 		
-		public static function album_picture($mini, $full){
+		public static function album_picture($mini, $full, $name, $desc){
 		
 			$template = self::get_template();
 			$class = self::TEMPLATES.ucfirst($template).self::HTML;
 			
-			$class::album_picture($mini, $full);
+			$class::album_picture($mini, $full, $name, $desc);
 		
 		}
 		
@@ -541,6 +539,24 @@
 			$class = self::TEMPLATES.ucfirst($template).self::HTML;
 			
 			$class::navigation($p, $max, $link);
+		
+		}
+		
+		/**
+			* Bridge function to a template method, used for a plugin to use its own methods
+			*
+			* @static
+			* @access	public
+			* @param	string [$name] Method name
+			* @param	array [$arguments] Array of all arguments passed to the method
+		*/
+		
+		public static function __callStatic($name, $arguments){
+		
+			$template = self::get_template();
+			$class = self::TEMPLATES.ucfirst($template).self::HTML;
+			
+			$class::$name($arguments);
 		
 		}
 		
