@@ -303,12 +303,16 @@
 					$this->_media->_author = $this->_user['user_id'];
 					$this->_media->_allow_comment = 'closed';
 					$this->_media->_permalink = $path.$name;
+					$this->_media->_album = 0;
 					
 					$this->_media->create();
 					
 					Session::monitor_activity('has upload a file named: '.$this->_media->_name);
 					
-					header('Location: index.php?ns=media&ctl=manage');
+					if(substr($mime, 0, 5) == 'video')
+						header('Location: index.php?ns=media&ctl=manage&type=video');
+					else
+						header('Location: index.php?ns=media&ctl=manage');
 				
 				}catch(Exception $e){
 				
@@ -340,6 +344,7 @@
 						$this->_media->_description = stripslashes(VPost::description());
 						$this->_media->_category = implode(',', VPost::cat(array()));
 						$this->_media->_allow_comment = VPost::allow_comment('closed');
+						$this->_media->_album = 0;
 						
 						$img = new HandleMedia();
 						$img->load_upload('cover');
@@ -380,6 +385,7 @@
 						$this->_media->_allow_comment = 'closed';
 						$this->_media->_permalink = Helper::slug(VPost::name());
 						$this->_media->_embed_code = VPost::embed_code();
+						$this->_media->_album = 0;
 						
 						$this->_media->create();
 						
@@ -411,6 +417,7 @@
 					$this->_media->_status = 'publish';
 					$this->_media->_allow_comment = 'closed';
 					$this->_media->_permalink = VPost::url();
+					$this->_media->_album = 0;
 					
 					$this->_media->create();
 					
