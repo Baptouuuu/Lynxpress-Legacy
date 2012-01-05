@@ -87,11 +87,6 @@
 					$to_read['condition_select_types'][':album'] = '=';
 					$to_read['condition_values'][':album'] = VGet::album();
 					$to_read['value_types'][':album'] = 'str';
-					$to_read['condition_types'][':type'] = 'AND';
-					$to_read['condition_columns'][':type'] = 'media_type';
-					$to_read['condition_select_types'][':type'] = '=';
-					$to_read['condition_values'][':type'] = 'attach';
-					$to_read['value_types'][':type'] = 'str';
 					$to_read['order'] = array('media_name', 'ASC');
 					
 					$this->_album = new Media(VGet::album());
@@ -146,7 +141,7 @@
 			
 			}catch(Exception $e){
 			
-				@error_log($e->getMessage(), 1, WS_EMAIL);
+				@error_log($e->getMessage().' file: '.__FILE__.'; line: '.__LINE__, 1, WS_EMAIL);
 				header('Location: 404.php');
 			
 			}
@@ -270,7 +265,7 @@
 				$folder = dirname($permalink).'/';
 				$file = basename($permalink);
 				
-				Html::album_picture($folder.'150-'.$file, $permalink);
+				Html::album_picture($folder.'150-'.$file, $permalink, $picture->_name, $picture->_description);
 			
 			}
 			
