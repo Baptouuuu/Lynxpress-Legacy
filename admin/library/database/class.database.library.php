@@ -60,6 +60,8 @@
 		
 		public function __construct(){
 		
+			self::check_ext();
+			
 			try{
 			
 				if(!defined('DB_NAME') && !defined('DB_HOST') && !defined('DB_USER') && !defined('DB_PWD') && !defined('DB_PREDFIX'))
@@ -202,7 +204,7 @@
 			*
 			* condition_columns is optional
 			*
-			* condition_select_types can be "=", "!=", ">", "<", ">=", "<=", "LIKE", "IS NULL" or "IS NOT NULL", this element is optional
+			* condition_select_types can be "=", "!=", ">", "<", ">=", "<=" or "LIKE", this element is optional
 			*
 			* condition_values is optional
 			*
@@ -567,6 +569,20 @@
 			}
 			
 			return $type;
+		
+		}
+		
+		/**
+			* Check if PDO is loaded
+			*
+			* @static
+			* @access	private
+		*/
+		
+		private static function check_ext(){
+		
+			if(!extension_loaded('PDO'))
+				die('PDO extension not loaded!');
 		
 		}
 		
