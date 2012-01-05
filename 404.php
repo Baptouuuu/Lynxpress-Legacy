@@ -50,7 +50,7 @@
 		
 		require_once Html::footer();
 		
-		$mail = new Mail(WS_EMAIL, '"404 not found" reached"', json_encode(VServer::all()));
+		$mail = new Mail(WS_EMAIL, '"404 not found reached', str_replace('",', "\",\n",json_encode(VServer::all())));
 		$mail->send();
 	
 	}catch(Exception $e){
