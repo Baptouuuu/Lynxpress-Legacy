@@ -145,6 +145,8 @@
 		
 		public static function unzip($src, $dest){
 		
+			self::check_ext();
+			
 			if(!is_dir($dest))
 				$return = @mkdir($dest, 0777, true);
 			else
@@ -172,14 +174,17 @@
 			* @static
 			* @access	public
 			* @param	string [$path]
+			* @param	boolean [$check] Check if the file exists
 		*/
 		
-		public static function delete($path){
+		public static function delete($path, $check = true){
 		
 			$filename = basename($path);
 			$dirname = dirname($path).'/';
 			
-			if(file_exists($path))
+			if($check === false)
+				@unlink($path);
+			elseif(file_exists($path) && $check === true)
 				@unlink($path);
 			else
 				throw new Exception('File doesn\'t exists');
@@ -190,6 +195,20 @@
 			
 			if(empty($dir) || $dir === $unix_dir)
 				@rmdir($dirname);
+		
+		}
+		
+		/**
+			* Check if zip extension is loaded
+			*
+			* @static
+			* @access	private
+		*/
+		
+		private static function check_ext(){
+		
+			if(!extension_loaded('zip'))
+				throw new Exception('ZIP extension not loaded!');
 		
 		}
 		
