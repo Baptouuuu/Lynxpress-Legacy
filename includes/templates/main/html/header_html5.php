@@ -13,15 +13,21 @@
 		<link rel="alternate" type="application/rss+xml" title="<?php echo WS_NAME ?>" href="feed.php" />
 		<link rel="alternate" type="application/xml" title="Sitemap" href="sitemap.php" />
 		<link rel="stylesheet" type="text/css" href="includes/templates/main/css/html5.css" />
-	    <link rel="stylesheet" type="text/css" href="shadowbox/shadowbox.css" />
-	    	    
-	    <script type="text/javascript" src="shadowbox/shadowbox.js"></script>
-		<script type="text/javascript">
-		Shadowbox.init({
-			displayNav:		true,
-			slideshowDelay: 2
-		});
-		</script>
+	    <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	    
+	    <script src="js/jquery-1.4.3.min.js"></script>
+	    <script type="text/javascript" src="fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	    <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	    
+	    <script type="text/javascript">
+	    	$(document).ready(function() {
+	    		$("a[rel=fancybox]").fancybox({
+	    			'titlePosition'		: 'outside',
+	    			'overlayColor'		: '#000',
+	    			'overlayOpacity'	: 0.85
+	    		});
+	    	});
+	    </script>
 		
 	</head>
 
