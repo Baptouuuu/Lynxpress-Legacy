@@ -56,6 +56,8 @@
 		
 		public function __construct($type = 'rss'){
 		
+			self::check_ext();
+			
 			$this->_db =& Database::load();
 			
 			if(in_array($type, array('rss', 'sitemap')))
@@ -258,6 +260,20 @@
 		
 			header('Content-Type: application/xml; charset=utf-8');
 			echo $this->_xml->asXML();
+		
+		}
+		
+		/**
+			* Check if SimpleXml extension is loaded
+			*
+			* @static
+			* @access	private
+		*/
+		
+		private static function check_ext(){
+		
+			if(!extension_loaded('SimpleXML'))
+				throw new Exception('SimpleXML extension not loaded!');
 		
 		}
 	
