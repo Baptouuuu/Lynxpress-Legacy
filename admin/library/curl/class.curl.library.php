@@ -53,6 +53,8 @@
 		
 		public function __construct($url = false){
 		
+			self::check_ext();
+			
 			$this->_c = curl_init();
 			$this->_follow = true;
 			
@@ -96,6 +98,20 @@
 		public function __set($attr, $value){
 		
 			$this->$attr = $value;
+		
+		}
+		
+		/**
+			* Check if curl extension is loaded
+			*
+			* @static
+			* @access	private
+		*/
+		
+		private static function check_ext(){
+		
+			if(!extension_loaded('curl'))
+				throw new Exception('Curl extension not loaded!');
 		
 		}
 		
