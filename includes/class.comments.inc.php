@@ -60,6 +60,9 @@
 		
 		public function __construct($id){
 		
+			if(empty($id))
+				throw new Exception('Element id missing');
+			
 			parent::__construct();
 			
 			$this->_id = $id;
@@ -112,7 +115,7 @@
 			
 			}catch(Exception $e){
 			
-				@error_log($e->getMessage(), 1, WS_EMAIL);
+				@error_log($e->getMessage().' file: '.__FILE__.'; line: '.__LINE__, 1, WS_EMAIL);
 			
 			}
 		
@@ -126,8 +129,8 @@
 		
 		private function question(){
 		
-			$this->_question[] = mt_rand(0, 100);
-			$this->_question[] = mt_rand(0, 100);
+			$this->_question[] = mt_rand(0, 10);
+			$this->_question[] = mt_rand(0, 10);
 			$this->_question[] = md5($this->_question[0] + $this->_question[1]);
 		
 		}
