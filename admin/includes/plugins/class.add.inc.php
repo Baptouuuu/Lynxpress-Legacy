@@ -136,10 +136,7 @@
 					if(!isset($conf['name']) || !isset($conf['namespace']) || !isset($conf['entry_point']) || !isset($conf['author']) || !isset($conf['url']) || !isset($conf['admin']) || !isset($conf['site']) || !isset($conf['library']) || !isset($conf['queries']) || !isset($conf['uninstall']))
 						throw new Exception('Manifest invalid');
 					
-					if(is_dir('includes/'.$conf['namespace']))
-						throw new Exception('The namespace "'.$conf['namespace'].'" is already taken');
-					
-					if(is_dir('library/'.$conf['namespace']))
+					if(is_dir('includes/'.$conf['namespace']) || is_dir('library/'.$conf['namespace']))
 						throw new Exception('The namespace "'.$conf['namespace'].'" is already taken');
 					
 					//if one of files doesn't exists, an exception will be raised
