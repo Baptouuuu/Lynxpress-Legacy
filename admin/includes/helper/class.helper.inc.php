@@ -157,6 +157,8 @@
 		
 		public static function make_password($username, $pwd){
 		
+			self::check_ext();
+			
 			return md5($username.SALT.$pwd);
 		
 		}
@@ -171,6 +173,8 @@
 		
 		public static function generate_salt(){
 		
+			self::check_ext();
+			
 			return base64_encode(md5(md5(uniqid().mt_rand(time().mt_rand().(time()+rand()), (time()+rand()).mt_rand().time()))));
 		
 		}
@@ -190,7 +194,9 @@
 				$curl = new Curl('http://update.lynxpress.org/manifest.json');
 				$array = json_decode($curl->_content, true);
 				
-				if($array['version'] > WS_VERSION)
+				if($array['version'] > WS_VERSION && strpos($array['version'], 'RC') !== false)
+					return false;
+				elseif($array['version'] > WS_VERSION)
 					return true;
 				elseif(strpos(WS_VERSION, 'RC') !== false && strpos($array['version'], 'RC') === false)
 					return true;
@@ -202,6 +208,55 @@
 				return false;
 			
 			}
+		
+		}
+		
+		/**
+			* Return an array of all plugins entry points
+			*
+			* @static
+			* @access	public
+			* @return	array
+		*/
+		
+		public static function plugins_infos(){
+		
+			$db =& Database::load();
+			$return = array();
+			
+			$to_read['table'] = 'setting';
+			$to_read['columns'] = array('setting_data');
+			$to_read['condition_columns'][':t'] = 'setting_type';
+			$to_read['condition_select_types'][':t'] = '=';
+			$to_read['condition_values'][':t'] = 'plugin';
+			$to_read['value_types'][':t'] = 'str';
+			
+			$plugins = $db->read($to_read);
+			
+			if(!empty($plugins))
+				foreach($plugins as $plugin){
+				
+					$plugin['setting_data'] = json_decode($plugin['setting_data'], true);
+				
+					$return[] = array('name' => $plugin['setting_data']['name'], 'namespace' => $plugin['setting_data']['namespace'], 'entry_point' => $plugin['setting_data']['entry_point']);
+				
+				}
+			
+			return $return;
+		
+		}
+		
+		/**
+			* Check if necessary extension are loaded for this class
+			*
+			* @static
+			* @access	private
+		*/
+		
+		private static function check_ext(){
+		
+			if(!extension_loaded('hash'))
+				throw new Exception('Hash extension not loaded!');
 		
 		}
 	
