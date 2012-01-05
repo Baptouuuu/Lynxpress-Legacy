@@ -160,6 +160,9 @@
 					//retrieve zip with all files inside
 					$curl_zip = new Curl('http://lynxpress.org/versions/Lynxpress-'.$manifest['version'].'.zip');
 					
+					if($curl_zip->_content == '<!--The Lynx is not here!-->')
+						throw new Exception('Can\'t retrieve lynxpress archive');
+					
 					$zip = new File();
 					$zip->_content = $curl_zip->_content;
 					$zip->save('tmp/update.zip');
@@ -172,10 +175,9 @@
 					File::delete('tmp/update.zip');
 					
 					//replace all files registered in the manifest
-					foreach($manifest['files'] as $dest => $src){
+					foreach($manifest['src'] as $key => $src){
 					
-						$file = File::read('tmp/update/Lynxpress-'.$manifest['version'].'/'.$src);
-						$file->save($dest);
+						File::read('tmp/update/Lynxpress-'.$manifest['version'].'/'.$src)->save($manifest['dest'][$key]);
 						
 						File::delete('tmp/update/Lynxpress-'.$manifest['version'].'/'.$src);
 					
@@ -187,7 +189,7 @@
 					
 					//remove files
 					foreach($manifest['remove'] as $file)
-						File::delete($file);
+						File::delete($file, false);
 					
 					$config = File::read(PATH.'config.php');
 					$config->_content = str_replace('(\'WS_VERSION\', \''.WS_VERSION.'\')', '(\'WS_VERSION\', \''.$manifest['version'].'\')', $config->_content);
