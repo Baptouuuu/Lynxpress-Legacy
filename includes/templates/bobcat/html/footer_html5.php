@@ -1,6 +1,6 @@
 </section>
 			
-			<aside id="sidebar">
+			<aside>
 				<ul id="categories">
 					<?php
 					
