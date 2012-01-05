@@ -164,6 +164,11 @@
 					$to_read['condition_select_types'][':t'] = 'LIKE';
 					$to_read['condition_values'][':t'] = 'image/%';
 					$to_read['value_types'][':t'] = 'str';
+					$to_read['condition_types'][':album'] = 'AND';
+					$to_read['condition_columns'][':album'] = 'media_album';
+					$to_read['condition_select_types'][':album'] = '=';
+					$to_read['condition_values'][':album'] = '0';
+					$to_read['value_types'][':album'] = 'int';
 					$to_read['order'] = array('media_date', 'DESC');
 					
 					$this->_pictures = $this->_db->read($to_read);
@@ -382,6 +387,19 @@
 				$this->_post->_author = $this->_user['user_id'];	//we set this here because it's specific to the creation
 				
 				try{
+				
+					//check if permalink already used
+					$to_read['table'] = 'post';
+					$to_read['columns'] = array('post_permalink');
+					$to_read['condition_columns'][':p'] = 'post_permalink';
+					$to_read['condition_select_types'][':p'] = '=';
+					$to_read['condition_values'][':p'] = $this->_post->_permalink;
+					$to_read['value_types'][':p'] = 'str';
+					
+					$perm = $this->_db->read($to_read);
+					
+					if(!empty($perm))
+						throw new Exception('Generated permalink already in use. Please change your post title!');
 				
 					$this->_post->create();
 					$this->_action_msg = ActionMessages::new_post_create(true);
