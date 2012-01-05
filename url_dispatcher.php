@@ -59,6 +59,10 @@
 		
 		Loader::load();
 		
+		//forbidden classes
+		if(in_array(VGet::ctl(), array('comments', 'helper', 'html', 'html', 'install', 'loader', 'master', 'session', 'social', 'xml')))
+			throw new Exception('Unknown controllers');
+		
 		new Session();
 		
 		$controller = '\\Site\\'.ucfirst(VGet::ctl('defaultpage'));
