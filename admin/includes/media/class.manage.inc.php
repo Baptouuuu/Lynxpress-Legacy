@@ -152,6 +152,11 @@
 				$to_read['condition_select_types'][':type'] = 'LIKE';
 				$to_read['condition_values'][':type'] = $this->_view_type.'%';
 				$to_read['value_types'][':type'] = 'str';
+				$to_read['condition_types'][':album'] = 'AND';
+				$to_read['condition_columns'][':album'] = 'media_album';
+				$to_read['condition_select_types'][':album'] = '=';
+				$to_read['condition_values'][':album'] = '0';
+				$to_read['value_types'][':album'] = 'int';
 				
 				$to_read['order'] = array('media_date', 'desc');
 				
@@ -289,6 +294,10 @@
 		
 			$to_read['table'] = 'media';
 			$to_read['columns'] = array('media_type');
+			$to_read['condition_columns'][':album'] = 'media_album';
+			$to_read['condition_select_types'][':album'] = '=';
+			$to_read['condition_values'][':album'] = '0';
+			$to_read['value_types'][':album'] = 'int';
 			
 			$types = $this->_db->read($to_read);
 			
