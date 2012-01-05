@@ -427,13 +427,15 @@
 			* @access	public
 			* @param	string [$mini] Picture thumb path
 			* @param	string [$full] Picture path
+			* @param	string [$name] Picture name
+			* @param	string [$desc] Picture description
 		*/
 		
-		public static function album_picture($mini, $full){
+		public static function album_picture($mini, $full, $name, $desc){
 		
 			echo '<li>'.
-				 	'<a href="'.$full.'" rel="shadowbox[album]">'.
-				 		'<img src="'.$mini.'" alt="Picture" />'.
+				 	'<a href="'.$full.'" rel="fancybox" title="'.$name.' | '.$desc.'">'.
+				 		'<img src="'.$mini.'" alt="'.$name.'" />'.
 				 	'</a>'.
 				 '</li>';
 		
@@ -495,8 +497,9 @@
 							}else{
 							
 								echo '<p>'.
-									 	'Please get a newer browser in order to see this video<br/>'.
-									 	'Or contact the website owner to ask him to link a video to this one'.
+									 	'Please get a newer browser in order to see this video.<br/>'.
+									 	'Or contact the website owner to ask him to link a video to this one.<br/>'.
+									 	'Still, you can download the file <a href="'.$link.'" title="Dowload '.$name.'">&gt;here&lt;</a>.'.
 									 '</p>';
 							
 							}
