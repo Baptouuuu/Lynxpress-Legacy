@@ -855,9 +855,10 @@
 			* @param	string [$name] Picture name
 			* @param	string [$author_name] Author username
 			* @param	string [$date] Upload date
+			* @param	integer [$album] Album id
 		*/
 		
-		public static function ma_picture_label($id, $permalink, $dirname, $filename, $name, $author_name, $date){
+		public static function ma_picture_label($id, $permalink, $dirname, $filename, $name, $author_name, $date, $album){
 		
 			echo '<div class="album_label">'.
 					'<label for="album_'.$id.'">'.
@@ -867,12 +868,13 @@
 					'</label>'.
 				 	'<div class="content_label">'.
 					 	'<div class="label_cover">'.
-					 		'<a href="'.PATH.$permalink.'" rel="shadowbox"><img src="'.PATH.$dirname.'150-'.$filename.'" alt="Picture" /></a>'.
+					 		'<a class="fancybox" href="'.PATH.$permalink.'" title="'.$name.'"><img src="'.PATH.$dirname.'150-'.$filename.'" alt="Picture" /></a>'.
 					 	'</div>'.
 					 	'<div class="user_info_side">'.
 					 		'Name: <span class="lname"><input class="pic_input_text" type="text" name="pic'.$id.'" value="'.$name.'"/></span><br/>'.
 						 	'Author: <span class="lauth">'.ucfirst($author_name).'</span><br/>'.
 						 	'Creation: <span class="ldate">'.date('Y/m/d @ H:i', strtotime($date)).'</span><br/>'.
+						 	'<a href="index.php?ns=media&ctl=albums&action=edit_image&id='.$album.'&pid='.$id.'">Edit</a> | '.
 						 	'<a class="red" href="index.php?ns=media&ctl=albums&action=delete&id='.$id.'">Delete permanently</a>'.
 						'</div>'.
 					'</div>'.
@@ -910,6 +912,48 @@
 				 	'<span class="indication">The maximum upload file size is set to '.HandleMedia::max_upload().'MB</span><br/>'.
 				 	'<input type="hidden" name="album_id" value="'.$id.'" />'.
 				 	'<input class="submit button button_publish" type="submit" name="upload" value="Add Pictures" />'.
+				 '</div>';
+		
+		}
+		
+		/**
+			* Display form to edit an image of an album
+			*
+			* @static
+			* @access	public
+			* @param	string [$name] Image name
+			* @param	string [$dirname] Directory path of the file
+			* @param	string [$fname] File name
+			* @param	string [$description] Image description
+			* @param	string [$permalink] Path to the file
+			* @param	integer [$id] Album picture id
+		*/
+		
+		public static function ma_edit_image($name, $dirname, $fname, $description, $permalink, $pid){
+		
+			echo '<div id="edit_media">'.
+				 	'<input id="media_name" type="text" name="name" value="'.$name.'" placeholder="Image title" required /><br/>'.
+				 	'<br/>'.
+				 	'<img src="'.PATH.$dirname.'1000-'.$fname.'" alt="'.$name.'" title="'.$name.'" /><br/>'.
+				 	'<select id="flip" name="flip">'.
+				 		'<option value="no">Flip</option>'.
+				 		'<option value="h">Horizontally</option>'.
+				 		'<option value="v">Vertically</option>'.
+				 	'</select><br/>'.
+				 	'<select id="rotate" name="rotate">'.
+				 		'<option value="no">Rotation</option>'.
+				 		'<option value="90">90°</option>'.
+				 		'<option value="180">180</option>'.
+				 		'<option value="270">-90°</option>'.
+				 	'</select><br/>'.
+				 	'<br/>'.
+				 	'<textarea id="media_desc" class="base_txta" rows="10" name="description" wrap="soft" placeholder="A little description of your photo">'.$description.'</textarea><br/>'.
+				 	'<label for="fsize">Image url</label>: <input id="fsize" class="user_input_text" type="text" value="'.$permalink.'" readonly /> <span class="indication">(full size)</span><br/>'.
+				 	'<label for="size15">Image url</label>: <input id="size15" class="user_input_text" type="text" value="'.$dirname.'150-'.$fname.'" readonly /> <span class="indication">(image with 150 pixels width)</span><br/>'.
+				 	'<label for="size3">Image url</label>: <input id="size3" class="user_input_text" type="text" value="'.$dirname.'300-'.$fname.'" readonly /> <span class="indication">(image with 300 pixels width)</span><br/>'.
+				 	'<label for="size1">Image url</label>: <input id="size1" class="user_input_text" type="text" value="'.$dirname.'1000-'.$fname.'" readonly /> <span class="indication">(image with 1000 pixels width)</span><br/>'.
+				 	'<input class="submit button button_publish" type="submit" name="update_image" value="Update" />'.
+				 	'<input type="hidden" name="pid" value="'.$pid.'" />'.
 				 '</div>';
 		
 		}
