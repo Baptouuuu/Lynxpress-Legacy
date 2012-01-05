@@ -147,7 +147,7 @@
 				}
 				
 				if(!empty($completed))
-					$msg .= self::custom_good((($completed > 1)?"$completed items":'Item').' moved to trash. <a href="?action=untrash&id='.implode(',', $ids).'">Undo</a>');
+					$msg .= self::custom_good((($completed > 1)?"$completed items":'Item').' moved to trash. <a href="index.php?ns=posts&ctl=manage&action=untrash&id='.implode(',', $ids).'">Undo</a>');
 				
 				if(!empty($msg) && !empty($aborted))
 					$msg .= '<br/>';
