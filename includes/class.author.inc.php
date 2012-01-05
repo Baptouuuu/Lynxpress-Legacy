@@ -111,7 +111,7 @@
 			
 			}catch(Exception $e){
 			
-				@error_log($e->getMessage(), 1, WS_EMAIL);
+				@error_log($e->getMessage().' file: '.__FILE__.'; line: '.__LINE__, 1, WS_EMAIL);
 				header('Location: 404.php');
 			
 			}
