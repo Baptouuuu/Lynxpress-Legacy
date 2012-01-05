@@ -60,7 +60,7 @@
 		private $_password = null;
 		private $_conf = null;
 		private $_result = null;
-		const VERSION = '1.0-RC4';
+		const VERSION = '1.0';
 		
 		/**
 			* Class constructor
@@ -214,6 +214,11 @@
 				if($e->getMessage() == 'false fopen'){
 				
 					$this->_result = 'false fopen';
+				
+				}elseif($e->getMessage() == 'SQLSTATE[28000] [1045] Access denied for user \''.$this->_db_user.'\'@\''.$this->_db_host.'\' (using password: YES)'){
+				
+					$this->_result = 'false connect';
+					unlink('config.php');
 				
 				}elseif($e->getMessage() == 'SQLSTATE[42000] [1049] Unknown database \''.$this->_db_name.'\''){
 				
@@ -744,6 +749,8 @@
 				Html::config_error($this->_conf);
 			elseif($this->_result == 'false create')
 				Html::create_error();
+			elseif($this->_result == 'false connect')
+				Html::connect_error();
 			elseif($this->_result == 'unknown')
 				Html::unknown_error();
 			elseif($this->_result == 'successful')
