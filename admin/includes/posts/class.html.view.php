@@ -167,7 +167,7 @@
 		public static function np_pic($id, $name, $full){
 		
 			echo '<div class="np_pic">'.
-				 	'(<a href="'.PATH.$full.'" rel="shadowbox">view</a>)'.
+				 	'(<a class="fancybox" href="'.PATH.$full.'" title="'.$name.'">view</a>)'.
 				 	'<input id="pic'.$id.'" type="text" value="'.htmlspecialchars('<img src="'.$full.'" />').'" readonly /> '.
 				 	'<label for="pic'.$id.'">'.$name.'</label> '.
 				 '</div>';
@@ -213,7 +213,6 @@
 		public static function np_vid($id, $name, $link, $embed_code){
 		
 			echo '<div class="np_vid">'.
-				 	'(<a href="'.PATH.$link.'" rel="shadowbox">view</a>) '.
 				 	'<input id="vid'.$id.'" type="text" value="'.htmlspecialchars('<video src="'.$link.'" controls preload="auto">'.$embed_code.'</video>').'" readonly />'.
 				 	'<label for="vid'.$id.'">'.$name.'</label>'.
 				 '</div>';
