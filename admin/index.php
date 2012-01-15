@@ -2,7 +2,7 @@
 	
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -33,11 +33,13 @@
 		
 		$page = new $controller();
 		
-		require_once INC.'html/header.php';
+		if($page->html === true)
+			require_once INC.'html/header.php';
 		
 		$page->display_content();
 		
-		require_once INC.'html/footer.html';
+		if($page->html === true)
+			require_once INC.'html/footer.html';
 	
 	}catch(Exception $e){
 	
