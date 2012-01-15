@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -208,6 +208,8 @@
 					
 					foreach($plg->_data['uninstall'] as $query)
 						$this->_db->query(str_replace('{{prefix}}', DB_PREFIX, $query));
+					
+					File::delete(PATH.'css/'.$plg->_data['namespace'].'.css', false);
 					
 					$plg->delete();
 					
