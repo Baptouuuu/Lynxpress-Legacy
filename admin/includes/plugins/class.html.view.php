@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -25,6 +25,7 @@
 	
 	namespace Admin\Plugins;
 	use \Admin\Html\Html as Master;
+	use \Library\Variable\Post as VPost;
 	
 	/**
 		* Html Plugins
@@ -53,6 +54,7 @@
 			echo '<div id="menu">'.
 				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
 				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=add">Add</a></span>'.
 				 '</div>';
 		
@@ -87,6 +89,7 @@
 			echo '<div id="menu">'.
 				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
 				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=add">Add</a></span>'.
 				 '</div>';
 		
@@ -171,6 +174,67 @@
 						'<a href="index.php?ns='.$namespace.'&ctl='.$entry_point.'">'.$name.'</a>'.
 					'</div>'.
 				'</div>';
+		
+		}
+		
+		/**
+			* Display menu for plugin library page
+			*
+			* @static
+			* @access	public
+		*/
+		
+		public static function lib_menu(){
+		
+			echo '<div id="menu">'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
+				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=add">Add</a></span>'.
+				 '</div>';
+		
+		}
+		
+		/**
+			* Display plugins action in library
+			*
+			* @static
+			* @access	public
+		*/
+		
+		public static function lib_actions(){
+		
+			echo '<div id="lib_plg_act">'.
+					 '<h3>This is the list of plugins registered on lynxpress.org</h3>'.
+					 '<input id="search_input" type="text" name="search" value="'.VPost::search().'" placeholder="Search" />'.
+					 '<input class="button" type="submit" name="search_button" value="Search Plugins" />'.
+				 '</div>';
+		
+		}
+		
+		/**
+			* Display a library plugin label
+			*
+			* @static
+			* @access	public
+			* @param	string [$user] Github user name
+			* @param	string [$repo] Github repository
+			* @param	string [$download] Filename to download
+			* @param	string [$dec] Plugin description
+			* @param	string [$website] Plugin website
+		*/
+		
+		public static function lib_plg_label($user, $repo, $download, $desc, $website){
+		
+			echo '<div class="lib_plg_label">'.
+					'<div class="content_label">'.
+					 	'Author: <span class="plgauthor">'.$user.'</span><br/>'.
+					 	'Url: <span class="plgurl"><a href="'.$website.'" target="_blank">'.$website.'</a></span><br/>'.
+					 	'Description: <p class="plgdesc">'.$desc.'</p><br/>'.
+					 	'<a href="http://github.com/'.$user.'/'.$repo.'" target="_blank">View on Github</a> | '.
+					 	'<a class="green" href="index.php?ns=plugins&ctl=library&action=install&user='.$user.'&repo='.$repo.'&download='.$download.'">Install</a>'.
+					'</div>'.
+				 '</div>';
 		
 		}
 	
