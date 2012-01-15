@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Templates
@@ -259,7 +259,7 @@
 						'<input class="input_text '.(($error_name)?'wrong':'').'" id="respond_name" type="text" name="respond_name" value="'.$name.'" placeholder="Your name" required /><label for="respond_name">Name *</label><br/>'.
 						'<input class="input_text '.(($error_email)?'wrong':'').'" id="respond_email" type="email" name="respond_email" value="'.$email.'" placeholder="lynx@press.org" required /><label for="respond_email">E-mail *</label><br/>'.
 						'<textarea id="respond_content'.(($error_content)?'_wrong':'').'" name="respond_content" wrap="soft" placeholder="Want to say something?" required >'.$content.'</textarea><br/>'.
-						'How many does '.$n1.' + '.$n2.'?&nbsp;&nbsp;&nbsp;<input id="captcha" class="input_text '.(($error_captcha)?'wrong':'').'" type="number" name="number" max="200" min="0" required/><br/>'.
+						'How many does '.$n1.' + '.$n2.'?&nbsp;&nbsp;&nbsp;<input id="captcha" class="input_text '.(($error_captcha)?'wrong':'').'" type="number" name="number" max="20" min="0" required/><br/>'.
 						'<input type="hidden" name="result" value="'.$result.'" />'.
 						'<input id="respond_submit" type="submit" name="submit_comment" value="Submit Comment" />'.
 					'</form>'.
@@ -301,11 +301,15 @@
 			* @param	string [$date] Comment creation date
 			* @param	string [$link] Comment permalink
 			* @param	string [$content] Comment content
+			* @param	string [$email] Comment email
 		*/
 		
-		public static function comment($id, $name, $date, $link, $content){
+		public static function comment($id, $name, $date, $link, $content, $email){
 		
 			echo '<div class="comments" id="comment_'.$id.'">'.
+					'<div class="gravatar">'.
+						'<img src="http://www.gravatar.com/avatar/'.md5(strtolower($email)).'?s=50" alt="" />'.
+					'</div>'.
 					'<div class="comment_info">'.
 						'By <a style="text-decoration: none;" href="#comment_'.$id.'">'.$name.'</a> '.
 						'the '.date('d/m/Y @ H:i', strtotime($date)).
@@ -444,7 +448,7 @@
 		
 			echo '<li>'.
 				 	'<a href="'.$full.'" rel="fancybox" title="'.$name.' | '.$desc.'">'.
-				 		'<img src="'.$mini.'" alt="'.$name.'" />'.
+				 		'<img src="'.$mini.'" alt="'.$name.' | '.$desc.'" />'.
 				 	'</a>'.
 				 '</li>';
 		

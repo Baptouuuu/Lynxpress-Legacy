@@ -53,9 +53,11 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif;  ma
 			
 			/*Comments*/
 			.comments{font-size: 12px; margin: 0px 0px 10px 15px; min-height: 66px; text-decoration: none; width: 580px;}
-				.comment_info{background-color: #b6b6b6; background-image: -webkit-gradient(linear, left top, left bottom, from(#d5d5d5), to(#b6b6b6)); background-image: -moz-linear-gradient(90deg, #b6b6b6, #d5d5d5); border-radius: 4px; box-shadow: 1px 1px 1px lightGrey; height: 14px; padding: 5px;}
+				.gravatar{height: 50px; margin: 0 0 -50px 0; width: 50px;}
+					.gravatar > img{border-radius: 4px; box-shadow: 1px 1px 1px lightGrey; max-height: 50px; max-width: 50px;}
+				.comment_info{background-color: #b6b6b6; background-image: -webkit-gradient(linear, left top, left bottom, from(#d5d5d5), to(#b6b6b6)); background-image: -moz-linear-gradient(90deg, #b6b6b6, #d5d5d5); border-radius: 4px; box-shadow: 1px 1px 1px lightGrey; height: 14px; margin: 0 0 0 60px; padding: 5px;}
 					.comment_info a{text-decoration: underline;}
-				.comment_content{margin: 5px 0 0 20px; padding: 5px; width: 525px;}
+				.comment_content{margin: 5px 0 0 80px; padding: 5px; width: 465px;}
 			
 			/*Albums*/
 			#header_album{border-bottom: 1px solid lightGrey; box-shadow: 0px 3px 5px lightGrey; font: italic normal normal 29px/29px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; margin: 15px -8px; padding: 5px; text-align: center;}
@@ -140,9 +142,10 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif;  ma
 			#stwitter{background: transparent url(../../../../images/twitter.png) no-repeat scroll 0px 0px; margin: -48px 0 0 58px;}
 		
 		/*Sidebar*/
-		#corps > aside{background-color: #fff; border: 1px solid lightGrey; border-radius: 4px; box-shadow: 2px 2px 2px lightGrey; float: right; margin: 30px 0; padding: 5px; width: 350px;}
-			#categories{margin: 10px 0 10px -20px;}
-				#categories li{margin: 0 0 10px 0;}
+		#corps > aside{background-color: #fff; border: 1px solid lightGrey; border-radius: 4px; box-shadow: 2px 2px 2px lightGrey; float: right; margin: 30px 0 15px 0; padding: 5px; width: 350px;}
+			#corps > aside > h3{font: italic normal normal 22px/0px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; margin: 20px 0 20px 10px;}
+			#corps > aside > ul{margin: 10px 0 10px 20px; padding: 0;}
+				#corps > aside li{margin: 0 0 10px 0;}
 		
 		
 		#clear{clear: both; display: block; float: none; font-size: 0px; height: 0px; line-height: 0px; margin: 0px; overflow: hidden; padding: 0px; width: 0px;}

@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Site
@@ -25,6 +25,7 @@
 	
 	namespace Site\Helper;
 	use \Library\Database\Database as Database;
+	use \Library\Variable\Get as VGet;
 	
 	/**
 		* Main
@@ -188,6 +189,66 @@
 			}
 			
 			return $crop_length;
+		
+		}
+		
+		/**
+			* Check if current controller can display an archive list
+			*
+			* @static
+			* @access	public
+			* @return	boolean
+		*/
+		
+		public static function check_pub_dates(){
+		
+			if(in_array(VGet::ctl('posts'), array('posts', 'search')))
+				return true;
+			else
+				return false;
+		
+		}
+		
+		/**
+			* Display a list of publication dates for news
+			*
+			* @static
+			* @access	public
+			* @param	string [$pattern] Date structure to display
+			* @param	integer [$max] Maximum months to display
+		*/
+		
+		public static function pub_dates($pattern = 'F Y', $max = 12){
+		
+			if(self::check_pub_dates()){
+			
+				$db =& Database::load();
+				
+				$to_read['table'] = 'post';
+				$to_read['columns'] = array('post_date');
+				
+				$dates = $db->read($to_read);
+				
+				if(!empty($dates))
+					foreach($dates as &$date)
+						$date = substr($date['post_date'], 0, 7);
+				
+				$dates = array_unique($dates);
+				
+				if(!empty($dates))
+					foreach($dates as $key => $date)
+						if($key > $max)
+							unset($dates[$key]);
+				
+				echo '<ul>';
+				
+				if(!empty($dates))
+					foreach($dates as $date)
+						echo '<li><a href="index.php?ctl=search&q=date:'.$date.'">'.date($pattern, strtotime($date)).'</a></li>';
+				
+				echo '</ul>';
+			
+			}
 		
 		}
 	

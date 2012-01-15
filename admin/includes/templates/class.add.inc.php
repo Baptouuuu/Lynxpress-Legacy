@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -145,7 +145,7 @@
 					
 					//check if the manifest is complete
 					if(!isset($conf['name']) || !isset($conf['author']) || !isset($conf['url']) || !isset($conf['namespace']) || !isset($conf['files']))
-						throw new Exception('Manifest invalid');
+						throw new Exception('Invalid manifest!');
 					
 					if(is_dir(PATH.'includes/templates/'.$conf['namespace'].'/'))
 						throw new Exception('Template already exist');

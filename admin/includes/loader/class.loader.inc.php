@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -68,7 +68,7 @@
 			}
 			
 			if(!file_exists($require))
-				throw new Exception('Namespace "'.$namespaces[1].'" doesn\'t exists');
+				throw new Exception('Namespace "'.$class.'" doesn\'t exists');
 			
 			require_once $require;
 			

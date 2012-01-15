@@ -1,3 +1,4 @@
+<?php use \Site\Helper\Posts as Helper; ?>
 </section>
 			
 			<aside>
@@ -13,6 +14,18 @@
 					?>
 				</ul>
 			</aside>
+				
+			<?php 
+			
+				if(Helper::check_pub_dates() === true){
+				
+					echo '<aside>';
+					Helper::pub_dates();
+					echo '</aside>';
+				
+				}
+			
+			?>
 			
 			<div id="clear"></div>
        

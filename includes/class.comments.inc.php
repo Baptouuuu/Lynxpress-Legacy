@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Site
@@ -194,7 +194,7 @@
 				Html::html5('o');
 				
 				foreach($this->_comments as $comment)
-					Html::comment($comment->_id, $comment->_name, $comment->_date, $com_link, nl2br($comment->_content));
+					Html::comment($comment->_id, $comment->_name, $comment->_date, $com_link, nl2br($comment->_content), $comment->_email);
 				
 				Html::html5('c');
 			

@@ -13,18 +13,26 @@
 		<link rel="alternate" type="application/rss+xml" title="<?php echo WS_NAME ?>" href="feed.php" />
 		<link rel="alternate" type="application/xml" title="Sitemap" href="sitemap.php" />
 		<link rel="stylesheet" type="text/css" href="includes/templates/bobcat/css/html5.css" />
-	    <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	    <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox.css" media="screen" />
+	    <link rel="stylesheet" type="text/css" href="fancybox/helpers/jquery.fancybox-buttons.css?v=2.0.3" />
 	    
-	    <script src="js/jquery-1.4.3.min.js"></script>
-	    <script type="text/javascript" src="fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-	    <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	    <script type="text/javascript" src="js/jquery.mousewheel-3.0.6.pack.js"></script>
+	    <script type="text/javascript" src="fancybox/jquery.fancybox.js"></script>
+	    <script type="text/javascript" src="fancybox/helpers/jquery.fancybox-buttons.js?v=2.0.3"></script>
 	    
 	    <script type="text/javascript">
 	    	$(document).ready(function() {
 	    		$("a[rel=fancybox]").fancybox({
-	    			'titlePosition'		: 'outside',
-	    			'overlayColor'		: '#000',
-	    			'overlayOpacity'	: 0.85
+	    			helpers: {
+	    				title : {
+	    					type : 'outside'
+	    				},
+	    				overlay : {
+	    					speedIn : 500,
+	    					opacity : 0.85
+	    				}
+	    			}
 	    		});
 	    	});
 	    </script>

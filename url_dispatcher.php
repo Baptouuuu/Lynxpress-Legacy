@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Site
@@ -60,7 +60,7 @@
 		Loader::load();
 		
 		//forbidden classes
-		if(in_array(VGet::ctl(), array('comments', 'helper', 'html', 'html', 'install', 'loader', 'master', 'session', 'social', 'xml')))
+		if(in_array(VGet::ctl(), array('comments', 'helper', 'html', 'install', 'loader', 'master', 'session', 'social', 'xml')))
 			throw new Exception('Unknown controllers');
 		
 		new Session();

@@ -56,9 +56,11 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif;  ma
 			
 			/*comments*/
 			.comments{font-size: 12px; margin: 0px 0px 10px 15px; min-height: 66px; text-decoration: none; width: 955px;}
-				.comment_info{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; height: 14px; padding: 5px;}
+				.gravatar{height: 50px; margin: 0 0 -50px 0; width: 50px;}
+					.gravatar > img{max-height: 50px; max-width: 50px;}
+				.comment_info{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; height: 14px; margin: 0 0 0 60px; padding: 5px;}
 					.comment_info a{text-decoration: underline;}
-				.comment_content{margin: 5px 0 0 20px; padding: 5px; width: 905px;}
+				.comment_content{margin: 5px 0 0 80px; padding: 5px; width: 845px;}
 			
 			/*albums*/
 			#header_album{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; font-size: 18px; height: 25px; margin: 0px -14px 0px -14px; padding: 4px 0px 0px 30px;}
@@ -133,7 +135,11 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif;  ma
 			#sfacebook{background: transparent url(../../../../images/facebook.png) no-repeat scroll 0px 0px;}
 			#stwitter{background: transparent url(../../../../images/twitter.png) no-repeat scroll 0px 0px; margin: -48px 0px 0px 58px;}
 	
-	#footer{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; font-size: 14px; height: auto; margin: auto; margin-top: 15px; min-height: 20px; padding: 4px 0px 1px 0px; position: relative; text-align: center; width: 1000px;}
+	#footer{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; font-size: 14px; height: auto; margin: auto; margin-top: 15px; min-height: 20px; padding: 4px 0 5px 0; position: relative; text-align: center; width: 1000px;}
+		#pub_dates{margin: 15px 15px 0 15px;}
+			#pub_dates ul{margin: 0; padding: 0;}
+				#pub_dates li{display: inline-block; padding: 3px 5px;}
+				#pub_dates li + li{border-left: 1px solid #000;}
 
 
 /*General*/

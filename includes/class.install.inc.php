@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Installation
@@ -60,7 +60,7 @@
 		private $_password = null;
 		private $_conf = null;
 		private $_result = null;
-		const VERSION = '1.0';
+		const VERSION = '1.1';
 		
 		/**
 			* Class constructor
@@ -138,7 +138,7 @@
 			$conf .= "\n";
 			$conf .= "\t/**\n";
 			$conf .= "\t\t* @author\t\tBaptiste Langlade\n";
-			$conf .= "\t\t* @copyright\t2011\n";
+			$conf .= "\t\t* @copyright\t2011-2012\n";
 			$conf .= "\t\t* @license\t\thttp://www.gnu.org/licenses/gpl.html GNU GPL V3\n";
 			$conf .= "\t\t* @package\t\tLynxpress\n";
 			$conf .= "\t\t*\n";

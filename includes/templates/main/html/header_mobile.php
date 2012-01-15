@@ -12,6 +12,18 @@
 		<link rel="alternate" type="application/rss+xml" title="<?php echo WS_NAME ?>" href="feed.php" />
 		<link rel="alternate" type="application/xml" title="Sitemap" href="sitemap.php" />
 		<link rel="stylesheet" type="text/css" href="includes/templates/main/css/mobile.css" />
+		<link rel="stylesheet" type="text/css" href="photoswipe/photoswipe.css" />
+		
+		<script type="text/javascript" src="photoswipe/klass.min.js"></script>
+		<script type="text/javascript" src="photoswipe/code.photoswipe-3.0.4.min.js"></script>
+		
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function(){
+			
+				var myPhotoSwipe = Code.PhotoSwipe.attach( window.document.querySelectorAll('#album a'), { enableMouseWheel: false , enableKeyboard: false } );
+			
+			}, false);
+		</script>
 		
 	</head>
 
@@ -33,6 +45,9 @@
         		</li>
         		<li class="tmenu">
         			<a href="<?php echo WS_URL ?>?ctl=albums">Albums</a>
+        		</li>
+        		<li class="tmenu">
+        			<a href="<?php echo WS_URL ?>?ctl=video">Videos</a>
         		</li>
         	</ul>
             

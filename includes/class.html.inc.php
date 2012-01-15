@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Site
@@ -230,14 +230,15 @@
 			* @param	string [$date] Comment creation date
 			* @param	string [$link] Comment permalink
 			* @param	string [$content] Comment content
+			* @param	string [$email] Comment email
 		*/
 		
-		public static function comment($id, $name, $date, $link, $content){
+		public static function comment($id, $name, $date, $link, $content, $email){
 		
 			$template = self::get_template();
 			$class = self::TEMPLATES.ucfirst($template).self::HTML;
 			
-			$class::comment($id, $name, $date, $link, $content);
+			$class::comment($id, $name, $date, $link, $content, $email);
 		
 		}
 		

@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		*
@@ -37,6 +37,6 @@
 	
 	define('SALT', '2722123d19895a7a56fe421217e8396f');		//after installation, don't change this constant
 	
-	define('WS_VERSION', '1.0');
+	define('WS_VERSION', '1.1');
 
 ?>

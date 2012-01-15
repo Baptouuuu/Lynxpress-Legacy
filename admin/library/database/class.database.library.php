@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		*
@@ -64,7 +64,7 @@
 			
 			try{
 			
-				if(!defined('DB_NAME') && !defined('DB_HOST') && !defined('DB_USER') && !defined('DB_PWD') && !defined('DB_PREDFIX'))
+				if(!defined('DB_NAME') && !defined('DB_HOST') && !defined('DB_USER') && !defined('DB_PWD') && !defined('DB_PREFIX'))
 					throw new Exception('Lynxpress can\'t find database constants!');
 				
 				$this->_c = new PDO('mysql:dbname='.DB_NAME.';host='.DB_HOST.';', DB_USER, DB_PWD, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));

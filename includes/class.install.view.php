@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Installation
@@ -259,7 +259,7 @@
 					'<h3>Lynxpress > Installation successfull</h3>'.
 					'<p class="message">'.
 						'You\'re Lynxpress blog is now installed, now you can loggin with your given username and password and start blogging.<br/>'.
-						'<a id="start" href="admin/login.php">Start</a>'.
+						'<a id="start" href="admin/index.php?ns=session&ctl=login">Start</a>'.
 					'</p>'.
 				 '</header>';
 		

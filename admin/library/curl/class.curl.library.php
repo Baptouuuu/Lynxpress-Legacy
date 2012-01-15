@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		*
@@ -75,6 +75,9 @@
 		
 		public function connect(){
 		
+			if(empty($this->_url))
+				throw new Exception('Please mention a url');
+			
 			curl_setopt($this->_c, CURLOPT_URL, $this->_url);
 			curl_setopt($this->_c, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($this->_c, CURLOPT_HEADER, false);

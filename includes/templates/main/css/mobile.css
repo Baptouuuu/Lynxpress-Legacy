@@ -1,10 +1,10 @@
 body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif; margin: 0; padding: 0;}
 
-	#header{background: black url(/images/overlay.png) repeat-x; height: 40px; margin: -16px 0 0 0; min-width: 340px; width: 100%;}
+	#header{background: black url(../../../../images/overlay.png) repeat-x; height: 40px; margin: -16px 0 0 0; min-width: 340px; width: 100%;}
 			#header li:first-child{margin-right: 24px;}
 			#header li{float: left; position: relative;}
 			.tmenu{font-size: 18px; padding: 9px 10px 10px 10px;}
-			.tmenu:hover{background: #3399ff url(/images/overlay.png) repeat-x;}
+			.tmenu:hover, .tmenu:active{background: #3399ff url(../../../../images/overlay.png) repeat-x;}
 				#header a{color: white;}
 	
 	#corps{min-width: 340px; width: 100%;}
@@ -41,6 +41,11 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif; mar
 			
 			/*videos*/
 			#header_video{text-align: center; text-shadow: 0 1px 0 white;}
+			#videos{padding: 15px 20px;}
+				#videos > ul{padding: 0;}
+					#videos .video{margin: 0 auto 20px; text-align: center; width: 600px;}
+						.video_details{background: #000; color: #fff; font-size: 15px; margin: 10px 0; padding: 3px 5px;}
+							.video_details p{margin-bottom: 0;}
 			
 			/*error message*/
 			#no_content{margin: 0 0 0 -40px !important; text-align: center;}
