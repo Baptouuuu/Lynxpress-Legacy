@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -85,7 +85,7 @@
 			
 			if($user === false || empty($user)){
 			
-				header('Location: login.php');
+				header('Location: index.php?ns=session&ctl=login');
 			
 			}else{
 			
@@ -98,7 +98,7 @@
 			
 				}else{
 			
-					header('Location: login.php');
+					header('Location: index.php?ns=session&ctl=login');
 			
 				}
 			
@@ -115,7 +115,7 @@
 		public function logout(){
 		
 			session_destroy();
-			header('Location: login.php');
+			header('Location: index.php?ns=session&ctl=login');
 		
 		}
 		
@@ -142,14 +142,14 @@
 				if($user === false || empty($user)){
 				
 					session_destroy();
-					header('Location: login.php');
+					header('Location: index.php?ns=session&ctl=login');
 				
 				}else{
 				
 					if($user[0]['user_username'] != VSession::username()){
 				
 						session_destroy();
-						header('Location: login.php');
+						header('Location: index.php?ns=session&ctl=login');
 				
 					}else{
 				
@@ -162,7 +162,7 @@
 			}else{
 		
 				session_destroy();
-				header('Location: login.php');
+				header('Location: index.php?ns=session&ctl=login');
 		
 			}
 		
