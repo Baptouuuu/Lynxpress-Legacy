@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -713,6 +713,17 @@
 						
 						$this->_db->query('DELETE FROM `'.DB_PREFIX.'comment` WHERE comment_rel_id = '.$id.' AND comment_rel_type = "media"');
 						
+						if(VPost::type() == 'alien'){
+						
+							$to_update['table'] = 'media';
+							$to_update['columns'] = array(':attach' => 'media_attachment');
+							$to_update['condition_columns'] = array(':ca' => 'media_attachment');
+							$to_update['column_values'] = array(':attach' => null, ':ca' => $id);
+							$to_update['value_types'] = array(':attach' => 'null', ':ca' => 'int');
+							$this->_db->update($to_update);
+						
+						}
+						
 						array_push($results, true);
 					
 					}catch(Exception $e){
@@ -747,6 +758,17 @@
 					HandleMedia::delete(PATH.$path);
 					
 					$this->_db->query('DELETE FROM `'.DB_PREFIX.'comment` WHERE comment_rel_id = '.VGet::id().' AND comment_rel_type = "media"');
+					
+					if(VGet::type() == 'alien'){
+					
+						$to_update['table'] = 'media';
+						$to_update['columns'] = array(':attach' => 'media_attachment');
+						$to_update['condition_columns'] = array(':ca' => 'media_attachment');
+						$to_update['column_values'] = array(':attach' => null, ':ca' => VGet::id());
+						$to_update['value_types'] = array(':attach' => 'null', ':ca' => 'int');
+						$this->_db->update($to_update);
+					
+					}
 					
 					Session::monitor_activity('deleted a file');
 					
