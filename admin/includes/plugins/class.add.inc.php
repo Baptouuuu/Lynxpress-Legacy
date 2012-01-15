@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -134,7 +134,7 @@
 					
 					//check if manifest is complete
 					if(!isset($conf['name']) || !isset($conf['namespace']) || !isset($conf['entry_point']) || !isset($conf['author']) || !isset($conf['url']) || !isset($conf['admin']) || !isset($conf['site']) || !isset($conf['library']) || !isset($conf['queries']) || !isset($conf['uninstall']))
-						throw new Exception('Manifest invalid');
+						throw new Exception('Invalid manifest!');
 					
 					if(is_dir('includes/'.$conf['namespace']) || is_dir('library/'.$conf['namespace']))
 						throw new Exception('The namespace "'.$conf['namespace'].'" is already taken');
@@ -177,6 +177,14 @@
 						File::delete($tmp.'library/'.$file);
 					
 					}
+					
+					if(isset($conf['css']))
+						foreach($conf['css'] as $file){
+						
+							File::move($tmp.'css/'.$file, PATH.'css/'.$conf['namespace'].'.css');
+							File::delete($tmp.'css/'.$file);
+						
+						}
 					
 					foreach($conf['queries'] as $query)
 						$this->_db->query(str_replace('{{prefix}}', DB_PREFIX, $query));
