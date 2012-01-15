@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		*
@@ -187,7 +187,7 @@
 			elseif(file_exists($path) && $check === true)
 				@unlink($path);
 			else
-				throw new Exception('File doesn\'t exists');
+				throw new Exception('File "'.$path.'" doesn\'t exists');
 			
 			$dir = @scandir($dirname);
 			
