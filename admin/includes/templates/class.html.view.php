@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -26,6 +26,7 @@
 	namespace Admin\Templates;
 	use \Library\Media\Media as Media;
 	use \Admin\Html\Html as Master;
+	use \Library\Variable\Post as VPost;
 	
 	/**
 		* Html Templates
@@ -57,6 +58,7 @@
 				echo '<div id="menu">'.
 					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 	'<span class="menu_item"><a href="index.php?ns=templates&ctl=manage">Templates</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=templates&ctl=library">Library</a></span>'.
 					 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=templates&ctl=add">Add</a></span>'.
 					 '</div>';
 			
@@ -103,6 +105,7 @@
 				echo '<div id="menu">'.
 					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=templates&ctl=manage">Templates</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=templates&ctl=library">Library</a></span>'.
 					 	'<span class="menu_item"><a href="index.php?ns=templates&ctl=add">Add</a></span>'.
 					 '</div>';
 			
@@ -155,6 +158,67 @@
 					 	'Name: <span class="tplname">'.$name.'</span><br/>'.
 					 	'Author: <span class="tplauthor">'.$author.'</span><br/>'.
 					 	'Url : <span class="tplurl"><a href="'.$url.'" target="_blank">'.$url.'</a></span>'.
+					'</div>'.
+				 '</div>';
+		
+		}
+		
+		/**
+			* Display menu for templates library page
+			*
+			* @static
+			* @access	public
+		*/
+		
+		public static function lib_menu(){
+		
+			echo '<div id="menu">'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=templates&ctl=manage">Templates</a></span>'.
+				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=templates&ctl=library">Library</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=templates&ctl=add">Add</a></span>'.
+				 '</div>';
+		
+		}
+		
+		/**
+			* Display templates action in library
+			*
+			* @static
+			* @access	public
+		*/
+		
+		public static function lib_actions(){
+		
+			echo '<div id="lib_tpl_act">'.
+					 '<h3>This is the list of templates registered on lynxpress.org</h3>'.
+					 '<input id="search_input" type="text" name="search" value="'.VPost::search().'" placeholder="Search" />'.
+					 '<input class="button" type="submit" name="search_button" value="Search Templates" />'.
+				 '</div>';
+		
+		}
+		
+		/**
+			* Display a library template label
+			*
+			* @static
+			* @access	public
+			* @param	string [$user] Github user name
+			* @param	string [$repo] Github repository
+			* @param	string [$download] Filename to download
+			* @param	string [$dec] Template description
+			* @param	string [$website] Template website
+		*/
+		
+		public static function lib_tpl_label($user, $repo, $download, $desc, $website){
+		
+			echo '<div class="lib_plg_label">'.
+					'<div class="content_label">'.
+					 	'Author: <span class="plgauthor">'.$user.'</span><br/>'.
+					 	'Url: <span class="plgurl"><a href="'.$website.'" target="_blank">'.$website.'</a></span><br/>'.
+					 	'Description: <p class="plgdesc">'.$desc.'</p><br/>'.
+					 	'<a href="http://github.com/'.$user.'/'.$repo.'" target="_blank">View on Github</a> | '.
+					 	'<a class="green" href="index.php?ns=templates&ctl=library&action=install&user='.$user.'&repo='.$repo.'&download='.$download.'">Install</a>'.
 					'</div>'.
 				 '</div>';
 		
