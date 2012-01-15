@@ -65,6 +65,7 @@ body {background-color: #f7f6f1; background-attachment: fixed; height:100%; padd
 	
 	#login{height: auto; left: 50%; margin-left: -150px; margin-top: -150px; position: absolute; top: 50%; width: 300px;}
 		#login h2{text-align: center; margin: 12px -5px 0px -5px; text-shadow: #fff 0px 1px 0px;}
+		#login > div.message{margin: 10px 0 0 0;}
 		.login{background: none; border: 1px solid lightGrey; border-radius: 3px; font-size: 13px; height: 28px; outline: none; width: 296px;}
 		.login:hover{background-color: white;}
 		.submit_login{background-color: #636363; background-image: -webkit-gradient(linear, left top, left bottom, from(#636363), to(#292929)); background-image: -moz-linear-gradient(90deg, #292929 0%, #636363 100%); border-radius: 3px; border-style: none; color: white; cursor: pointer; font-size: 13px; height: 28px; line-height: 1; text-decoration: none; width: 300px;}
@@ -154,7 +155,7 @@ body {background-color: #f7f6f1; background-attachment: fixed; height:100%; padd
 	
 	/*Users*/
 	#labels{margin: 10px 0 0 0; min-height: 50px; width: 100%; }
-		.user_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; float: left; height: 100px; margin: 0 15px 12px 0; width: auto;}
+		.user_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; display: inline-block; height: 100px; margin: 0 15px 12px 0; width: auto;}
 			.check_label{border-right: 1px solid lightGrey; height: 95px; padding: 3px; width: 20px;}
 				.check_label input{margin-top: 41px;}
 			.content_label{display: block; font-size: 13px; height: 88px; margin: -101px 0 0 27px; padding: 5px 10px 5px 5px; }
@@ -187,8 +188,7 @@ body {background-color: #f7f6f1; background-attachment: fixed; height:100%; padd
 	.column_name{min-width: 200px;}
 	.column_link{min-width: 200px;}
 	.column_rss{min-width: 200px;}
-	.column_priority{min-width: 100px;
-	}
+	.column_priority{min-width: 100px;}
 	
 	/*New Media*/
 	#new_media{padding: 10px}
@@ -217,7 +217,7 @@ body {background-color: #f7f6f1; background-attachment: fixed; height:100%; padd
 		#embed{text-align: center;}
 	
 	/*Albums*/
-	.album_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; float: left; height: 100px; margin: 0 15px 12px 0; width: auto;}
+	.album_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; display: inline-block; height: 100px; margin: 0 15px 12px 0; width: auto;}
 		.label_cover{display: block; height: 75px; width: 83px;}
 			.label_cover img{max-height: 75px !important; max-width: 83px !important;}
 			.lname{margin-left: 39px;}
@@ -236,7 +236,7 @@ body {background-color: #f7f6f1; background-attachment: fixed; height:100%; padd
 	.pic_input_text:focus{background-color: white;}
 	
 	/*Settings*/
-	.setting_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; color: #414141; float: left; height: 30px; margin: 0 15px 12px 0; width: auto;}
+	.setting_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; color: #414141; display: inline-block; height: 30px; margin: 0 15px 12px 0; width: auto;}
 		.setting_label a{color: #414141;}
 		.label_img{border-right: 1px solid lightGrey; height: 30px; width: 30px;}
 			.label_img input{margin: 9px;}
@@ -267,10 +267,21 @@ body {background-color: #f7f6f1; background-attachment: fixed; height:100%; padd
 	.column_role_settings{width: 100px;}
 	
 	/*Templates*/
-	.template_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; float: left; height: 60px; margin: 0 15px 12px 0; width: auto;}
+	.template_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; display: inline-block; height: 60px; margin: 0 15px 12px 0; width: auto;}
 		.template_label .check_label{height: 55px;}
 			.template_label .check_label input{margin-top: 21px;}
 			.template_label .content_label{margin: -61px 0 0 27px; padding: 7px 10px 5px 10px;}
 				.tplname{margin-left: 17px;}
 				.tplauthor{margin-left: 10px;}
 				.tplurl{margin-left: 28px;}
+	#lib_tpl_act{height: 100px;}
+		#lib_tpl_act > #search_input{margin: 0px 5px 0px 10px; width: 200px;}
+	
+	/*Plugins*/
+	#lib_plg_act{height: 100px;}
+		#lib_plg_act > #search_input{margin: 0px 5px 0px 10px; width: 200px;}
+		.lib_plg_label{background-color: #dfdfdf; background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#dfdfdf)); background-image: -moz-linear-gradient(90deg, #dfdfdf 0%, #f1f1f1 100%); border: 1px solid lightGrey; border-radius: 3px; box-shadow: 0px 1px 1px #b3b3b3; display: inline-block; height: 154px; margin: 0 15px 12px 0; width: auto;}
+			.lib_plg_label > .content_label{display: block; font-size: 13px; height: 100%; margin: 0; padding: 5px 10px 5px 5px;}
+				span.plgauthor{margin: 0 0 0 26px;}
+				span.plgurl{margin: 0 0 0 48px;}
+				.lib_plg_label > .content_label > p{border: 1px solid lightGrey; border-radius: 4px; height: 70px; margin: -13px 0 0 74px; overflow: scroll; padding: 5px; width: 180px;}
