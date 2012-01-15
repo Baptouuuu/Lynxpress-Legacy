@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -50,6 +50,7 @@
 		protected $_categories = array();
 		private $_session_fct = null;
 		protected $_action_msg = null;
+		protected $_display_html = null;
 		
 		/**
 			* Class constructor
@@ -70,6 +71,8 @@
 			$this->_session_fct = new Session();
 			$this->_session_fct->verify_session();
 			$this->permission();
+			
+			$this->_display_html = true;
 		
 		}
 		
@@ -133,6 +136,8 @@
 				return $this->_title;
 			elseif($attr == 'settings')
 				return $this->_user['settings'];
+			elseif($attr == 'html')
+				return $this->_display_html;
 			else
 				return 'The lynx is not here!';
 		
