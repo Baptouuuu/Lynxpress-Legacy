@@ -2,7 +2,7 @@
 
 	/**
 		* @author		Baptiste Langlade
-		* @copyright	2011
+		* @copyright	2011-2012
 		* @license		http://www.gnu.org/licenses/gpl.html GNU GPL V3
 		* @package		Lynxpress
 		* @subpackage	Administration
@@ -158,7 +158,7 @@
 					$manifest = json_decode($manifest->_content, true);
 					
 					//retrieve zip with all files inside
-					$curl_zip = new Curl('http://lynxpress.org/versions/Lynxpress-'.$manifest['version'].'.zip');
+					$curl_zip = new Curl('http://versions.lynxpress.org/Lynxpress-'.$manifest['version'].'.zip');
 					
 					if($curl_zip->_content == '<!--The Lynx is not here!-->')
 						throw new Exception('Can\'t retrieve lynxpress archive');
@@ -173,6 +173,10 @@
 					File::unzip('tmp/update.zip', 'tmp/update/');
 					
 					File::delete('tmp/update.zip');
+					
+					//check if all files are readable
+					foreach($manifest['src'] as $src)
+						File::read('tmp/update/Lynxpress-'.$manifest['version'].'/'.$src);
 					
 					//replace all files registered in the manifest
 					foreach($manifest['src'] as $key => $src){
