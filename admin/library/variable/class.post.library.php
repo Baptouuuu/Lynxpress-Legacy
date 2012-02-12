@@ -39,7 +39,7 @@
 		* @subpackage	Variables
 		* @namespace	Variable
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -79,7 +79,7 @@
 			if(!isset($default[0]))
 				$default[0] = null;
 			
-			if(!isset($_POST[$variable]) || empty($_POST[$variable]))
+			if(!isset($_POST[$variable]) || (empty($_POST[$variable]) && ($_POST[$variable] !== '0' && $_POST[$variable] !== 0)))
 				return $default[0];
 			else
 				return $_POST[$variable];
