@@ -28,6 +28,7 @@
 	use Exception;
 	use \Library\Variable\Get as VGet;
 	use \Library\Variable\Post as VPost;
+	use \Library\Variable\Request as VRequest;
 	use \Library\Variable\Files as VFiles;
 	use \Library\Models\Media as Media;
 	use \Library\Models\User as User;
@@ -35,6 +36,8 @@
 	use \Admin\ActionMessages\ActionMessages as ActionMessages;
 	use \Admin\Session\Session as Session;
 	use \Admin\Helper\Helper as Helper;
+	use \Library\File\File as File;
+	use finfo;
 	
 	/**
 		* Manage Albums
@@ -45,7 +48,7 @@
 		* @subpackage	Controllers
 		* @namespace	Media
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @final
 	*/
 	
@@ -54,6 +57,10 @@
 		private $_albums = null;
 		private $_pictures = array();
 		private $_search = null;
+		private $_dates = null;
+		private $_page = null;
+		private $_limit_start = null;
+		private $_max = null;
 		
 		/**
 			* Class constructor
@@ -65,12 +72,17 @@
 		
 			parent::__construct();
 			
-			if(VPost::search_button(false))
-				$this->_search = trim(VPost::search('foo'));
-			
 			$this->_title = 'Albums';
 			
 			if($this->_user['album_photo']){
+			
+				if(VPost::search_button(false) || VGet::search()){
+				
+					$this->_search = trim(VRequest::search('Lynxpress'));
+					
+					$this->_title .= ' > Search for "'.$this->_search.'"';
+				
+				}
 			
 				$this->create();
 				$this->update();
@@ -101,29 +113,29 @@
 				$to_read['value_types'][':t'] = 'str';
 				$to_read['order'] = array('media_date', 'DESC');
 				
-				if(VPost::filter(false)){
+				if(VRequest::filter(false)){
 				
-					if(VPost::date() != 'all'){
+					if(VRequest::date() != 'all'){
 					
 						$to_read['condition_types'][':d'] = 'AND';
 						$to_read['condition_columns'][':d'] = 'media_date';
 						$to_read['condition_select_types'][':d'] = 'LIKE';
-						$to_read['condition_values'][':d'] = VPost::date('1970-01').'%';
+						$to_read['condition_values'][':d'] = VRequest::date('1970-01').'%';
 						$to_read['value_types'][':d'] = 'str';
 					
 					}
 					
-					if(VPost::category() != 'all'){
+					if(VRequest::category() != 'all'){
 					
 						$to_read['condition_types'][':c'] = 'AND';
 						$to_read['condition_columns'][':c'] = 'media_category';
 						$to_read['condition_select_types'][':c'] = 'LIKE';
-						$to_read['condition_values'][':c'] = '%'.VPost::category().'%';
+						$to_read['condition_values'][':c'] = '%'.VRequest::category().'%';
 						$to_read['value_types'][':c'] = 'str';
 					
 					}
 				
-				}elseif(VPost::search_button(false)){
+				}elseif(VPost::search_button(false) || VGet::search()){
 				
 					$to_read['condition_types'][':n'] = 'AND';
 					$to_read['condition_columns'][':n'] = 'media_name';
@@ -145,6 +157,13 @@
 						$this->get_picture();
 				
 				}
+				
+				//pass $to_read by parameter to have same conditions
+				$this->get_pagination($to_read);
+				$this->get_dates($to_read);
+				
+				$to_read['order'] = array('media_date', 'desc');
+				$to_read['limit'] = array($this->_limit_start, parent::ITEMS);
 				
 				$this->_albums = $this->_db->read($to_read);
 				
@@ -168,6 +187,66 @@
 					throw new Exception('Invalid album!');
 				
 				}
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
+		
+		}
+		
+		/**
+			* Get pagination informations
+			*
+			* @access	private
+			* @param	array [$to_read]
+		*/
+		
+		private function get_pagination($to_read){
+		
+			try{
+			
+				list($this->_page, $this->_limit_start) = Helper::pagination(parent::ITEMS);
+				
+				$to_read['columns'] = array('COUNT(MEDIA_ID) as count');
+				
+				$count = $this->_db->read($to_read);
+				
+				$this->_max = ceil($count[0]['count']/parent::ITEMS);
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
+		
+		}
+		
+		/**
+			* Retrieve posts dates
+			*
+			* @access	private
+			* @param	array [$to_read]
+		*/
+		
+		private function get_dates($to_read){
+		
+			try{
+			
+				$to_read['columns'] = array('distinct substr(media_date, 1, 7) as date');
+				$to_read['order'] = array('media_date', 'DESC');
+				
+				if(VRequest::date('all') != 'all'){
+				
+					unset($to_read['condition_columns'][':d']);
+					unset($to_read['condition_select_types'][':d']);
+					unset($to_read['condition_values'][':d']);
+					unset($to_read['value_types'][':d']);
+				
+				}
+				
+				$this->_dates = $this->_db->read($to_read);
 			
 			}catch(Exception $e){
 			
@@ -274,14 +353,12 @@
 		
 			if(!empty($this->_albums)){
 			
-				foreach($this->_albums as $album){
+				foreach($this->_dates as $album){
 				
-					$key = substr($album->_date, 0, 7);
-					$dates[$key] = date('F Y', strtotime($album->_date));
+					$key = $album['date'];
+					$dates[$key] = date('F Y', strtotime($key));
 				
 				}
-				
-				$dates = array_unique($dates);
 			
 			}else{
 			
@@ -344,6 +421,29 @@
 			echo '</section>';
 			
 			Html::form('c');
+		
+		}
+		
+		/**
+			* Display pagination
+			*
+			* @access	private
+		*/
+		
+		private function display_pagination(){
+		
+			if($this->_max > 1){
+			
+				$link = null;
+				
+				if(VRequest::filter(false))
+					$link = '&filter=true&date='.VRequest::date().'&category='.VRequest::category();
+				elseif(!empty($this->_search))
+					$link = '&search='.$this->_search;
+				
+				Html::pagination($this->_page, $this->_max, $link, 'Albums');
+			
+			}
 		
 		}
 		
@@ -491,6 +591,7 @@
 				}else{
 				
 					$this->display_albums();
+					$this->display_pagination();
 					
 					echo Helper::datalist('titles', $this->_albums, '_name');
 				
@@ -552,6 +653,83 @@
 							$picture->_permalink = $path.$name;
 							$picture->_status = 'publish';
 							$picture->create();
+						
+						}
+					
+					}
+					
+					Session::monitor_activity('added new photos to '.$album->_name);
+					
+					$result = true;
+				
+				}catch(Exception $e){
+				
+					$result = $e->getMessage();
+				
+				}
+				
+				$this->_action_msg = ActionMessages::created($result);
+			
+			}elseif(VPost::upload_zip() && !empty($_FILES)){
+			
+				try{
+				
+					$album = new Media();
+					$album->_id = VPost::album_id();
+					$album->read('_name');
+					$album->read('_permalink');
+					$path = $album->_permalink;
+					
+					$tmp = 'tmp/albums/';
+					
+					if(empty($_FILES['zip']['tmp_name']))
+						throw new Exception('No archive uploaded!');
+					
+					File::unzip($_FILES['zip']['tmp_name'], $tmp);
+					
+					$files = @scandir($tmp);
+					
+					if(empty($files))
+						throw new Exception('Your archive is empty!');
+					
+					foreach($files as $file){
+					
+						$finfo = new finfo(FILEINFO_MIME_TYPE);
+						
+						$mime = $finfo->file($tmp.$file);
+						
+						if($mime == 'directory')
+							continue;
+						
+						$pic = new HandleMedia();
+						$pic->_mime = $mime;
+						$pic->load($tmp.$file);
+						
+						$name = Helper::remove_accent($pic->_name);
+						
+						if(substr($mime, 0, 5) == 'image'){
+						
+							if(file_exists(PATH.$path.$name))
+								throw new Exception('The file "'.$name.'" already exists');
+							
+							File::read($tmp.$file)->save(PATH.$path.$name);
+							
+							$pic->_file = PATH.$path.$name;
+							$pic->thumb(150, 0);
+							$pic->thumb(300, 0);
+							$pic->thumb(1000, 0);
+							
+							$picture = new Media();
+							$picture->_name = $name;
+							$picture->_type = $mime;
+							$picture->_author = $this->_user['user_id'];
+							$picture->_album = $album->_id;
+							$picture->_allow_comment = 'closed';
+							$picture->_permalink = $path.$name;
+							$picture->_status = 'publish';
+							$picture->create();
+							
+							File::delete($tmp.$file);
 						
 						}
 					
