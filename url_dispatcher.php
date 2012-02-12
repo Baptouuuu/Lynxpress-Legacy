@@ -59,24 +59,38 @@
 		
 		Loader::load();
 		
+		$controller = '\\Site\\'.ucfirst(VGet::ctl('defaultpage'));
+		
 		//forbidden classes
-		if(in_array(VGet::ctl(), array('comments', 'helper', 'html', 'install', 'loader', 'master', 'session', 'social', 'xml')))
+		if($controller::CONTROLLER === false)
 			throw new Exception('Unknown controllers');
 		
 		new Session();
 		
-		$controller = '\\Site\\'.ucfirst(VGet::ctl('defaultpage'));
-		
 		$page = new $controller();
 		
-		$title = $page->_title;
-		$menu = $page->_menu;
+		$cache = new Cache();
 		
-		require_once Html::header();
+		if($cache->_exist === false){
 		
-		$page->display_content();
+			$cache->build('s');
+			
+			$title = $page->_title;
+			$menu = $page->_menu;
+			
+			require_once Html::header();
+			
+			$page->display_content();
+			
+			require_once Html::footer();
+			
+			$cache->build('e');
 		
-		require_once Html::footer();
+		}else{
+		
+			readfile($cache->_url);
+		
+		}
 	
 	}catch(Exception $e){
 	
