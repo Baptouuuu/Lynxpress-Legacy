@@ -39,7 +39,7 @@
 		* @package		Site
 		* @subpackage	Controllers
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -47,6 +47,7 @@
 	
 		private $_view_type = null;
 		private $_nb_pages = null;
+		const CONTROLLER = true;
 		
 		/**
 			* Class constructor

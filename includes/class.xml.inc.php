@@ -37,7 +37,7 @@
 		* @package		Site
 		* @subpackage	Controllers
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 	*/
 	
 	class XML{
@@ -46,6 +46,7 @@
 		private $_type = null;
 		private $_content = array();
 		private $_xml = null;
+		const CONTROLLER = false;
 		
 		/**
 			* Class constructor

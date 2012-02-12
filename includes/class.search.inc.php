@@ -39,7 +39,7 @@
 		* @package		Site
 		* @subpackage	Controllers
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -52,6 +52,7 @@
 		private $_by_date = null;
 		private $_nb_pages = null;
 		private $_nb_results = null;
+		const CONTROLLER = true;
 		
 		/**
 			* Class constructor

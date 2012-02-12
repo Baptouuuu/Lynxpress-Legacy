@@ -37,7 +37,7 @@
 		*
 		* @package		Site
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -50,6 +50,7 @@
 		private $_errors = array('name' => '', 'email' => '', 'content' => '', 'question' => '');
 		private $_submitted = null;
 		const SQL_TABLE = 'comment';
+		const CONTROLLER = false;
 		
 		/**
 			* Class constructor

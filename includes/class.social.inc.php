@@ -33,12 +33,14 @@
 		*
 		* @package		Site
 		* @author		Baptiste Langlade <lynxpressorg@gmail.com>
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
 	abstract class Social{
 	
+		const CONTROLLER = false;
+		
 		/**
 			* Retrieve share buttons setting
 			*

@@ -35,7 +35,7 @@
 		*
 		* @package		Site
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -50,6 +50,7 @@
 		protected $_menu = array();
 		protected $_content = null;
 		const ITEMS_PAGE = 10;
+		const CONTROLLER = false;
 
 		/**
 			* Class constructor

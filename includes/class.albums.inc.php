@@ -39,7 +39,7 @@
 		* @package		Site
 		* @subpackage	Controllers
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -47,6 +47,7 @@
 	
 		private $_album = null;
 		private $_category = null;
+		const CONTROLLER = true;
 		
 		/**
 			* Class constructor
@@ -288,15 +289,19 @@
 			
 			echo '<br/><span id="go_back_album"><a href="'.PATH.'?ctl='.$this->_pid.'&album='.VGet::album().'">Go Back</a></span>';
 			
-			//create comment section
-			if($this->_album->_allow_comment == 'open'){
+			if(VSession::renderer() != 'mobile'){
 			
-				$c = new Comments($this->_album->_id);
-				$c->display_content();
-			
-			}else{
-			
-				Html::comment_closed();
+				//create comment section
+				if($this->_album->_allow_comment == 'open'){
+				
+					$c = new Comments($this->_album->_id);
+					$c->display_content();
+				
+				}else{
+				
+					Html::comment_closed();
+				
+				}
 			
 			}
 		

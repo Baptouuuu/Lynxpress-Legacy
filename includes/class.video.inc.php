@@ -38,11 +38,13 @@
 		* @package		Site
 		* @subpackage	Controllers
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
 	final class Video extends Master{
+	
+		const CONTROLLER = true;
 	
 		/**
 			* Class constructor

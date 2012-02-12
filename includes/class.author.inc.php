@@ -38,12 +38,14 @@
 		* @package		Site
 		* @subpackage	Controllers
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
 	final class Author extends Master{
 	
+		const CONTROLLER = true;
+		
 		/**
 			* Class constructor
 			*
@@ -131,7 +133,7 @@
 			if(!empty($this->_content)){
 			
 				if(!VSession::html5())
-					echo '<ul>';
+					echo '<ul id="authors">';
 				
 				foreach ($this->_content as $user)
 					Html::author($user->_publicname, $user->_email, $user->_website, $user->_msn, $user->_twitter, $user->_facebook, $user->_google, $user->_avatar, $user->_bio);

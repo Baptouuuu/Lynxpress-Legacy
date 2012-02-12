@@ -35,12 +35,14 @@
 		*
 		* @package		Site
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
 	abstract class Loader{
 	
+		const CONTROLLER = false;
+		
 		/**
 			* Load php files thanks to there namespaces
 			*

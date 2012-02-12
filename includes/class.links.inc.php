@@ -40,11 +40,13 @@
 		* @package		Site
 		* @subpackage	Controllers
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
 	final class Links extends Master{
+	
+		const CONTROLLER = true;
 	
 		/**
 			* Class constructor
@@ -103,7 +105,7 @@
 				Html::header_links();
 				
 				if(!VSession::html5())
-					echo '<ul>';
+					echo '<ul id="links">';
 				
 				foreach ($this->_content as $link)
 					Html::related_link($link->_name, $link->_link, $link->_rss_link, $link->_notes, $link->_priority);
@@ -113,7 +115,15 @@
 			
 			}else{
 			
+				Html::header_links();
+				
+				if(!VSession::html5())
+					echo '<ul id="links">';
+				
 				Html::no_content('There\'s no link registered yet.');
+				
+				if(!Vsession::html5())
+					echo '</ul>';
 			
 			}
 		

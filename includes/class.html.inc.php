@@ -35,7 +35,7 @@
 		* @package		Site
 		* @subpackage	Views
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -43,6 +43,7 @@
 	
 		const TEMPLATES = '\\Templates\\';
 		const HTML = '\\Html';
+		const CONTROLLER = false;
 		
 		/**
 			* Retrieve used template from database and put it in Session variable
