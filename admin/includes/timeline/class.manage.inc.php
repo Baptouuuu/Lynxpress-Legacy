@@ -96,7 +96,7 @@
 					$this->_prefs = new Setting();
 					$this->_prefs->_name = 'User preferences for "'.VSession::username().'"';
 					$this->_prefs->_type = 'user_'.VSession::user_id();
-					$this->_prefs->_data = json_encode(array('last_visit' => date('Y-m-d H:i:s'), 'timeline' => array(array('title' => 'Lynxpress Blog', 'url' => 'http://blog.lynxpress.org/'))));
+					$this->_prefs->_data = json_encode(array('last_visit' => date('Y-m-d H:i:s'), 'timeline' => array(array('title' => 'Lynxpress Demo', 'url' => 'http://demo.lynxpress.org/'))));
 					$this->_prefs->create();
 				
 				}else{
