@@ -30,6 +30,7 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif;  ma
 				#news_info{background-color: #333; color: #fff; font-size: 13px; margin: 9px 0px 0px 30px; padding: 3px 8px; width: 895px;}
 					#news_info a{color: #3da7d4;}
 				#news_content{font-size: 14px; margin: 15px 30px 10px; text-align: justify;}
+					#news_content h4{font-size: 15px; margin: 5px 0;}
 					#news_content a{color: #0071bb; text-decoration: underline;}
 					#news_content a:hover{color: #ed1e24; text-decoration: underline;}
 					#news_content img.center{display: block; margin-left: auto; margin-right: auto;}
@@ -88,17 +89,27 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif;  ma
 						.video_element{display: block; margin: 0 auto; width: 560px;}
 						.video_details{background-color: #333; color: #fff; font-size: 13px; margin: 9px 0px 0px 125px; padding: 3px 8px; width: 708px;}
 							.video_details p{padding: 0 13px;}
+			
+			/*links*/
+			#header_links{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; font-size: 18px; height: 25px; margin: 0px -14px 0px -14px; padding: 4px 0px 0px 30px}
+			#links{padding: 0;}
+				.link{margin: 0 10px 15px 10px;}
+					.link h3{font: italic normal normal 20px/25px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; text-align: center; text-shadow: 0 1px 0 white;}
+					.link > .details{background-color: #333; color: #fff; font-size: 13px; margin: 9px 0px 0px 125px; padding: 3px 8px; width: 708px;}
+						.link > .details a{color: #3da7d4;}
+					.link > .description{font-size: 13px; height: 100px; padding: 3px; overflow: auto; text-align: justify;}
 							
 			/*authors*/
 			#header_author{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; font-size: 18px; height: 25px; margin: 0px -14px 0px -14px; padding: 4px 0px 0px 30px;}
-			.author{margin: 0 10px 15px 10px;}
-				.author h3{font: italic normal normal 20px/25px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; text-align: center; text-shadow: 0 1px 0 white;}
-				.author_bio{font-size: 13px; height: 100px; padding: 3px; overflow: auto; text-align: justify;}
-				.author_links{height: 48px;	margin: 10px auto; width: 175px;}
-					.author_links a{display: block; height: 48px; margin-right: 10px; text-indent: -9999px; width: 48px;}
-					.author_twitter{background: transparent url(../../../../images/twitter.png) no-repeat scroll 0px 0px;}
-					.author_facebook{background: transparent url(../../../../images/facebook.png) no-repeat scroll 0px 0px; margin: -48px 0 0 58px;}
-					.author_google{background: transparent url(../../../../images/google.png) no-repeat scroll 0px 0px; margin: -48px 0 0 116px;}
+			#authors{padding: 0;}
+				.author{margin: 0 10px 15px 10px;}
+					.author h3{font: italic normal normal 20px/25px Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif; text-align: center; text-shadow: 0 1px 0 white;}
+					.author_bio{font-size: 13px; height: 100px; padding: 3px; overflow: auto; text-align: justify;}
+					.author_links{height: 48px;	margin: 10px auto; width: 175px;}
+						.author_links a{display: block; height: 48px; margin-right: 10px; text-indent: -9999px; width: 48px;}
+						.author_twitter{background: transparent url(../../../../images/twitter.png) no-repeat scroll 0px 0px;}
+						.author_facebook{background: transparent url(../../../../images/facebook.png) no-repeat scroll 0px 0px; margin: -48px 0 0 58px;}
+						.author_google{background: transparent url(../../../../images/google.png) no-repeat scroll 0px 0px; margin: -48px 0 0 116px;}
 			
 			/*contact*/
 			#header_contact{background: #b6b6b6 url(../../../../images/overlay.png) repeat-x; font-size: 18px; height: 25px; margin: 0px -14px 0px -14px; padding: 4px 0 0; text-align: center;}

@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace	Update
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -54,8 +54,8 @@
 			if($bool){
 			
 				echo '<div id="menu">'.
-					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=update&ctl=manage">Update</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 '</div>';
 			
 			}else{
@@ -81,7 +81,7 @@
 				 '<input class="button button_publish submit" type="submit" name="update" value="Update Lynxpress" /><br/>'.
 				 '<p class="indication">'.
 				 	'(Before update, please backup your website files to prevent any problem. A database backup will be made and sent to '.WS_EMAIL.')<br/>'.
-				 	'(Please don\'t quit this page while updating.)'.
+				 	'(Please don\'t leave this page while updating.)'.
 				 '</p>';
 		
 		}

@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace	Comments
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -79,7 +79,7 @@
 					'<a href="index.php?ns=comments&ctl=manage&comment_status=approved">'.$approved.'</a> ('.$count_approved.') | '.
 					'<a href="index.php?ns=comments&ctl=manage&comment_status=spam">'.$spam.'</a> ('.$count_spam.') | '.
 					'<a href="index.php?ns=comments&ctl=manage&comment_status=trash">'.$trash.'</a> ('.$count_trash.')'.
-					'<span id="search"><input id="search_input" type="text" name="search" placeholder="Search" list="names" />'.
+					'<span id="search"><input id="search_input" class="input" type="text" name="search" placeholder="Search" list="names" />'.
 					'<input class="button" type="submit" name="search_button" value="Search Comments" /></span>'.
 				'</div>';
 		
@@ -480,7 +480,7 @@
 					'<input type="hidden" name="id" value="'.$id.'" />'.
 					'<input type="hidden" name="type" value="'.$type.'" />'.
 					'<input type="hidden" name="comment_status" value="approved" />'.
-					'<a class="a_button" href="comments.php">Cancel</a>'.
+					'<a class="a_button" href="index.php?ns=comments&ctl=manage">Cancel</a>'.
 					'<input class="button button_publish" type="submit" name="submit" value="Submit Reply" />'.
 				'</div>';
 		
@@ -506,8 +506,8 @@
 							'Author'.
 						'</div>'.
 						'<div class="comment_edit_content">'.
-							'<label for="comment_edit_name">Name:</label><input id="comment_edit_name" class="input_soft" type="text" name="comment_name" value="'.$name.'" /><br/>'.
-							'<label for="comment_edit_email">E-mail(<a href="mailto:'.$email.'">send e-mail</a>):</label><input id="comment_edit_email" class="input_soft" type="text" name="comment_email" value="'.$email.'" />'.
+							'<label for="comment_edit_name">Name:</label><input id="comment_edit_name" class="input input_soft" type="text" name="comment_name" value="'.$name.'" /><br/>'.
+							'<label for="comment_edit_email">E-mail(<a href="mailto:'.$email.'">send e-mail</a>):</label><input id="comment_edit_email" class="input input_soft" type="text" name="comment_email" value="'.$email.'" />'.
 							'<input type="hidden" name="comment_id" value="'.$comment_id.'" />'.
 						'</div>'.
 					'</div><br/>'.

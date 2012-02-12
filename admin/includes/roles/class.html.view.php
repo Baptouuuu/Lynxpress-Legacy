@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace	Roles
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -51,8 +51,8 @@
 		public static function manageroles_menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=roles&ctl=manage">User Roles</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 '</div>';
 		
 		}
@@ -139,7 +139,7 @@
 			$delete = '';
 		
 			if(!in_array($name, array('administrator', 'editor', 'author')))
-				$delete = '<a class="red" href="index.php?ns=roles&ctl=manage&action=delete&role='.$name.'">Delete permanently</a>';
+				$delete = '<div class="row_actions"><a class="red" href="index.php?ns=roles&ctl=manage&action=delete&role='.$name.'">Delete permanently</a></div>';
 			
 			echo '<tr>'.
 				 	'<td class="column_role_name">'.

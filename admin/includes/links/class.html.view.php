@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace	Links
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -54,18 +54,18 @@
 			if($bool){
 			
 				echo '<div id="menu">'.
-					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-					 	'<span class="menu_item"><a href="index.php?ns=links&ctl=manage">Links</a></span>'.
-					 	'<span id="menu_selected" class="menu_item">Editing</span>'.
 					 	'<span class="menu_item"><a href="index.php?ns=links&ctl=add">Add</a></span>'.
+					 	'<span id="menu_selected" class="menu_item"><a href="#">Editing</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=links&ctl=manage">Links</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 '</div>';
 			
 			}else{
 			
 				echo '<div id="menu">'.
-					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-					 	'<span class="menu_item"><a href="index.php?ns=links&ctl=manage">Links</a></span>'.
 					 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=links&ctl=add">Add</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=links&ctl=manage">Links</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 '</div>';
 			
 			}
@@ -95,7 +95,7 @@
 									'<label for="name">Link name <span class="indication">(required)</span></label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="name" class="user_input_text" name="name" type="text" value="'.$name.'" placeholder="LynxPress" required />'.
+									'<input id="name" class="input user_input_text" name="name" type="text" value="'.$name.'" placeholder="LynxPress" required />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -103,7 +103,7 @@
 									'<label for="url">URL <span class="indication">(required)</span></label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="url" class="user_input_text" name="url" type="url" value="'.$link.'" placeholder="http://lynxpress.org" required />'.
+									'<input id="url" class="input user_input_text" name="url" type="url" value="'.$link.'" placeholder="http://lynxpress.org" required />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -111,7 +111,7 @@
 									'<label for="rss">RSS URL</label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="rss" class="user_input_text" name="rss" type="url" value="'.$rss_link.'" placeholder="http://lynxpress.org/feed.php" />'.
+									'<input id="rss" class="input user_input_text" name="rss" type="url" value="'.$rss_link.'" placeholder="http://lynxpress.org/feed.php" />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -193,9 +193,9 @@
 		public static function ml_menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=links&ctl=manage">Links</a></span>'.
 				 	'<span class="menu_item"><a href="index.php?ns=links&ctl=add">Add</a></span>'.
+				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=links&ctl=manage">Links</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 '</div>';
 		
 		}
@@ -226,7 +226,7 @@
 			if($part == 'o'){
 			
 				echo '<div id="select_post_status">'.
-					 	'<span id="search"><input id="search_input" type="text" name="search" placeholder="Search" list="titles" />'.
+					 	'<span id="search"><input id="search_input" class="input" type="text" name="search" placeholder="Search" list="titles" />'.
 					 	'<input class="button" type="submit" name="search_button" value="Search Links" /></span>'.
 					 '</div>';
 					 self::ml_delete();

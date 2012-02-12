@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace	Users
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -51,9 +51,9 @@
 		public static function nu_menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-				 	'<span class="menu_item"><a href="index.php?ns=users&ctl=manage">Users</a></span>'.
 				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=users&ctl=add">Add</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=users&ctl=manage">Users</a></span>'.
+					'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 '</div>';
 		
 		}
@@ -82,7 +82,7 @@
 									'<label for="username">Username <span class="indication">(required)</span></label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="username" class="user_input_text" name="username" type="text" value="'.$username.'" required />'.
+									'<input id="username" class="input user_input_text" name="username" type="text" value="'.$username.'" required />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -90,7 +90,7 @@
 									'<label for="email">E-mail <span class="indication">(required)</span></label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="email" class="user_input_text" name="email" type="email" value="'.$email.'" required />'.
+									'<input id="email" class="input user_input_text" name="email" type="email" value="'.$email.'" required />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -98,7 +98,7 @@
 									'<label for="firstname">First Name</label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="firstname" class="user_input_text" name="firstname" type="text" value="'.$firstname.'" />'.
+									'<input id="firstname" class="input user_input_text" name="firstname" type="text" value="'.$firstname.'" />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -106,7 +106,7 @@
 									'<label for="lastname">Last Name</label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="lastname" class="user_input_text" name="lastname" type="text" value="'.$lastname.'" />'.
+									'<input id="lastname" class="input user_input_text" name="lastname" type="text" value="'.$lastname.'" />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -114,7 +114,7 @@
 									'<label for="website">Website</label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="website" class="user_input_text" name="website" type="url" value="'.$website.'" />'.
+									'<input id="website" class="input user_input_text" name="website" type="url" value="'.$website.'" />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -122,8 +122,8 @@
 									'<label for="pwd">Password <span class="indication">(twice, required)</span></label>'.
 								'</th>'.
 								'<td>'.
-									'<input id="pwd" class="user_input_text" name="pwd" type="password" required /><br/>'.
-									'<input name="re_pwd" class="user_input_text" type="password" required />'.
+									'<input id="pwd" class="input user_input_text" name="pwd" type="password" required /><br/>'.
+									'<input name="re_pwd" class="input user_input_text" type="password" required />'.
 								'</td>'.
 							'</tr>'.
 							'<tr>'.
@@ -183,10 +183,10 @@
 			if($edit){
 			
 				echo '<div id="menu">'.
-						 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-						 	'<span class="menu_item"><a href="index.php?ns=users&ctl=manage">Users</a></span>'.
-						 	'<span id="menu_selected" class="menu_item">Editing</span>'.
 						 	'<span class="menu_item"><a href="index.php?ns=users&ctl=add">Add</a></span>'.
+						 	'<span id="menu_selected" class="menu_item"><a href="#">Editing</a></span>'.
+						 	'<span class="menu_item"><a href="index.php?ns=users&ctl=manage">Users</a></span>'.
+						 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 						 '</div>';
 			
 			}else{
@@ -222,7 +222,7 @@
 				 				'Username'.
 				 			'</th>'.
 				 			'<td>'.
-				 				'<input class="user_input_text" type="text" value="'.$username.'" disabled />'.
+				 				'<input class="input user_input_text" type="text" value="'.$username.'" disabled />'.
 				 				'<input name="username" type="hidden" value="'.$username.'" />'.
 				 			'</td>'.
 				 		'</tr>'.
@@ -231,7 +231,7 @@
 				 				'<label for="firstname">First Name</label>'.
 				 			'</th>'.
 				 			'<td>'.
-				 				'<input id="firstname" class="user_input_text" name="firstname" type="text" value="'.$firstname.'" />'.
+				 				'<input id="firstname" class="input user_input_text" name="firstname" type="text" value="'.$firstname.'" />'.
 				 			'</td>'.
 				 		'</tr>'.
 				 		'<tr>'.
@@ -239,7 +239,7 @@
 				 				'<label for="lastname">Last Name</label>'.
 				 			'</th>'.
 				 			'<td>'.
-				 				'<input id="lastname" class="user_input_text" name="lastname" type="text" value="'.$lastname.'" />'.
+				 				'<input id="lastname" class="input user_input_text" name="lastname" type="text" value="'.$lastname.'" />'.
 				 			'</td>'.
 				 		'</tr>'.
 				 		'<tr>'.
@@ -247,7 +247,7 @@
 				 				'<label for="nickname">Nickname <span class="indication">(required)</span></label>'.
 				 			'</th>'.
 				 			'<td>'.
-				 				'<input id="nickname" class="user_input_text" name="nickname" type="text" value="'.$nickname.'" required />'.
+				 				'<input id="nickname" class="input user_input_text" name="nickname" type="text" value="'.$nickname.'" required />'.
 				 			'</td>'.
 				 		'</tr>'.
 				 		'<tr>'.
@@ -349,7 +349,7 @@
 			 					'<label for="email">E-mail <span class="indication">(required)</span></label>'.
 			 				'</th>'.
 			 				'<td>'.
-			 					'<input id="email" class="user_input_text" name="email" type="email" value="'.$email.'" required />'.
+			 					'<input id="email" class="input user_input_text" name="email" type="email" value="'.$email.'" required />'.
 			 				'</td>'.
 			 			'</tr>'.
 			 			'<tr>'.
@@ -357,7 +357,7 @@
 			 					'<label for="website">Website</label>'.
 			 				'</th>'.
 			 				'<td>'.
-			 					'<input id="website" class="user_input_text" name="website" type="url" value="'.$website.'" />'.
+			 					'<input id="website" class="input user_input_text" name="website" type="url" value="'.$website.'" />'.
 			 				'</td>'.
 			 			'</tr>'.
 			 			'<tr>'.
@@ -365,7 +365,7 @@
 			 					'<label for="msn">MSN</label>'.
 			 				'</th>'.
 			 				'<td>'.
-			 					'<input id="msn" class="user_input_text" name="msn" type="email" value="'.$msn.'" />'.
+			 					'<input id="msn" class="input user_input_text" name="msn" type="email" value="'.$msn.'" />'.
 			 				'</td>'.
 			 			'</tr>'.
 			 			'<tr>'.
@@ -373,7 +373,7 @@
 			 					'<label for="twitter">Twitter</label>'.
 			 				'</th>'.
 			 				'<td>'.
-			 					'<input id="twitter" class="user_input_text" name="twitter" type="url" value="'.$twitter.'" />'.
+			 					'<input id="twitter" class="input user_input_text" name="twitter" type="url" value="'.$twitter.'" />'.
 			 				'</td>'.
 			 			'</tr>'.
 			 			'<tr>'.
@@ -381,7 +381,7 @@
 			 					'<label for="fb">Facebook</label>'.
 			 				'</th>'.
 			 				'<td>'.
-			 					'<input id="fb" class="user_input_text" name="fb" type="url" value="'.$facebook.'" />'.
+			 					'<input id="fb" class="input user_input_text" name="fb" type="url" value="'.$facebook.'" />'.
 			 				'</td>'.
 			 			'</tr>'.
 			 			'<tr>'.
@@ -392,7 +392,7 @@
 			 					'</span>'.
 			 				'</th>'.
 			 				'<td>'.
-			 					'<input id="google" class="user_input_text" name="google" type="url" value="'.$google.'" />'.
+			 					'<input id="google" class="input user_input_text" name="google" type="url" value="'.$google.'" />'.
 			 				'</td>'.
 			 			'</tr>'.
 			 		'</tbody>'.
@@ -427,8 +427,8 @@
 										'<label for="new_pwd">New Password</label>'.
 									'</th>'.
 									'<td>'.
-										'<input id="new_pwd" class="user_input_text new_pwd" name="new_pwd" type="password" /> <span class="indication">If you would like to change the password type a new one. Otherwise leave this blank.</span><br/>'.
-										'<input class="user_input_text new_pwd" name="re_new_pwd" type="password" /> <span class="indication">Type your new password again</span>'.
+										'<input id="new_pwd" class="input user_input_text new_pwd" name="new_pwd" type="password" /> <span class="indication">If you would like to change the password type a new one. Otherwise leave this blank.</span><br/>'.
+										'<input class="input user_input_text new_pwd" name="re_new_pwd" type="password" /> <span class="indication">Type your new password again</span>'.
 									'</td>'.
 								'</tr>'.
 							'</tbody>'.
@@ -477,9 +477,9 @@
 			if($bool){
 			
 				echo '<div id="menu">'.
-					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-					 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=users&ctl=manage">Users</a></span>'.
 					 	'<span class="menu_item"><a href="index.php?ns=users&ctl=add">Add</a></span>'.
+					 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=users&ctl=manage">Users</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 '</div>';
 			
 			}else{
@@ -508,7 +508,7 @@
 			
 			}elseif($part == 'c'){
 			
-				echo '<span id="search"><input id="search_input" type="text" name="search" placeholder="Search" list="titles" />'.
+				echo '<span id="search"><input id="search_input" class="input" type="text" name="search" placeholder="Search" list="titles" />'.
 					'<input class="button" type="submit" name="search_button" value="Search Users" /></span>'.
 				'</div>';
 			

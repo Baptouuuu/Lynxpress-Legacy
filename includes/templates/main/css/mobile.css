@@ -12,7 +12,7 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif; mar
 			
 			/*listing articles*/
 			#listing_articles{margin: 0 0 0 -40px; min-height: 150px;}
-				#listing_articles li{border: 1px solid lightGrey; margin: -1px -1px 0 -1px; min-height: 43px; padding: 0 0 0 41px;}
+				#listing_articles li{background: url(../../../../images/follow_link.png) no-repeat right; border: 1px solid lightGrey; margin: -1px -1px 0 -1px; min-height: 43px; padding: 0 30px 0 41px;}
 					#listing_articles li h4{margin: 4px 0;}
 						#listing_articles li h4 a{display: block;}
 							.la_title{line-height: 2.2;}
@@ -34,10 +34,11 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif; mar
 			#listing_albums{margin: 20px 0 0 0; min-height: 250px; width: 100%;}
 				#listing_albums li{display: inline-block; height: 220px; margin: 0 29px; padding: 6px; text-align: center; width: 230px;}
 					#listing_albums li img{max-height: 200px; max-width: 230px;}
+					#listing_albums li:hover img, #listing_albums li:active img{background-color: #777;}
 				#album{margin: 0 30px; min-height: 141px;}
 					#album ul{margin: 30px 0 30px -30px;}
 						#album ul li{display: inline-block; padding: 10px 16px;}
-						#album ul li:hover{background-color: #777;}
+						#album ul li:hover, #album ul li:active{background-color: #777;}
 			
 			/*videos*/
 			#header_video{text-align: center; text-shadow: 0 1px 0 white;}
@@ -46,6 +47,16 @@ body{background-color: #f7f6f1;font-family: "Trebuchet MS",Arial,sans-serif; mar
 					#videos .video{margin: 0 auto 20px; text-align: center; width: 600px;}
 						.video_details{background: #000; color: #fff; font-size: 15px; margin: 10px 0; padding: 3px 5px;}
 							.video_details p{margin-bottom: 0;}
+							
+			/*links*/
+			#header_links{text-align: center; text-shadow: 0 1px 0 white;}
+			#links{margin: 0; padding: 15px 40px;}
+				#links > .link{margin: 0 auto; max-width: 600px;}
+				#links > .link + .link{margin: 60px auto 0 auto;}
+					#links > .link h3{font-size: 17px; text-align: center; text-shadow: 0 1px 0 white;}
+					#links > .link p.details{background-color: #333; color: #fff; font-size: 15px; margin: 10px 0; padding: 3px 5px;}
+						#links > .link p.details a{color: #3da7d4;}
+					#links > .link p.description{font-size: 15px; margin: 10px 0; text-align: justify;}
 			
 			/*error message*/
 			#no_content{margin: 0 0 0 -40px !important; text-align: center;}

@@ -36,7 +36,7 @@
 		* @subpackage	Views
 		* @namespace	Media
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -105,7 +105,7 @@
 		
 			self::form('o', 'post', '#', true);
 			
-			echo '<label for="file">Select a file to upload:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input id="file" name="file" type="file" />'.
+			echo '<label for="file">Select a file to upload:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input id="file" name="file" type="file" required />'.
 				 '<input id="upload" class="button button_publish" type="submit" name="upload" value="Upload" /><br/>'.
 				 '<span class="indication">(The maximum upload file size is set to '.HandleMedia::max_upload().'MB)</span><br/>'.
 				 '<span class="indication">(If you want to upload a video too large, upload it via ftp and use this <a href="index.php?ns=media&ctl=add&view=video">form</a> to register it)</span><br/>';
@@ -128,7 +128,7 @@
 			
 				self::form('o', 'post', '#', true);
 				
-				echo '<input id="media_name" type="text" name="name" placeholder="Album name" required /><br/>'.
+				echo '<input id="media_name" class="input" type="text" name="name" placeholder="Album name" required /><br/>'.
 					 '<textarea id="media_desc" class="base_txta" rows="10" name="description" wrap="soft" placeholder="A description of your album"></textarea><br/>'.
 					 '<fieldset id="cats">'.
 					 	'<legend>Categories</legend>';
@@ -173,7 +173,7 @@
 		
 			self::form('o', 'post', '#');
 			
-			echo '<input id="media_name" type="text" name="name" placeholder="Video title" required /><br/>'.
+			echo '<input id="media_name" class="input" type="text" name="name" placeholder="Video title" required /><br/>'.
 				 '<textarea id="media_desc" class="base_txta" rows="10" name="embed_code" wrap="soft" placeholder="Embed code" required></textarea></br>'.
 				 '<input class="submit button button_publish" type="submit" name="link_alien" value="Link" />';
 			
@@ -195,14 +195,14 @@
 			
 				self::form('o', 'post', '#');
 				
-				echo '<input id="media_name" type="text" name="name" placeholder="Video name" required /><br/>'.
+				echo '<input id="media_name" class="input" type="text" name="name" placeholder="Video name" required /><br/>'.
 					 '<fieldset id="cats">'.
 					 	'<legend>Video mime type</legend>';
 			
 			}elseif($part == 'c'){
 			
 				echo '</fieldset>'.
-					 '<label for="video_url">Video url:</label> <input id="video_url" class="user_input_text" type="text" name="url" placeholder="content/'.date('Y/m/').'" required /><br/>'.
+					 '<label for="video_url">Video url:</label> <input id="video_url" class="input user_input_text" type="text" name="url" placeholder="content/'.date('Y/m/').'" required /><br/>'.
 					 '<span class="indication">(Upload your video inside content folder to work correctly. You should use directory convention too, putting your content inside folder with year and month.)</span><br/>'.
 					 '<input class="submit button button_publish" type="submit" name="register_video" value="Register Video" />';
 			
@@ -246,7 +246,7 @@
 					echo '<div id="menu">'.
 						 	'<span class="menu_item"><a href="index.php?ns=media&ctl=add">Add</a></span>'.
 						 	'<span class="menu_item"><a href="index.php?ns=media&ctl=manage">Media</a></span>'.
-						 	'<span  id="menu_selected" class="menu_item">Editing '.$name.'</span>'.
+						 	'<span id="menu_selected" class="menu_item"><a href="#">Editing '.$name.'</a></span>'.
 						 	(($can_album)?'<span class="menu_item"><a href="index.php?ns=media&ctl=albums">Albums</a></span>':'').
 						 '</div>';
 				
@@ -289,7 +289,7 @@
 					'<a href="index.php?ns=media&ctl=manage">'.$image.'</a> ('.$count_image.') | '.
 					'<a href="index.php?ns=media&ctl=manage&type=video">'.$video.'</a> ('.$count_video.') | '.
 					'<a href="index.php?ns=media&ctl=manage&type=alien">'.$alien.'</a> ('.$count_alien.')'.
-					'<span id="search"><input id="search_input" type="text" name="search" placeholder="Search" list="titles" />'.
+					'<span id="search"><input id="search_input" class="input" type="text" name="search" placeholder="Search" list="titles" />'.
 					'<input class="button" type="submit" name="search_button" value="Search Medias" /></span>'.
 				'</div>';
 		
@@ -419,10 +419,10 @@
 		
 		public static function mm_image_links($dirname, $filename){
 		
-			$links = '<input class="user_input_text" type="text" value="'.$dirname.$filename.'" readonly/><br/>';
-			$links .= '<input class="user_input_text" type="text" value="'.$dirname.'1000-'.$filename.'" readonly/><br/>';
-			$links .= '<input class="user_input_text" type="text" value="'.$dirname.'300-'.$filename.'" readonly/><br/>';
-			$links .= '<input class="user_input_text" type="text" value="'.$dirname.'150-'.$filename.'" readonly/>';
+			$links = '<input class="input user_input_text" type="text" value="'.$dirname.$filename.'" readonly/><br/>';
+			$links .= '<input class="input user_input_text" type="text" value="'.$dirname.'1000-'.$filename.'" readonly/><br/>';
+			$links .= '<input class="input user_input_text" type="text" value="'.$dirname.'300-'.$filename.'" readonly/><br/>';
+			$links .= '<input class="input user_input_text" type="text" value="'.$dirname.'150-'.$filename.'" readonly/>';
 			
 			return $links;
 		
@@ -439,7 +439,7 @@
 		
 		public static function mm_video_link($permalink){
 		
-			return '<input class="user_input_text" type="text" value="'.$permalink.'" readonly/>';
+			return '<input class="input user_input_text" type="text" value="'.$permalink.'" readonly/>';
 		
 		}
 		
@@ -522,7 +522,7 @@
 		public static function mm_edit_image($name, $dirname, $fname, $description, $permalink, $id, $type){
 		
 			echo '<div id="edit_media">'.
-				 	'<input id="media_name" type="text" name="name" value="'.$name.'" placeholder="Image title" required /><br/>'.
+				 	'<input id="media_name" class="input" type="text" name="name" value="'.$name.'" placeholder="Image title" required /><br/>'.
 				 	'<br/>'.
 				 	'<img src="'.PATH.$dirname.'1000-'.$fname.'" alt="'.$name.'" title="'.$name.'" /><br/>'.
 				 	'<select id="flip" name="flip">'.
@@ -533,15 +533,15 @@
 				 	'<select id="rotate" name="rotate">'.
 				 		'<option value="no">Rotation</option>'.
 				 		'<option value="90">90°</option>'.
-				 		'<option value="180">180</option>'.
+				 		'<option value="180">180°</option>'.
 				 		'<option value="270">-90°</option>'.
 				 	'</select><br/>'.
 				 	'<br/>'.
 				 	'<textarea id="media_desc" class="base_txta" rows="10" name="description" wrap="soft" placeholder="A little description of your photo">'.$description.'</textarea><br/>'.
-				 	'<label for="fsize">Image url</label>: <input id="fsize" class="user_input_text" type="text" value="'.$permalink.'" readonly /> <span class="indication">(full size)</span><br/>'.
-				 	'<label for="size15">Image url</label>: <input id="size15" class="user_input_text" type="text" value="'.$dirname.'150-'.$fname.'" readonly /> <span class="indication">(image with 150 pixels width)</span><br/>'.
-				 	'<label for="size3">Image url</label>: <input id="size3" class="user_input_text" type="text" value="'.$dirname.'300-'.$fname.'" readonly /> <span class="indication">(image with 300 pixels width)</span><br/>'.
-				 	'<label for="size1">Image url</label>: <input id="size1" class="user_input_text" type="text" value="'.$dirname.'1000-'.$fname.'" readonly /> <span class="indication">(image with 1000 pixels width)</span><br/>'.
+				 	'<label for="fsize">Image url</label>: <input id="fsize" class="input user_input_text" type="text" value="'.$permalink.'" readonly /> <span class="indication">(full size)</span><br/>'.
+				 	'<label for="size15">Image url</label>: <input id="size15" class="input user_input_text" type="text" value="'.$dirname.'150-'.$fname.'" readonly /> <span class="indication">(image with 150 pixels width)</span><br/>'.
+				 	'<label for="size3">Image url</label>: <input id="size3" class="input user_input_text" type="text" value="'.$dirname.'300-'.$fname.'" readonly /> <span class="indication">(image with 300 pixels width)</span><br/>'.
+				 	'<label for="size1">Image url</label>: <input id="size1" class="input user_input_text" type="text" value="'.$dirname.'1000-'.$fname.'" readonly /> <span class="indication">(image with 1000 pixels width)</span><br/>'.
 				 	'<input class="submit button button_publish" type="submit" name="update_image" value="Update" />'.
 				 	'<input type="hidden" name="id" value="'.$id.'" />'.
 				 	'<input type="hidden" name="type" value="'.$type.'" />'.
@@ -565,7 +565,7 @@
 			if($part == 'o'){
 			
 				echo '<div id="edit_media">'.
-					 	'<input id="media_name" type="text" name="name" value="'.$param1.'" placeholder="Video title" required /><br/>'.
+					 	'<input id="media_name" class="input" type="text" name="name" value="'.$param1.'" placeholder="Video title" required /><br/>'.
 					 	'<br/>'.
 					 	'<video width="640" src="'.PATH.$param2.'" controls>'.
 					 	'</video><br/>'.
@@ -585,7 +585,7 @@
 				echo	'</select>'.
 					 	'&nbsp;&nbsp;<span class="indication">Attaching a video file to an external video permits to load the last one if the user browser doesn\'t support &lt;video&gt; html5 tag</span><br/>'.
 					 	'<br/>'.
-					 	'<label for="link">Video url</label>: <input id="link" class="user_input_text" type="text" value="'.$param1.'" readonly /><br/>'.
+					 	'<label for="link">Video url</label>: <input id="link" class="input user_input_text" type="text" value="'.$param1.'" readonly /><br/>'.
 					 	'<input class="submit button button_publish" type="submit" name="update_video" value="Update" />'.
 					 	'<input type="hidden" name="id" value="'.$param2.'" />'.
 					 	'<input type="hidden" name="type" value="'.$param3.'" />'.
@@ -610,7 +610,7 @@
 		public static function mm_edit_alien($name, $embed_code, $description, $id, $type){
 		
 			echo '<div id="edit_media">'.
-				 	'<input id="media_name" type="text" name="name" value="'.$name.'" placeholder="Video title" required /><br/>'.
+				 	'<input id="media_name" class="input" type="text" name="name" value="'.$name.'" placeholder="Video title" required /><br/>'.
 				 	'<br/>'.
 				 	'<div id="embed">'.
 				 		$embed_code.
@@ -701,8 +701,8 @@
 			
 				echo '</select>'.
 					 '<input class="button" type="submit" name="filter" value="Filter" />'.
-					 '<span id="search"><input id="search_input" type="text" name="search" placeholder="Search" list="titles" />'.
-					 '<input class="button" type="submit" name="search_button" value="Search Users" /></span>';
+					 '<span id="search"><input id="search_input" class="input" type="text" name="search" placeholder="Search" list="titles" />'.
+					 '<input class="button" type="submit" name="search_button" value="Search Albums" /></span>';
 			
 			}
 		
@@ -819,7 +819,7 @@
 						 		'<input type="hidden" name="album_id" value="'.$id.'" />'.
 						 	'</div>'.
 							'<div id="ea_infos">'.
-							 	'<input id="media_name" type="text" name="name" value="'.$name.'" placeholder="Album Title" required /><br/>'.
+							 	'<input id="media_name" class="input" type="text" name="name" value="'.$name.'" placeholder="Album Title" required /><br/>'.
 							 	'<textarea class="base_txta" id="media_desc" name="description" wrap="soft" rows="10" placeholder="A description of your album">'.$description.'</textarea><br/>'.
 							 	'<fieldset id="cats">'.
 							 		'<legend>Categories</legend>';
@@ -871,11 +871,13 @@
 					 		'<a class="fancybox" href="'.PATH.$permalink.'" title="'.$name.'"><img src="'.PATH.$dirname.'150-'.$filename.'" alt="Picture" /></a>'.
 					 	'</div>'.
 					 	'<div class="user_info_side">'.
-					 		'Name: <span class="lname"><input class="pic_input_text" type="text" name="pic'.$id.'" value="'.$name.'"/></span><br/>'.
+					 		'Name: <span class="lname"><input class="input pic_input_text" type="text" name="pic'.$id.'" value="'.$name.'"/></span><br/>'.
 						 	'Author: <span class="lauth">'.ucfirst($author_name).'</span><br/>'.
 						 	'Creation: <span class="ldate">'.date('Y/m/d @ H:i', strtotime($date)).'</span><br/>'.
-						 	'<a href="index.php?ns=media&ctl=albums&action=edit_image&id='.$album.'&pid='.$id.'">Edit</a> | '.
-						 	'<a class="red" href="index.php?ns=media&ctl=albums&action=delete&id='.$id.'">Delete permanently</a>'.
+							 '<div class="row_actions">'.
+							 	'<a href="index.php?ns=media&ctl=albums&action=edit_image&id='.$album.'&pid='.$id.'">Edit</a> | '.
+							 	'<a class="red" href="index.php?ns=media&ctl=albums&action=delete&id='.$id.'">Delete permanently</a>'.
+							 '</div>'.
 						'</div>'.
 					'</div>'.
 				 '</div>';
@@ -895,8 +897,6 @@
 		
 			echo '<div id="edit_media">'.
 				 	'<h3>Upload new pictures for "'.$name.'"</h3>'.
-				 	'<span class="indication">Remember, uploading a file with a name of an existing file will replace it</span><br/>'.
-				 	'<br/>'.
 				 	'<input type="file" name="picture1" /><br/>'.
 				 	'<input type="file" name="picture2" /><br/>'.
 				 	'<input type="file" name="picture3" /><br/>'.
@@ -912,6 +912,11 @@
 				 	'<span class="indication">The maximum upload file size is set to '.HandleMedia::max_upload().'MB</span><br/>'.
 				 	'<input type="hidden" name="album_id" value="'.$id.'" />'.
 				 	'<input class="submit button button_publish" type="submit" name="upload" value="Add Pictures" />'.
+				 	'<h3>Upload a zip</h3>'.
+				 	'<input type="file" name="zip" /><br/>'.
+				 	'<br/>'.
+				 	'<span class="indication">Your pictures has to be at the root of the zip (not in a sub-folder)</span><br/>'.
+				 	'<input class="submit button button_publish" type="submit" name="upload_zip" value="Upload Zip" />'.
 				 '</div>';
 		
 		}
@@ -932,7 +937,7 @@
 		public static function ma_edit_image($name, $dirname, $fname, $description, $permalink, $pid){
 		
 			echo '<div id="edit_media">'.
-				 	'<input id="media_name" type="text" name="name" value="'.$name.'" placeholder="Image title" required /><br/>'.
+				 	'<input id="media_name" class="input" type="text" name="name" value="'.$name.'" placeholder="Image title" required /><br/>'.
 				 	'<br/>'.
 				 	'<img src="'.PATH.$dirname.'1000-'.$fname.'" alt="'.$name.'" title="'.$name.'" /><br/>'.
 				 	'<select id="flip" name="flip">'.
@@ -943,15 +948,15 @@
 				 	'<select id="rotate" name="rotate">'.
 				 		'<option value="no">Rotation</option>'.
 				 		'<option value="90">90°</option>'.
-				 		'<option value="180">180</option>'.
+				 		'<option value="180">180°</option>'.
 				 		'<option value="270">-90°</option>'.
 				 	'</select><br/>'.
 				 	'<br/>'.
 				 	'<textarea id="media_desc" class="base_txta" rows="10" name="description" wrap="soft" placeholder="A little description of your photo">'.$description.'</textarea><br/>'.
-				 	'<label for="fsize">Image url</label>: <input id="fsize" class="user_input_text" type="text" value="'.$permalink.'" readonly /> <span class="indication">(full size)</span><br/>'.
-				 	'<label for="size15">Image url</label>: <input id="size15" class="user_input_text" type="text" value="'.$dirname.'150-'.$fname.'" readonly /> <span class="indication">(image with 150 pixels width)</span><br/>'.
-				 	'<label for="size3">Image url</label>: <input id="size3" class="user_input_text" type="text" value="'.$dirname.'300-'.$fname.'" readonly /> <span class="indication">(image with 300 pixels width)</span><br/>'.
-				 	'<label for="size1">Image url</label>: <input id="size1" class="user_input_text" type="text" value="'.$dirname.'1000-'.$fname.'" readonly /> <span class="indication">(image with 1000 pixels width)</span><br/>'.
+				 	'<label for="fsize">Image url</label>: <input id="fsize" class="input user_input_text" type="text" value="'.$permalink.'" readonly /> <span class="indication">(full size)</span><br/>'.
+				 	'<label for="size15">Image url</label>: <input id="size15" class="input user_input_text" type="text" value="'.$dirname.'150-'.$fname.'" readonly /> <span class="indication">(image with 150 pixels width)</span><br/>'.
+				 	'<label for="size3">Image url</label>: <input id="size3" class="input user_input_text" type="text" value="'.$dirname.'300-'.$fname.'" readonly /> <span class="indication">(image with 300 pixels width)</span><br/>'.
+				 	'<label for="size1">Image url</label>: <input id="size1" class="input user_input_text" type="text" value="'.$dirname.'1000-'.$fname.'" readonly /> <span class="indication">(image with 1000 pixels width)</span><br/>'.
 				 	'<input class="submit button button_publish" type="submit" name="update_image" value="Update" />'.
 				 	'<input type="hidden" name="pid" value="'.$pid.'" />'.
 				 '</div>';

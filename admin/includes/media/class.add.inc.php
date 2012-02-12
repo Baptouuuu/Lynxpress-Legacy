@@ -44,7 +44,7 @@
 		* @subpackage	Controllers
 		* @namespace	Media
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -307,7 +307,7 @@
 					
 					$this->_media->create();
 					
-					Session::monitor_activity('has upload a file named: '.$this->_media->_name);
+					Session::monitor_activity('has uploaded a file named: '.$this->_media->_name);
 					
 					if(substr($mime, 0, 5) == 'video')
 						header('Location: index.php?ns=media&ctl=manage&type=video');

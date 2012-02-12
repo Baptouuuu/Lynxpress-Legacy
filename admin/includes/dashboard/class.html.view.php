@@ -34,7 +34,7 @@
 		* @subpackage	Views
 		* @namespace	Dashboard
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -50,7 +50,7 @@
 		public static function menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span id="menu_selected" class="menu_item"><a href="index.php">Dashboard</a></span>'.
+				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=dashboard&ctl=manage">Dashboard</a></span>'.
 				 '</div>';
 		
 		}
@@ -145,7 +145,7 @@
 			echo '<div class="comments_item">'.
 					'<h4><span class="comments_user">From '.$name.' on</span> <a target="_blank" href="'.PATH.'?'.$rel_permalink.'">'.$rel_title.'</a></h4>'.
 					'<p>'.htmlspecialchars($content).'</p>'.
-					'<p class="action">'.
+					'<p class="row_actions">'.
 						'<span class="green"><a href="index.php?ns=comments&ctl=manage&action=approve&comment_id='.$id.'">Approve</a></span> | '.
 						'<span class="orange"><a href="index.php?ns=comments&ctl=manage&action=unapprove&comment_id='.$id.'">Unapprove</a></span> | '.
 						'<span class="red"><a href="index.php?ns=comments&ctl=manage&action=spam&comment_id='.$id.'">Spam</a></span> | '.
@@ -172,9 +172,9 @@
 							'New Post'.
 						'</div>'.
 						'<form method="post" action="index.php?ns=posts&ctl=add">'.
-							'<h5><label for="qp_title">Title</label></h5> <input id="qp_title" class="input_text" type="text" name="title" value="" /><br/>'.
-							'<h5><label for="qp_content">Content</label></h5> <textarea id="qp_content" class="input_text" name="content" rows="4" cols="70" wrap="soft"></textarea>'.
-							'<h5><label for="qp_tags">Tags</label></h5> <input id="qp_tags" class="input_text" type="text" name="post_tags" value="" /><br />'.
+							'<h5><label for="qp_title">Title</label></h5> <input id="qp_title" class="input input_text" type="text" name="title" value="" required /><br/>'.
+							'<h5><label for="qp_content">Content</label></h5> <textarea id="qp_content" class="input input_text" name="content" rows="4" cols="70" wrap="soft" required></textarea>'.
+							'<h5><label for="qp_tags">Tags</label></h5> <input id="qp_tags" class="input input_text" type="text" name="post_tags" value="" required /><br />'.
 							'<input type="hidden" name="action" value="to_insert" />'.
 							'<input type="hidden" name="post_allow_comment" value="open" />'.
 							'<input type="hidden" name="action" value="to_insert" />'.

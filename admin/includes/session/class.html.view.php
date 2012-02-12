@@ -33,7 +33,7 @@
 		* @subpackage	Views
 		* @namespace	Session
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -64,18 +64,20 @@
 									'<a href="../">Back to website</a>'.
 								'</nav>'.
 							'</header>'.
-							'<form method="post" action="#">'.
-								'<div id="login">'.
-									'<h2>Connexion</h2>'.
-									$msg.
-									'<br />'.
-									'<input class="login" type="text" name="login" placeholder="Username" required /><br />'.
-									'<br />'.
-									'<input class="login" type="password" name="password" placeholder="Password" required /><br />'.
-									'<br />'.
-									'<input class="submit_login" type="submit" name="" value="Connexion" />'.
-								'</div>'.
-							'</form>'.
+							'<section id="wrapper">'.
+								'<form method="post" action="#">'.
+									'<div id="login">'.
+										'<h2>Connexion</h2>'.
+										$msg.
+										'<br />'.
+										'<input class="input" type="text" name="login" placeholder="Username" autofocus required /><br />'.
+										'<br />'.
+										'<input class="input" type="password" name="password" placeholder="Password" required /><br />'.
+										'<br />'.
+										'<input class="submit_login" type="submit" name="" value="Connexion" />'.
+									'</div>'.
+								'</form>'.
+							'</section>'.
 						'</body>'.
 					'</html>';
 		

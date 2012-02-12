@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace	Social
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -51,8 +51,8 @@
 		public static function menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=social&ctl=manage">Share Buttons</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 '</div>';
 		
 		}

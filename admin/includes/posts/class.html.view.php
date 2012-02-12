@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace	Posts
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -56,7 +56,7 @@
 			
 				echo '<div id="menu">'.
 					 	'<span class="menu_item"><a href="index.php?ns=posts&ctl=add">Add</a></span>'.
-					 	'<span id="menu_selected" class="menu_item">Editing</span>'.
+					 	'<span id="menu_selected" class="menu_item"><a href="#">Editing</a></span>'.
 					 	'<span class="menu_item"><a href="index.php?ns=posts&ctl=manage">Posts</a></span>'.
 					 '</div>';
 			
@@ -91,7 +91,7 @@
 			
 				echo '<div id="post_info">'.
 					 	'<div id="title_wrap">'.
-					 		'<input id="new_title" type="text" name="title" value="'.$param1.'" placeholder="Enter title here" required />';
+					 		'<input id="new_title" class="input" type="text" name="title" value="'.$param1.'" placeholder="Enter title here" required />';
 				
 				if(!empty($param2) && $action == 'to_update'){
 				
@@ -121,7 +121,7 @@
 				echo 		'</fieldset>'.
 					 		'<input id="allow_comment" type="checkbox" name="allow_comment" value="open" '.(($param1 == 'open')?'checked="true"':'').' /><label for="allow_comment">Allow comments</label><br/>'.
 					 		'<br/>'.
-					 		'<label for="post_tags">Tags</label><input id="post_tags" type="text" name="tags" value="'.$param2.'" placeholder="Separate your tags with commas" />'.
+					 		'<label for="post_tags">Tags</label><input id="post_tags" class="input" type="text" name="tags" value="'.$param2.'" placeholder="Separate your tags with commas" />'.
 					 	'</div>'.
 					 '</div>';
 			
@@ -168,7 +168,7 @@
 		
 			echo '<div class="np_pic">'.
 				 	'(<a class="fancybox" href="'.PATH.$full.'" title="'.$name.'">view</a>)'.
-				 	'<input id="pic'.$id.'" type="text" value="'.htmlspecialchars('<img src="'.$full.'" />').'" readonly /> '.
+				 	'<input id="pic'.$id.'" type="text" value="'.htmlspecialchars('<img src="'.WS_URL.$full.'" />').'" readonly /> '.
 				 	'<label for="pic'.$id.'">'.$name.'</label> '.
 				 '</div>';
 		
@@ -213,7 +213,7 @@
 		public static function np_vid($id, $name, $link, $embed_code){
 		
 			echo '<div class="np_vid">'.
-				 	'<input id="vid'.$id.'" type="text" value="'.htmlspecialchars('<video src="'.$link.'" controls preload="auto">'.$embed_code.'</video>').'" readonly />'.
+				 	'<input id="vid'.$id.'" type="text" value="'.htmlspecialchars('<video src="'.WS_URL.$link.'" controls preload="auto">'.$embed_code.'</video>').'" readonly />'.
 				 	'<label for="vid'.$id.'">'.$name.'</label>'.
 				 '</div>';
 		
@@ -252,7 +252,7 @@
 				echo '<input class="button" type="submit" name="save_draft" value="Save Draft" />';
 			
 			if(in_array('preview', $actions))
-				echo '&nbsp;&nbsp;<a class="a_button" href="'.PATH.'?preview=true&ctl=posts&news='.$permalink.'" target="_blank">Preview</a>';
+				echo '&nbsp;&nbsp;<a class="a_button" href="'.PATH.'?ctl=posts&news='.$permalink.'&preview=true" target="_blank">Preview</a>';
 			
 			if(in_array('view', $actions))
 				echo '&nbsp;&nbsp;<a class="a_button" href="'.PATH.'?ctl=posts&news='.$permalink.'" target="_blank">View Post</a>';
@@ -305,7 +305,7 @@
 					'<a href="index.php?ns=posts&ctl=manage&post_status=publish">'.$publish.'</a> ('.$count_publish.') | '.
 					'<a href="index.php?ns=posts&ctl=manage&post_status=draft">'.$draft.'</a> ('.$count_draft.') | '.
 					'<a href="index.php?ns=posts&ctl=manage&post_status=trash">'.$trash.'</a> ('.$count_trash.')'.
-					'<span id="search"><input id="search_input" type="text" name="search" placeholder="Search" list="titles" />'.
+					'<span id="search"><input id="search_input" class="input" type="text" name="search" placeholder="Search" list="titles" />'.
 					'<input class="button" type="submit" name="search_button" value="Search Posts" /></span>'.
 				'</div>';
 		
@@ -591,8 +591,8 @@
 		public static function sp_menu(){
 		
 			echo '<div id="menu">'.
+					'<span id="menu_selected" class="menu_item"><a href="index.php?ns=posts&ctl=settingpage">Posts</a></span>'.
 				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=posts&ctl=settingpage">Posts</a></span>'.
 				 '</div>';
 		
 		}

@@ -37,7 +37,7 @@
 		* @subpackage	Main
 		* @namespace	Main
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -111,7 +111,7 @@
 			if(VSession::renderer() == 'mobile'){
 			
 				echo '<li>'.
-						'<h4><a href="'.PATH.'?ctl=posts&news='.$permalink.'"><span class="la_title">'.$title.'</span><img class="follow_link" src="images/follow_link.png" alt=""></a></h4>'.
+						'<h4><a href="'.PATH.'?ctl=posts&news='.$permalink.'"><span class="la_title">'.$title.'</span></a></h4>'.
 					'</li>';
 			
 			}else{
@@ -189,7 +189,7 @@
 				
 				if(Vsession::html5()){
 				
-					echo '<details><summary>Published the <time datetime="'.$date.'" pubdate>'.date('F d, Y', strtotime($date)).'</time> by <a href="'.PATH.'?ctl=author&author='.$author.'&rel=author" title="Profile">'.$author.'</a>, Categories: '.implode(' | ', $categories).$edited.'</summary></details><article>';
+					echo '<details><summary>Published the <time datetime="'.date(DATE_ATOM, strtotime($date)).'" pubdate>'.date('F d, Y', strtotime($date)).'</time> by <a href="'.PATH.'?ctl=author&author='.$author.'&rel=author" title="Profile">'.$author.'</a>, Categories: '.implode(' | ', $categories).$edited.'</summary></details><article>';
 				
 				}else{
 				
@@ -251,10 +251,10 @@
 		
 			echo '<div id="respond">'.
 					'<form method="post" action="#respond" accept-charset="utf-8">'.
-						'<input class="input_text '.(($error_name)?'wrong':'').'" id="respond_name" type="text" name="respond_name" value="'.$name.'" placeholder="Your name" required /><label for="respond_name">Name *</label><br/>'.
-						'<input class="input_text '.(($error_email)?'wrong':'').'" id="respond_email" type="email" name="respond_email" value="'.$email.'" placeholder="lynx@press.org" required /><label for="respond_email">E-mail *</label><br/>'.
+						'<input class="input_text '.(($error_name)?'wrong':'').'" id="respond_name" type="text" name="respond_name" value="'.$name.'" placeholder="Your name" required /><label for="respond_name">Name*</label><br/>'.
+						'<input class="input_text '.(($error_email)?'wrong':'').'" id="respond_email" type="email" name="respond_email" value="'.$email.'" placeholder="lynx@press.org" required /><label for="respond_email">E-mail*</label><br/>'.
 						'<textarea id="respond_content'.(($error_content)?'_wrong':'').'" name="respond_content" wrap="soft" placeholder="Want to say something?" required >'.$content.'</textarea><br/>'.
-						'How many does '.$n1.' + '.$n2.'?&nbsp;&nbsp;&nbsp;<input id="captcha" class="input_text '.(($error_captcha)?'wrong':'').'" type="number" name="number" max="20" min="0" required/><br/>'.
+						'<input id="captcha" class="input_text '.(($error_captcha)?'wrong':'').'" type="number" name="number" max="20" min="0" required/> <label for="captcha">'.$n1.' + '.$n2.'?</label><br/>'.
 						'<input type="hidden" name="result" value="'.$result.'" />'.
 						'<input id="respond_submit" type="submit" name="submit_comment" value="Submit Comment" />'.
 					'</form>'.
@@ -359,7 +359,7 @@
 			if(Vsession::html5()){
 			
 				echo '<figure class="album">'.
-					 	'<a href="'.PATH.'?ctl=albums&album='.$id.'"><img src="'.$link.'cover.png" /></a>'.
+					 	'<a href="'.PATH.'?ctl=albums&album='.$id.'"><img src="'.$link.'cover.png" alt="'.$title.' cover" /></a>'.
 					 	'<figcaption>'.
 					 		'<a href="'.PATH.'?ctl=albums&album='.$id.'">'.$title.'</a>'.
 					 	'</figcaption>'.
@@ -369,7 +369,7 @@
 			
 				echo '<li>'.
 					 	'<a href="'.PATH.'?ctl=albums&album='.$id.'">'.
-					 		'<img src="'.$link.'cover.png" /><br/>'.
+					 		'<img src="'.$link.'cover.png" alt="'.$title.' cover" /><br/>'.
 					 		$title.
 					 	'</a>'.
 					 '</li>';
@@ -399,7 +399,7 @@
 				if(VSession::html5() && VSession::renderer() != 'gecko'){
 				
 					echo '<details id="album_details" open>'.
-						 	'<summary>Created by '.$author.' the <time datetime="'.$date.'" pubdate>'.date('M d, Y @ H:i', strtotime($date)).'</time></summary>'.
+						 	'<summary>Created by '.$author.' the <time datetime="'.date(DATE_ATOM, strtotime($date)).'" pubdate>'.date('M d, Y @ H:i', strtotime($date)).'</time></summary>'.
 						 	'<p>'.
 						 		$description.
 						 	'</p>'.
@@ -482,7 +482,7 @@
 					 	'</video>'.
 					 	'<details>'.
 					 		'<summary>"'.$name.'" is a video made by '.$author.'</summary>'.
-					 		'<p>(uploaded the <time datetime="'.$date.'" pubdate>'.date('M d, Y @ H:i', strtotime($date)).'</time>)</p>'.
+					 		'<p>(uploaded the <time datetime="'.date(DATE_ATOM, strtotime($date)).'" pubdate>'.date('M d, Y @ H:i', strtotime($date)).'</time>)</p>'.
 					 		'<p>'.
 					 			$description.
 					 		'</p>'.
@@ -685,7 +685,11 @@
 		
 		public static function header_links(){
 		
+			if(!VSession::html5()){
 			
+				echo '<h3 id="header_links">External Sources</h3>';
+			
+			}
 		
 		}
 		
@@ -718,6 +722,19 @@
 							nl2br($notes).
 						'</section>'.
 					'</section>';
+			
+			}else{
+			
+				echo '<li class="link">'.
+					 	'<h3>'.$name.'</h3>'.
+					 	'<p class="details">'.
+					 		'Website: <a href="'.$link.'">'.$link.'</a><br/>'.
+					 		'Feed: <a href="'.$rss_link.'">'.$rss_link.'</a>'.
+					 	'</p>'.
+					 	'<p class="description">'.
+					 		nl2br($notes).
+					 	'</p>'.
+					 '</li>';
 			
 			}
 		
@@ -798,6 +815,21 @@
 				echo '</ul>';
 				
 			}
+		
+		}
+		
+		/**
+			* Handle calling unknown methods and display a message
+			*
+			* @static
+			* @access	public
+			* @param	string [$name] Method name called
+			* @param	array [$args] Method arguments
+		*/
+		
+		public static function __callStatic($name, $args){
+		
+			echo 'Unknown method "'.$name.'" (args: '.implode(', ', $args).')';
 		
 		}
 	

@@ -44,7 +44,7 @@
 		* @subpackage	Controllers
 		* @namespace	Users
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -68,9 +68,6 @@
 			$this->_roles =& Roles::load();
 			$this->_roles = $this->_roles->_roles;
 			
-			if(VPost::search_button(false))
-				$this->_search = trim(VPost::search('foo'));
-			
 			if(VRequest::role() && in_array(VRequest::role(), $this->_roles))
 				$this->_role = VRequest::role();
 			else
@@ -79,6 +76,9 @@
 			$this->build_title();
 			
 			if($this->_user['settings']){
+			
+				if(VPost::search_button(false))
+					$this->_search = trim(VPost::search('Lynxpress'));
 			
 				$this->update();
 				$this->delete();
@@ -293,6 +293,9 @@
 				Html::label($user->_id, $edit, $user->_username, $user->_publicname, $user->_role, $user->_email, $user->_avatar);
 					 	
 			}
+			
+			if(empty($this->_content))
+				echo 'No users found';
 			
 			echo '</section>';
 		

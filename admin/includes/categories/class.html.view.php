@@ -35,7 +35,7 @@
 		* @subpackage	Views
 		* @namespace
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -54,8 +54,8 @@
 			if($bool){
 			
 				echo '<div id="menu">'.
-					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=categories&ctl=manage">Categories</a></span>'.
+					 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 					 '</div>';
 			
 			}else{
@@ -157,7 +157,7 @@
 				 	'<th class="column_checkbox" scope="row"><input type="checkbox" name="category_id[]" value="'.$id.'" /></th>'.
 				 	'<td class="column_name">'.
 				 		ucwords($name).
-				 		'<div class="post_actions"><a class="red" href="index.php?ns=categories&ctl=manage&action=delete&id='.$id.'">Delete Permanently</a></div>'.
+				 		'<div class="row_actions"><a class="red" href="index.php?ns=categories&ctl=manage&action=delete&id='.$id.'">Delete Permanently</a></div>'.
 				 	'</td>'.
 				 	'<td class="column_type">'.ucwords($type).'</td>'.
 				 '</tr>';

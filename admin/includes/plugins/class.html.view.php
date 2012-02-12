@@ -36,7 +36,7 @@
 		* @subpackage	Views
 		* @namespace	Plugins
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -52,10 +52,10 @@
 		public static function ap_menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
-				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
 				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=add">Add</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 '</div>';
 		
 		}
@@ -71,7 +71,7 @@
 		
 			echo '<h3>Add a plugin to your website</h3>'.
 				 '<div id="new_plg">'.
-				 	'<lable for="plg">Upload a plugin archive:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input id="plg" type="file" name="plg" />'.
+				 	'<lable for="plg">Upload a plugin archive:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input id="plg" type="file" name="plg" required />'.
 				 	'<input id="upload" class="button button_publish" type="submit" name="upload" value="Upload" />'.
 				 '</div>';
 		
@@ -87,10 +87,10 @@
 		public static function mp_menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
-				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
 				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=add">Add</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
+				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 '</div>';
 		
 		}
@@ -187,10 +187,10 @@
 		public static function lib_menu(){
 		
 			echo '<div id="menu">'.
-				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
-				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
-				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
 				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=add">Add</a></span>'.
+				 	'<span id="menu_selected" class="menu_item"><a href="index.php?ns=plugins&ctl=library">Library</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=plugins&ctl=manage">Plugins</a></span>'.
+				 	'<span class="menu_item"><a href="index.php?ns=settings&ctl=manage">Settings</a></span>'.
 				 '</div>';
 		
 		}
@@ -206,7 +206,7 @@
 		
 			echo '<div id="lib_plg_act">'.
 					 '<h3>This is the list of plugins registered on lynxpress.org</h3>'.
-					 '<input id="search_input" type="text" name="search" value="'.VPost::search().'" placeholder="Search" />'.
+					 '<input id="search_input" class="input" type="text" name="search" value="'.VPost::search().'" placeholder="Search" />'.
 					 '<input class="button" type="submit" name="search_button" value="Search Plugins" />'.
 				 '</div>';
 		
@@ -228,9 +228,10 @@
 		
 			echo '<div class="lib_plg_label">'.
 					'<div class="content_label">'.
+						'Name: <span class="plgname">'.$repo.'</span><br/>'.
 					 	'Author: <span class="plgauthor">'.$user.'</span><br/>'.
 					 	'Url: <span class="plgurl"><a href="'.$website.'" target="_blank">'.$website.'</a></span><br/>'.
-					 	'Description: <p class="plgdesc">'.$desc.'</p><br/>'.
+					 	'<p class="plgdesc">'.nl2br($desc).'</p>'.
 					 	'<a href="http://github.com/'.$user.'/'.$repo.'" target="_blank">View on Github</a> | '.
 					 	'<a class="green" href="index.php?ns=plugins&ctl=library&action=install&user='.$user.'&repo='.$repo.'&download='.$download.'">Install</a>'.
 					'</div>'.

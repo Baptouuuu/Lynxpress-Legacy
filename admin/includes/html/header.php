@@ -55,9 +55,17 @@
 				<li>
 					<a href="../" target="_blank" title="Back to your website"><?php echo WS_NAME ?></a>
 				</li>
+				
+				<li>
+					<a href="index.php?ns=timeline&ctl=manage">Timeline</a>
+					
+					<ul>
+						<li><a href="index.php?ns=timeline&ctl=settings">Settings</a></li>
+					</ul>
+				</li>
 			
 				<li>
-					<a href="index.php">Dashboard</a>
+					<a href="index.php?ns=dashboard&ctl=manage">Dashboard</a>
 				</li>
 			
 				<li>
@@ -127,7 +135,7 @@
 						
 						if(!empty($plugins)){
 						
-							echo '<ul>';
+							echo '<ul id="mplg">';
 							
 							foreach($plugins as $plg)
 								echo '<li><a href="index.php?ns='.$plg['namespace'].'&ctl='.$plg['entry_point'].'">'.$plg['name'].'</a></li>';
@@ -156,7 +164,7 @@
 							 			'</ul>'.
 							 		'</li>'.
 							 		'<li><a href="index.php?ns=roles&ctl=manage">Roles</a></li>'.
-							 		'<li><a href="index.php?ns=social&ctl=manage">Social</a></li>'.
+							 		'<li><a href="index.php?ns=social&ctl=manage">Social Buttons</a></li>'.
 							 		'<li><a href="index.php?ns=defaultpage&ctl=manage">Default Page</a></li>'.
 							 		'<li>'.
 							 			'<a href="index.php?ns=templates&ctl=manage">Templates</a>'.

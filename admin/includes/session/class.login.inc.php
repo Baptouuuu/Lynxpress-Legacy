@@ -25,6 +25,7 @@
 	
 	namespace Admin\Session;
 	use \Library\Variable\Post as VPost;
+	use \Library\Variable\Get as VGet;
 	use \Admin\ActionMessages\ActionMessages as ActionMessages;
 	use Exception;
 	
@@ -37,7 +38,7 @@
 		* @subpackage	Controllers
 		* @namespace	Session
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -50,6 +51,9 @@
 		public function __construct(){
 		
 			$this->_display_html = false;
+			
+			if(VGet::loggedout())
+				$this->_msg = ActionMessages::custom_good('You\'ve been logged out');
 			
 			try{
 			
