@@ -36,12 +36,14 @@
 		* @subpackage	Helper
 		* @namespace	Helper
 		* @author		Baptiste Langalde lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @abstract
 	*/
 	
 	abstract class Helper{
 	
+		const CONTROLLER = false;
+		
 		/**
 			* Method to retrieve categories to put them in the menu
 			*
@@ -79,6 +81,7 @@
 		*
 		* @package		Site
 		* @subpackage	Helper
+		* @namespace	Helper
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
 		* @version		1.0
 		* @abstract
@@ -86,6 +89,8 @@
 	
 	abstract class Posts{
 	
+		const CONTROLLER = false;
+		
 		/**
 			* Build a search category link
 			*
@@ -202,7 +207,7 @@
 		
 		public static function check_pub_dates(){
 		
-			if(in_array(VGet::ctl('posts'), array('posts', 'search')))
+			if(in_array(VGet::ctl(), array('posts', 'search')))
 				return true;
 			else
 				return false;
@@ -249,6 +254,53 @@
 				echo '</ul>';
 			
 			}
+		
+		}
+	
+	}
+	
+	/**
+		* Menu Helper
+		*
+		* Function applied to website menu
+		*
+		* @package		Site
+		* @subpackage	Helper
+		* @namespace	Helper
+		* @author		Baptiste Langlade lynxpressorg@gmail.com
+		* @version		1.0
+		* @abstract
+	*/
+	
+	abstract class Menu{
+	
+		const CONTROLLER = false;
+		
+		/**
+			* Retrieve setting menu to extend website menu
+			*
+			* @static
+			* @access	public
+			* @return	array
+		*/
+		
+		public static function extend(){
+		
+			$db =& Database::load();
+			
+			$to_read['table'] = 'setting';
+			$to_read['columns'] = array('setting_data');
+			$to_read['condition_columns'][':t'] = 'setting_type';
+			$to_read['condition_select_types'][':t'] = '=';
+			$to_read['condition_values'][':t'] = 'site_menu';
+			$to_read['value_types'][':t'] = 'str';
+			
+			$data = $db->read($to_read);
+			
+			if(empty($data))
+				return array();
+			
+			return json_decode($data[0]['setting_data'], true);
 		
 		}
 	
