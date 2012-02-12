@@ -1,7 +1,10 @@
 User-agent: *
 Disallow: /admin/
-Disallow: /content/
+Disallow: /cache/
 Disallow: /includes/
 Disallow: /css/
+Disallow: /fancybox/
 Disallow: /images/
-Disallow: /shadowbox/
+Disallow: /js/
+Disallow: /photoswipe/
+Allow: /content/
