@@ -28,7 +28,10 @@
 	use \Admin\Roles\Roles as Roles;
 	use \Library\Variable\Post as VPost;
 	use \Library\Variable\Session as VSession;
+	use \Library\Variable\Server as VServer;
 	use \Admin\Helper\Helper as Helper;
+	use \Library\Models\Setting as Setting;
+	use Exception;
 	
 	/**
 		* Session
@@ -41,7 +44,7 @@
 		*
 		* @package	Administration
 		* @author	Baptiste Langlade lynxpressorg@gmail.com
-		* @version	1.0
+		* @version	1.0.1
 		* @final
 	*/
 	
@@ -50,6 +53,7 @@
 		private $_db = null;
 		private $_verified = null;
 		private $_roles = null;
+		private $_languages = array('en', 'fr');
 	
 		/**
 			* Class constructor
@@ -85,7 +89,7 @@
 			
 			if($user === false || empty($user)){
 			
-				header('Location: index.php?ns=session&ctl=login');
+				throw new Exception('Invalid Username');
 			
 			}else{
 			
@@ -98,7 +102,7 @@
 			
 				}else{
 			
-					header('Location: index.php?ns=session&ctl=login');
+					throw new Exception('Invalid Password');
 			
 				}
 			
@@ -114,8 +118,36 @@
 		
 		public function logout(){
 		
+			$to_read['table'] = 'setting';
+			$to_read['columns'] = array('SETTING_ID');
+			$to_read['condition_columns'][':t'] = 'setting_type';
+			$to_read['condition_select_types'][':t'] = '=';
+			$to_read['condition_values'][':t'] = 'user_'.VSession::user_id();
+			$to_read['value_types'][':t'] = 'str';
+			
+			$res = $this->_db->read($to_read);
+			
+			if(empty($res)){
+			
+				$setting = new Setting();
+				$setting->_name = 'User preferences for "'.VSession::username().'"';
+				$setting->_type = 'user_'.VSession::user_id();
+				$setting->_data = json_encode(array('last_visit' => date('Y-m-d H:i:s'), 'timeline' => array()));
+				$setting->create();
+			
+			}else{
+			
+				$setting = new Setting($res[0]['SETTING_ID']);
+				$setting->_data = json_decode($setting->_data, true);
+				$data = $setting->_data;
+				$data['last_visit'] = date('Y-m-d H:i:s');
+				$setting->_data = json_encode($data);
+				$setting->update('_data', 'str');
+			
+			}
+			
 			session_destroy();
-			header('Location: index.php?ns=session&ctl=login');
+			header('Location: index.php?ns=session&ctl=login&loggedout=true');
 		
 		}
 		
