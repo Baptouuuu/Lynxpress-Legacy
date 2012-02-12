@@ -29,7 +29,7 @@
 		
 	try{
 	
-		$controller = '\\Admin\\'.ucfirst(VGet::ns('dashboard')).'\\'.ucfirst(VGet::ctl('manage'));
+		$controller = '\\Admin\\'.ucfirst(VGet::ns('timeline')).'\\'.ucfirst(VGet::ctl('manage'));
 		
 		$page = new $controller();
 		
