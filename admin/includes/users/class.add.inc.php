@@ -43,7 +43,7 @@
 		* @subpackage	Controllers
 		* @namespace	Users
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -196,6 +196,18 @@
 			if($this->check_post_data()){
 					
 				try{
+					
+					$to_read['table'] = 'user';
+					$to_read['columns'] = array('USER_ID');
+					$to_read['condition_columns'][':u'] = 'user_username';
+					$to_read['condition_select_types'][':u'] = 'LIKE';
+					$to_read['condition_values'][':u'] = $this->_new_user->_username;
+					$to_read['value_types'][':u'] = 'str';
+					
+					$user = $this->_db->read($to_read);
+					
+					if(!empty($user))
+						throw new Exception('Username already used!');
 					
 					$this->_new_user->create();
 					
