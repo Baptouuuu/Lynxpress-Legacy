@@ -39,7 +39,7 @@
 		* @subpackage	Controllers
 		* @namespace	Activity
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -203,7 +203,7 @@
 			
 			}elseif(VPost::reset(false) && !$this->_user['delete_content']){
 			
-				
+				$this->_action_msg = ActionMessages::action_no_perm();
 			
 			}
 		
