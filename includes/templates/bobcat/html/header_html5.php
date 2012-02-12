@@ -1,4 +1,7 @@
-<?php use \Site\Html as Html; ?>
+<?php 
+	use \Site\Html as Html;
+	use \Site\Helper\Menu as Menu;
+?>
 <!DOCTYPE html >
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -62,11 +65,18 @@
         		
         		<a href="<?php echo WS_URL ?>?ctl=links">Links</a>
         		
+        		<?php 
+        		
+        			foreach(Menu::extend() as $item)
+        				echo '<a href="'.WS_URL.'?ctl='.$item['ctl'].'">'.$item['name'].'</a>';
+        		
+        		?>
+        		
         	</nav>
         	
         	<form id="search" class="form" method="get" action="index.php">
         		<input type="hidden" name="ctl" value="search" />
-        		<input type="text" name="q" placeholder="  Search..." list="titles" />
+        		<input type="text" name="q" placeholder="Search..." list="titles" />
         		<?php Html::datalist('titles'); ?>
         	</form>
             

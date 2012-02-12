@@ -49,6 +49,9 @@
         		<li class="tmenu">
         			<a href="<?php echo WS_URL ?>?ctl=video">Videos</a>
         		</li>
+        		<li class="tmenu">
+        			<a href="<?php echo WS_URL ?>?ctl=links">Links</a>
+        		</li>
         	</ul>
             
         </div>

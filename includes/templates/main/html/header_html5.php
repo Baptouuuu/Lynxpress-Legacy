@@ -1,4 +1,7 @@
-<?php use \Site\Html as Html; ?>
+<?php 
+	use \Site\Html as Html;
+	use \Site\Helper\Menu as Menu;
+?>
 <!DOCTYPE html >
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -61,6 +64,17 @@
         		<li class="tmenu">
         			<a href="<?php echo WS_URL ?>?ctl=video">Videos</a>
         		</li>
+        		<li class="tmenu">
+        			<a href="<?php echo WS_URL ?>?ctl=links">Links</a>
+        		</li>
+        		
+        		<?php 
+        		
+        			foreach(Menu::extend() as $item)
+        				echo '<li class="tmenu"><a href="'.WS_URL.'?ctl='.$item['ctl'].'">'.$item['name'].'</a></li>';
+        		
+        		?>
+        		
         	</ul>
             
         </header>
