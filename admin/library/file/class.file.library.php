@@ -35,7 +35,7 @@
 		* @subpackage	File
 		* @namespace	File
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 	*/
 	
 	class File{
@@ -84,19 +84,17 @@
 			
 				$path = $this->_path;
 			
-			}else{
-			
-				$dirname = dirname($path).'/';
-				
-				if(!is_dir($dirname))
-					$result = mkdir($dirname, 0777, true);
-				else
-					$result = true;
-				
-				if($result === false)
-					throw new Exception('Folder can\'t be created');
-			
 			}
+			
+			$dirname = dirname($path).'/';
+			
+			if(!is_dir($dirname))
+				$result = mkdir($dirname, 0777, true);
+			else
+				$result = true;
+			
+			if($result === false)
+				throw new Exception('Folder can\'t be created');
 			
 			$handle = @fopen($path, 'w');
 			
@@ -109,7 +107,7 @@
 		}
 		
 		/**
-			* Move a file
+			* Move a file, without deleting original file
 			*
 			* @static
 			* @access	public
