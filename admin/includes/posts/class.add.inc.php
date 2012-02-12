@@ -44,7 +44,7 @@
 		* @subpackage	Controllers
 		* @namespace	Posts
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -434,6 +434,18 @@
 			
 				try{
 				
+					$old = new Post();
+					$old->_id = $this->_post->_id;
+					$old->read('_status');
+					
+					//if post move from draft to published, creation date is updated
+					if($old->_status == 'draft' && $this->_post->_status == 'publish'){
+					
+						$this->_post->_date = date('Y-m-d H:i:s');
+						$this->_post->update('_date', 'str');
+					
+					}
+					
 					$this->_post->update('_title', 'str');
 					$this->_post->update('_content', 'str');
 					$this->_post->update('_allow_comment', 'str');
