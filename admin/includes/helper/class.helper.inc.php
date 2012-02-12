@@ -26,6 +26,7 @@
 	namespace Admin\Helper;
 	use \Library\Database\Database as Database;
 	use \Library\Curl\Curl as Curl;
+	use \Library\Variable\Get as VGet;
 	use \Admin\ActionMessages\ActionMessages as ActionMessages;
 	use Exception;
 	
@@ -37,7 +38,7 @@
 		* @package		Administration
 		* @namespace	Helper
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @abstract
 	*/
 	
@@ -257,6 +258,37 @@
 		
 			if(!extension_loaded('hash'))
 				throw new Exception('Hash extension not loaded!');
+		
+		}
+		
+		/**
+			* Method to determine page number and associated limit for sql queries
+			*
+			* @static
+			* @access	public
+			* @param	integer [$items] Items number per page
+			* @return	array
+		*/
+		
+		public static function pagination($items){
+		
+			if(!VGet::p()){
+			
+				$limit_start = 0;
+				$page = 1;
+			
+			}else{
+			
+				if(VGet::p() < 1)
+					$page = 1;
+				else
+					$page = VGet::p();
+				
+				$limit_start = ($page - 1) * $items;
+			
+			}
+			
+			return array($page, $limit_start);
 		
 		}
 	

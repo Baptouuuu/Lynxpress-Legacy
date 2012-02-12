@@ -44,7 +44,7 @@
 		* @subpackage	Controllers
 		* @namespace	Posts
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @final
 	*/
 	
@@ -53,6 +53,10 @@
 		private $_search = null;
 		private $_status = null;
 		private $_content = null;
+		private $_dates = null;
+		private $_page = null;
+		private $_limit_start = null;
+		private $_max = null;
 		
 		/**
 			* Class constructor
@@ -64,8 +68,8 @@
 		
 			parent::__construct();
 			
-			if(VPost::search_button(false))
-				$this->_search = trim(VPost::search('foo'));
+			if(VPost::search_button(false) || VGet::search())
+				$this->_search = trim(VRequest::search('Lynxpress'));
 			
 			//set the status in the attribute for more readability
 			if(VRequest::post_status(false) && !VPost::empty_trash(false)){
@@ -124,9 +128,9 @@
 				$to_read['table'] = 'post';
 				$to_read['columns'] = array('POST_ID');
 				
-				if(VPost::filter(false)){
+				if(VRequest::filter(false)){
 					
-					if(VPost::date('all') == 'all' && VPost::category('all') == 'all'){
+					if(VRequest::date('all') == 'all' && VRequest::category('all') == 'all'){
 						
 						switch($this->_status){
 						
@@ -147,21 +151,21 @@
 						
 					}else{
 						
-						if(VPost::date('all') != 'all'){
+						if(VRequest::date('all') != 'all'){
 						
 							$to_read['condition_columns'][':date'] = 'post_date';
 							$to_read['condition_select_types'][':date'] = 'LIKE';
-							$to_read['condition_values'][':date'] = VPost::date().'%';
+							$to_read['condition_values'][':date'] = VRequest::date().'%';
 							$to_read['value_types'][':date'] = 'str';
 						
 						}
 						
-						if(VPost::category('all') != 'all'){
+						if(VRequest::category('all') != 'all'){
 						
 							$to_read['condition_types'][':cat'] = 'AND';
 							$to_read['condition_columns'][':cat'] = 'post_category';
 							$to_read['condition_select_types'][':cat'] = 'LIKE';
-							$to_read['condition_values'][':cat'] = '%'.VPost::category().'%';
+							$to_read['condition_values'][':cat'] = '%'.VRequest::category().'%';
 							$to_read['value_types'][':cat'] = 'str';
 						
 						}
@@ -186,7 +190,7 @@
 					
 					}
 					
-				}elseif(VPost::search_button(false)){
+				}elseif(VPost::search_button(false) || VGet::search()){
 					
 					$search = '%'.$this->_search.'%';
 					
@@ -240,7 +244,12 @@
 					
 				}
 				
+				//pass $to_read by parameter to have same conditions
+				$this->get_pagination($to_read);
+				$this->get_dates($to_read);
+				
 				$to_read['order'] = array('post_date', 'desc');
+				$to_read['limit'] = array($this->_limit_start, parent::ITEMS);
 				
 				$this->_content = $this->_db->read($to_read);
 				
@@ -318,6 +327,66 @@
 		}
 		
 		/**
+			* Get pagination informations
+			*
+			* @access	private
+			* @param	array [$to_read]
+		*/
+		
+		private function get_pagination($to_read){
+		
+			try{
+			
+				list($this->_page, $this->_limit_start) = Helper::pagination(parent::ITEMS);
+				
+				$to_read['columns'] = array('COUNT(POST_ID) as count');
+				
+				$count = $this->_db->read($to_read);
+				
+				$this->_max = ceil($count[0]['count']/parent::ITEMS);
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
+		
+		}
+		
+		/**
+			* Retrieve posts dates
+			*
+			* @access	private
+			* @param	array [$to_read]
+		*/
+		
+		private function get_dates($to_read){
+		
+			try{
+			
+				$to_read['columns'] = array('distinct substr(post_date, 1, 7) as date');
+				$to_read['order'] = array('post_date', 'DESC');
+				
+				if(VRequest::date('all') != 'all'){
+				
+					unset($to_read['condition_columns'][':date']);
+					unset($to_read['condition_select_types'][':date']);
+					unset($to_read['condition_values'][':date']);
+					unset($to_read['value_types'][':date']);
+				
+				}
+				
+				$this->_dates = $this->_db->read($to_read);
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
+		
+		}
+		
+		/**
 			* Build page title
 			*
 			* @access	private
@@ -325,7 +394,7 @@
 		
 		private function build_title(){
 		
-			if(VPost::search_button(false))
+			if(VPost::search_button(false) || VGet::search())
 				$this->_title = 'Posts > Search results for "'.$this->_search.'"';
 			elseif($this->_status != 'all')
 				$this->_title = ucfirst($this->_status).'ed Posts';
@@ -427,14 +496,12 @@
 			
 				if($position == 'top'){
 					
-					foreach($this->_content as $post){
+					foreach($this->_dates as $post){
 					
-						$key = substr($post->_date, 0, 7);
-						$dates[$key] = date('F Y', strtotime($post->_date));
+						$key = $post['date'];
+						$dates[$key] = date('F Y', strtotime($key));
 					
 					}
-					
-					$dates = array_unique($dates);
 					
 					if($this->_status == 'trash'){
 					
@@ -554,6 +621,33 @@
 		}
 		
 		/**
+			* Display pagination
+			*
+			* @access	private
+		*/
+		
+		private function display_pagination(){
+		
+			if($this->_max > 1){
+			
+				$link = null;
+				
+				if(VRequest::filter(false))
+					$link = '&filter=true&date='.VRequest::date().'&category='.VRequest::category().'&post_status='.$this->_status;
+				elseif(!empty($this->_search))
+					$link = '&search='.$this->_search;
+				elseif(VGet::author())
+					$link = '&author='.VGet::author;
+				elseif($this->_status != 'all')
+					$link = '&post_status='.$this->_status;
+				
+				Html::pagination($this->_page, $this->_max, $link, 'Posts');
+			
+			}
+		
+		}
+		
+		/**
 			* Display page content
 			*
 			* @access	public
@@ -575,6 +669,7 @@
 				$this->display_actions('top');
 				$this->display_table();
 				$this->display_actions('butt');
+				$this->display_pagination();
 				
 				echo Helper::datalist('titles', $this->_content, '_title');
 				

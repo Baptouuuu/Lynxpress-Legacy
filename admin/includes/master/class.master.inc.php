@@ -38,7 +38,7 @@
 		*
 		* @package		Administration
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -51,6 +51,7 @@
 		private $_session_fct = null;
 		protected $_action_msg = null;
 		protected $_display_html = null;
+		const ITEMS = 20;					//items number to display in a listing
 		
 		/**
 			* Class constructor

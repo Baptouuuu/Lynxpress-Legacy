@@ -24,6 +24,7 @@
 	*/
 	
 	namespace Admin\Html;
+	use \Library\Variable\Get as VGet;
 	
 	/**
 		* Main html class
@@ -32,7 +33,7 @@
 		* @subpackage	Views
 		* @namespace	Html
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @abstract
 	*/
 	
@@ -60,6 +61,31 @@
 				echo '</form>';
 			
 			}
+		
+		}
+		
+		/**
+			* Display a pagination, for listings controllers
+			*
+			* @static
+			* @access	public
+			* @param	integer [$p] Current page
+			* @param	integer [$max] Maximum pages available
+			* @param	string [$link] Additional GET parameter, if in a search
+			* @param	string [$text] Text to display after older/newest
+		*/
+		
+		public static function pagination($p, $max, $link, $text){
+		
+			echo '<nav id="pagination">';
+			
+			if($p < $max)
+				echo '<a class="a_button" href="index.php?ns='.VGet::ns().'&ctl='.VGet::ctl('manage').$link.'&p='.($p+1).'">Older '.$text.'</a>';
+			
+			if($p > 1)
+				echo '<a class="a_button" href="index.php?ns='.VGet::ns().'&ctl='.VGet::ctl('manage').$link.'&p='.($p-1).'">Newest '.$text.'</a>';
+			
+			echo '</nav>';
 		
 		}
 	

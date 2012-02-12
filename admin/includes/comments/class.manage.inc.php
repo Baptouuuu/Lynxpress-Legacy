@@ -44,7 +44,7 @@
 		* @subpackage	Controllers
 		* @namespace	Comments
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @final
 	*/
 	
@@ -55,6 +55,9 @@
 		private $_search = null;
 		private $_actions = array('approve', 'unapprove', 'spam', 'unspam', 'trash', 'restore');
 		private $_action_value = array('approve' => 'approved', 'unapprove' => 'pending', 'spam' => 'spam', 'unspam' => 'pending', 'trash' => 'trash', 'restore' => 'pending');
+		private $_page = null;
+		private $_limit_start = null;
+		private $_max = null;
 		
 		/**
 			* Class constructor
@@ -95,8 +98,8 @@
 			
 			}
 			
-			if(VPost::search_button(false))
-				$this->_search = VPost::search('foo');
+			if(VPost::search_button(false) || VGet::search())
+				$this->_search = trim(VRequest::search('Lynxpress'));
 			
 			$this->_title = $this->build_title();
 			
@@ -138,7 +141,7 @@
 					$to_read['condition_values'][':status'] = $this->_status;
 					$to_read['value_types'][':status'] = 'str';
 					
-				}elseif(VPost::search_button(false)){
+				}elseif(VPost::search_button(false) || VGet::search()){
 					
 					$to_read['condition_columns']['group'][':content'] = 'comment_content';
 					$to_read['condition_select_types'][':content'] = 'LIKE';
@@ -176,7 +179,11 @@
 					
 				}
 				
-				$to_read['order'] = array('comment_date', 'DESC');
+				//pass $to_read by parameter to have same conditions
+				$this->get_pagination($to_read);
+				
+				$to_read['order'] = array('comment_date', 'desc');
+				$to_read['limit'] = array($this->_limit_start, parent::ITEMS);
 				
 				$this->_content = $this->_db->read($to_read);
 				
@@ -225,6 +232,33 @@
 		}
 		
 		/**
+			* Get pagination informations
+			*
+			* @access	private
+			* @param	array [$to_read]
+		*/
+		
+		private function get_pagination($to_read){
+		
+			try{
+			
+				list($this->_page, $this->_limit_start) = Helper::pagination(parent::ITEMS);
+				
+				$to_read['columns'] = array('COUNT(COMMENT_ID) as count');
+				
+				$count = $this->_db->read($to_read);
+				
+				$this->_max = ceil($count[0]['count']/parent::ITEMS);
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
+		
+		}
+		
+		/**
 			* Build the html page title
 			*
 			* @access	private
@@ -236,7 +270,7 @@
 				return 'Comment > in reponse to "'.VGet::comment_name().'"';
 			elseif(VGet::action() == 'edit')
 				return 'Edit Comment';			
-			elseif(VPost::search_button(false))
+			elseif(VPost::search_button(false) || VGet::search())
 				return 'Comments > Search results for "'.$this->_search.'"';
 			else
 				return 'Comments';
@@ -473,6 +507,31 @@
 		}
 		
 		/**
+			* Display pagination
+			*
+			* @access	private
+		*/
+		
+		private function display_pagination(){
+		
+			if($this->_max > 1){
+			
+				$link = null;
+				
+				if(VGet::action() == 'by_type')
+					$link = '&action=by_type&id='.VGet::id().'&type='.VGet::type().'&comment_status='.$this->_status();
+				elseif(!empty($this->_search))
+					$link = '&search='.$this->_search.'&comment_status='.$this->_status;
+				else
+					$link = '&comment_status='.$this->_status;
+				
+				Html::pagination($this->_page, $this->_max, $link, 'Comments');
+			
+			}
+		
+		}
+		
+		/**
 			* Display a form to reply directly to another comment
 			*
 			* @access	private
@@ -530,6 +589,7 @@
 						$this->display_actions('top');
 						$this->display_table();
 						$this->display_actions('butt');
+						$this->display_pagination();
 					
 					}else{
 					

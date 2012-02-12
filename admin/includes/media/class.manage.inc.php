@@ -45,7 +45,7 @@
 		* @subpackage	Controllers
 		* @namespace	Media
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @final
 	*/
 	
@@ -54,6 +54,10 @@
 		private $_view_type = null;
 		private $_medias = null;
 		private $_search = null;
+		private $_dates = null;
+		private $_page = null;
+		private $_limit_start = null;
+		private $_max = null;
 		
 		/**
 			* Class constructor
@@ -74,8 +78,13 @@
 			
 			if($this->_user['media']){
 			
-				if(VPost::search_button(false))
-					$this->_search = trim(VPost::search('foo'));
+				if(VPost::search_button(false) || VGet::search()){
+				
+					$this->_search = trim(VRequest::search('Lynxpress'));
+					
+					$this->_title .= ' > Search for "'.$this->_search.'"';
+				
+				}
 				
 				if($this->_view_type == 'video')
 					Helper::get_categories($this->_categories, $this->_action_msg, 'video');
@@ -102,30 +111,30 @@
 				$to_read['table'] = 'media';
 				$to_read['columns'] = array('MEDIA_ID');
 				
-				if(VPost::search_button(false)){
+				if(VPost::search_button(false) || VGet::search()){
 				
 					$to_read['condition_columns'][':name'] = 'media_name';
 					$to_read['condition_select_types'][':name'] = 'LIKE';
 					$to_read['condition_values'][':name'] = '%'.$this->_search.'%';
 					$to_read['value_types'][':name'] = 'str';
 				
-				}elseif(VPost::filter(false)){
+				}elseif(VRequest::filter(false)){
 				
-					if(VPost::date('all') !== 'all'){
+					if(VRequest::date('all') !== 'all'){
 					
 						$to_read['condition_columns'][':date'] = 'media_date';
 						$to_read['condition_select_types'][':date'] = 'LIKE';
-						$to_read['condition_values'][':date'] = VPost::date('1970-01').'%';
+						$to_read['condition_values'][':date'] = VRequest::date('1970-01').'%';
 						$to_read['value_types'][':date'] = 'str';
 					
 					}
 					
-					if(VPost::category('all') !== 'all'){
+					if(VRequest::category('all') !== 'all'){
 					
 						$to_read['condition_types'][':cat'] = 'AND';
 						$to_read['condition_columns'][':cat'] = 'media_category';
 						$to_read['condition_select_types'][':cat'] = 'LIKE';
-						$to_read['condition_values'][':cat'] = '%'.VPost::category().'%';
+						$to_read['condition_values'][':cat'] = '%'.VRequest::category().'%';
 						$to_read['value_types'][':cat'] = 'str';
 					
 					}
@@ -158,7 +167,12 @@
 				$to_read['condition_values'][':album'] = '0';
 				$to_read['value_types'][':album'] = 'int';
 				
+				//pass $to_read by parameter to have same conditions
+				$this->get_pagination($to_read);
+				$this->get_dates($to_read);
+				
 				$to_read['order'] = array('media_date', 'desc');
+				$to_read['limit'] = array($this->_limit_start, parent::ITEMS);
 				
 				$this->_medias = $this->_db->read($to_read);
 				
@@ -232,6 +246,66 @@
 			}
 			
 			return $aliens;
+		
+		}
+		
+		/**
+			* Get pagination informations
+			*
+			* @access	private
+			* @param	array [$to_read]
+		*/
+		
+		private function get_pagination($to_read){
+		
+			try{
+			
+				list($this->_page, $this->_limit_start) = Helper::pagination(parent::ITEMS);
+				
+				$to_read['columns'] = array('COUNT(MEDIA_ID) as count');
+				
+				$count = $this->_db->read($to_read);
+				
+				$this->_max = ceil($count[0]['count']/parent::ITEMS);
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
+		
+		}
+		
+		/**
+			* Retrieve posts dates
+			*
+			* @access	private
+			* @param	array [$to_read]
+		*/
+		
+		private function get_dates($to_read){
+		
+			try{
+			
+				$to_read['columns'] = array('distinct substr(media_date, 1, 7) as date');
+				$to_read['order'] = array('media_date', 'DESC');
+				
+				if(VRequest::date('all') != 'all'){
+				
+					unset($to_read['condition_columns'][':date']);
+					unset($to_read['condition_select_types'][':date']);
+					unset($to_read['condition_values'][':date']);
+					unset($to_read['value_types'][':date']);
+				
+				}
+				
+				$this->_dates = $this->_db->read($to_read);
+			
+			}catch(Exception $e){
+			
+				$this->_action_msg = ActionMessages::custom_wrong($e->getMessage());
+			
+			}
 		
 		}
 		
@@ -358,14 +432,12 @@
 				
 				if($position == 'top'){
 					
-					foreach($this->_medias as $item){
+					foreach($this->_dates as $item){
 				
-						$key = substr($item->_date, 0, 7);
-						$dates[$key] = date('F Y', strtotime($item->_date));
+						$key = $item['date'];
+						$dates[$key] = date('F Y', strtotime($key));
 				
 					}
-				
-					$dates = array_unique($dates);
 					
 					Html::mm_delete();
 					Html::mm_actions('o', $this->_view_type);
@@ -443,6 +515,33 @@
 			}
 			
 			Html::mm_table('c');
+		
+		}
+		
+		/**
+			* Display pagination
+			*
+			* @access	private
+		*/
+		
+		private function display_pagination(){
+		
+			if($this->_max > 1){
+			
+				$link = null;
+				
+				if(VRequest::filter(false))
+					$link = '&filter=true&date='.VRequest::date().'&category='.VRequest::category().'&type='.$this->_view_type;
+				elseif(!empty($this->_search))
+					$link = '&search='.$this->_search;
+				elseif(VGet::author())
+					$link = '&author='.VGet::author;
+				else
+					$link = '&type='.$this->_view_type;
+				
+				Html::pagination($this->_page, $this->_max, $link, 'Medias');
+			
+			}
 		
 		}
 		
@@ -529,6 +628,7 @@
 					$this->display_actions('top');
 					$this->display_table();
 					$this->display_actions('butt');
+					$this->display_pagination();
 					
 					echo Helper::datalist('titles', $this->_medias, '_title');
 				
@@ -642,6 +742,11 @@
 					
 						$media->_attachment = VPost::attach();
 						$media->update('_attachment', 'int');
+					
+					}else{
+					
+						$media->_attachment = null;
+						$media->update('_attachment', 'null');
 					
 					}
 					
