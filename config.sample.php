@@ -37,6 +37,6 @@
 	
 	define('SALT', '2722123d19895a7a56fe421217e8396f');		//after installation, don't change this constant
 	
-	define('WS_VERSION', '1.1');
+	define('WS_VERSION', '1.2');
 
 ?>
