@@ -36,7 +36,7 @@
 		* @subpackage	Media
 		* @namespace	Media
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 	*/
 	
 	class Media{
@@ -46,8 +46,7 @@
 		private $_width = null;
 		private $_height = null;
 		private $_mime = null;
-		private $_path = null;
-		private $_allowed = array('image/gif', 'image/jpeg', 'image/png', 'video/mp4', 'video/mov', 'video/mpg', 'video/mpeg');
+		private $_allowed = array('image/gif', 'image/jpeg', 'image/png', 'video/mp4', 'video/mov', 'video/mpg', 'video/mpeg', 'video/webm');
 		
 		/**
 			* Class constructor
@@ -91,6 +90,10 @@
 				$this->_file = $path;
 				$this->_name = basename($this->_file);
 			
+			}elseif(in_array($this->_mime, $this->_allowed)){
+			
+				throw new Exception('Format not supported');
+			
 			}else{
 			
 				throw new Exception('Unknown media type');
@@ -115,7 +118,7 @@
 				if(substr($_FILES[$name]['type'], 0, 5) == 'image'){
 				
 					$this->_file = $_FILES[$name]['tmp_name'];
-					$this->_mime = image_type_to_mime_type(exif_imagetype($this->_file));
+					$this->_mime = $_FILES[$name]['type'];
 					$this->_name = $_FILES[$name]['name'];
 					$attr = getimagesize($this->_file);
 					$this->_width = $attr[0];
