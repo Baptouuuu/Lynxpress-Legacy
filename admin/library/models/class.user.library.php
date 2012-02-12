@@ -37,7 +37,7 @@
 		* @subpackage	Models
 		* @namespace	Models
 		* @author		Baptiste Langlade <lynxpressorg@gmail.com>
-		* @version		1.0
+		* @version		1.0.1
 		* @final
 	*/
 	
@@ -286,8 +286,8 @@
 					break;
 				
 				case '_google':
-					if(!empty($value) && substr($value, 0, 7) != 'http://')
-						$error = 'Google+ url has to begin with "http://"';
+					if(!empty($value) && substr($value, 0, 7) != 'http://' && substr($value, 0, 8) != 'https://')
+						$error = 'Google+ url has to begin with "http://" or "https://"';
 					break;
 			
 			}
