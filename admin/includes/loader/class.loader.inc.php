@@ -35,7 +35,7 @@
 		*
 		* @package		Administration
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.0.1
 		* @abstract
 	*/
 	
@@ -62,6 +62,8 @@
 				
 				if(isset($namespaces[2]) && $namespaces[2] == 'html')
 					$require .= '.view.php';
+				elseif(isset($namespaces[2]) && $namespaces[2] == 'lang')
+					$require .= '.i18n.php';
 				else
 					$require .= '.inc.php';
 			
