@@ -34,7 +34,7 @@
 		* @subpackage	Curl
 		* @namespace	Curl
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 	*/
 	
 	class Curl{
@@ -43,6 +43,8 @@
 		private $_url = null;
 		private $_follow = null;
 		private $_content = null;
+		private $_post = null;
+		private $_data = array();
 		
 		/**
 			* Class Constructor
@@ -83,24 +85,21 @@
 			curl_setopt($this->_c, CURLOPT_HEADER, false);
 			curl_setopt($this->_c, CURLOPT_FOLLOWLOCATION, $this->_follow);
 			
+			if($this->_post === true){
+			
+				curl_setopt($this->_c, CURLOPT_POST, true);
+				curl_setopt($this->_c, CURLOPT_POSTFIELDS, $this->_data);
+			
+			}else{
+			
+				curl_setopt($this->_c, CURLOPT_HTTPGET, true);
+			
+			}
+			
 			$this->_content = curl_exec($this->_c);
 			
 			if($this->_content === false)
 				throw new Exception('Error trying to connect to "'.$this->_url.'" (Error: "'.curl_error($this->_c).'")');
-		
-		}
-		
-		/**
-			* Method to set data in the object
-			*
-			* @access	public
-			* @param	string [$attr]
-			* @param	mixed [$value]
-		*/
-		
-		public function __set($attr, $value){
-		
-			$this->$attr = $value;
 		
 		}
 		
@@ -115,6 +114,20 @@
 		
 			if(!extension_loaded('curl'))
 				throw new Exception('Curl extension not loaded!');
+		
+		}
+		
+		/**
+			* Method to set data in the object
+			*
+			* @access	public
+			* @param	string [$attr]
+			* @param	mixed [$value]
+		*/
+		
+		public function __set($attr, $value){
+		
+			$this->$attr = $value;
 		
 		}
 		
