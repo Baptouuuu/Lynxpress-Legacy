@@ -35,7 +35,7 @@
 		* @package		Administration
 		* @namespace	ActionMessages
 		* @author		Baptiste Langlade lynxpressorg@gmail.com
-		* @version		1.0
+		* @version		1.1
 		* @abstract
 	*/
 	
@@ -555,6 +555,24 @@
 				return self::custom_good('Lynxpress has been updated');
 			else
 				return self::custom_wrong($value);
+		
+		}
+		
+		/**
+			* Returns a message when user preferences are updated
+			*
+			* @static
+			* @access	public
+			* @param	mixed [$bool]
+			* @return	string
+		*/
+		
+		public static function pref_updated($bool){
+		
+			if($bool === true)
+				return self::custom_good('Preferences updated');
+			else
+				return self::custom_wrong($bool);
 		
 		}
 	
