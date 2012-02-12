@@ -40,7 +40,7 @@
 		*
 		* @package	Site
 		* @author	Baptiste Langlade lynxpressorg@gmail.com
-		* @version	1.0
+		* @version	1.0.1
 		* @final
 	*/
 	
@@ -51,6 +51,7 @@
 		private $_renderer = null;
 		private $_forbidden = null;
 		private $_bots = array('Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)', 'Googlebot/2.1 (+http://www.google.com/bot.html)', 'Googlebot-Image/1.0', 'msnbot/2.1', 'Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)', 'YahooSeeker/1.2 (compatible; Mozilla 4.0; MSIE 5.5; yahooseeker at yahoo-inc dot com ; http://help.yahoo.com/help/us/shop/merchant/)');
+		const CONTROLLER = false;
 		
 		/**
 			* Session constructor
@@ -103,12 +104,13 @@
 		
 			$iphone = strpos(VServer::HTTP_USER_AGENT(), 'iPhone;');
 			$android = strpos(VServer::HTTP_USER_AGENT(), 'Android');
+			$ipad = strpos(VServer::HTTP_USER_AGENT(), 'iPad');
 			$webkit = strpos(VServer::HTTP_USER_AGENT(), 'AppleWebKit/');
 			$gecko = strpos(VServer::HTTP_USER_AGENT(), 'Firefox/');
 			$presto = strpos(VServer::HTTP_USER_AGENT(), 'Presto/');
 			$trident = strpos(VServer::HTTP_USER_AGENT(), 'Trident/'); 
 			
-			if($iphone !== false || $android !== false){
+			if($iphone !== false || $android !== false || $ipad !== false){
 				
 				$this->_renderer = 'mobile';
 				$this->_html5 = false;
@@ -129,8 +131,11 @@
 				}elseif($gecko !== false){
 				
 					$gecko_version = substr(VServer::HTTP_USER_AGENT(), $gecko, 9);
+					$ff10up = substr(VServer::HTTP_USER_AGENT(), $gecko, 10);
 					
 					if($gecko_version >= 'Firefox/4')
+						$this->_html5 = true;
+					elseif($ff10up >= 'Firefox/10')
 						$this->_html5 = true;
 					else
 						$this->_html5 = false;
