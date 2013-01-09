@@ -1,6 +1,6 @@
 ## Lynxpress v2 ##
 
-A newer version is available on a dedicated github account, head over http://github.com/Lynxoress to take a look.
+A newer version is available on a dedicated github account, head over http://github.com/Lynxpress to take a look.
 
 ## Lynxpress ##
 
