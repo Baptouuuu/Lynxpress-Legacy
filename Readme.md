@@ -1,3 +1,7 @@
+## Lynxpress v2 ##
+
+A newer version is available on a dedicated github account, head over http://github.com/Lynxoress to take a look.
+
 ## Lynxpress ##
 
 This is a brand new cms written in php, trying to follow one word minimalism.
